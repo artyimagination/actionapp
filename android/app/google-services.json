@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "962384235593",
+    "firebase_url": "https://actionapp-50adb.firebaseio.com",
+    "project_id": "actionapp-50adb",
+    "storage_bucket": "actionapp-50adb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962384235593:android:b556e9442626a8db",
+        "android_client_info": {
+          "package_name": "com.actionapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962384235593-408lom4cv4iq250v2mlls4mtkad18j4k.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "962384235593-408lom4cv4iq250v2mlls4mtkad18j4k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfc5ijznZHUF1Wpsxd7sceWVcEUyvAxL8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

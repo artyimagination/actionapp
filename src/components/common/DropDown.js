@@ -1,0 +1,54 @@
+import React from 'react';
+import { View, Text, Picker } from 'react-native';
+
+
+const DropDown = ({ children, label, onValueChange, selectedValue, mode, style }) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.labelStyle}>
+        {label}
+      </Text>
+      <View style={styles.pickerContainer}>
+        <Picker
+          style={styles.pickerStyle}
+          itemStyle={{ flex: 1 }}
+          mode={mode}
+          selectedValue={selectedValue}
+          onValueChange={onValueChange}
+        >
+          {children}
+        </Picker>
+      </View>
+    </View>
+  );
+};
+
+const styles = {
+  container: {
+    height: 90,
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#ffffff'
+  },
+  labelStyle: {
+    paddingLeft: 40,
+    paddingTop: 10,
+    fontSize: 12,
+    textAlign: 'left'
+  },
+  pickerContainer: {
+    flex: 1,
+    borderWidth: 0,
+    borderColor: '#D9D5DC',
+    borderRadius: 10,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff'
+  },
+  pickerStyle: {
+    width: '80%'
+  }
+};
+
+export { DropDown };
