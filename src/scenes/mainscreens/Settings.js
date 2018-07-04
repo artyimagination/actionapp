@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { CardSection, CustomCheckBox } from '../../components/common';
+import { CardSection, CustomRightCheckBox } from '../../components/common';
 
 class Settings extends Component {
 
@@ -69,57 +69,93 @@ class Settings extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.mainContainer}>
           <CardSection style={styles.cardSectionStyle}>
-            <CustomCheckBox
+            <CustomRightCheckBox
               leftLabel="Notification"
+              labelStyle={styles.labelStyle}
               onChange={() => this.OnNotifiCationChanged()}
               isSelected={this.state.isNotification}
               checkboxContainerStyle={styles.checkBoxStyle}
             />
           </CardSection>
           <CardSection style={styles.cardSectionStyle}>
-            <CustomCheckBox
+            <CustomRightCheckBox
               leftLabel="Direct message"
+              subLabel="Get Notification when you have new direct message"
+              labelStyle={styles.labelStyle}
               onChange={() => this.OnDirectMessageClicked()}
               isSelected={this.state.isDirectMsg}
               checkboxContainerStyle={styles.checkBoxStyle}
             />
           </CardSection>
           <CardSection style={styles.cardSectionStyle}>
-            <CustomCheckBox
+            <CustomRightCheckBox
               leftLabel="Vibrate"
+              subLabel="Vibrate on incoming notification"
+              labelStyle={styles.labelStyle}
               onChange={() => this.OnVibrateClicked()}
               isSelected={this.state.isVibrate}
               checkboxContainerStyle={styles.checkBoxStyle}
             />
           </CardSection>
           <CardSection style={styles.cardSectionStyle}>
-            <Text>Privacy and Safety</Text>
+            <CustomRightCheckBox
+              leftLabel="Ringtone"
+              subLabel="Get your notification ringtone"
+              labelStyle={styles.labelStyle}
+              onChange={() => this.OnVibrateClicked()}
+              isSelected={this.state.isVibrate}
+              checkboxContainerStyle={styles.checkBoxStyle}
+            />
           </CardSection>
           <CardSection style={styles.cardSectionStyle}>
-            <CustomCheckBox
+            <Text style={styles.headerStyle}>Privacy and Safety</Text>
+          </CardSection>
+          <CardSection style={styles.cardSectionStyle}>
+            <CustomRightCheckBox
               leftLabel="Facebook"
+              subLabel="Show your facebook profile to user"
+              labelStyle={styles.labelStyle}
               onChange={() => this.OnFacebookClicked()}
               isSelected={this.state.isFacebook}
               checkboxContainerStyle={styles.checkBoxStyle}
             />
           </CardSection>
           <CardSection style={styles.cardSectionStyle}>
-            <CustomCheckBox
+            <CustomRightCheckBox
               leftLabel="Instagram"
+              subLabel="Show your Instagram profile to user"
+              labelStyle={styles.labelStyle}
               onChange={() => this.OnInstagramClicked()}
               isSelected={this.state.isInstagram}
               checkboxContainerStyle={styles.checkBoxStyle}
             />
           </CardSection>
           <CardSection style={styles.cardSectionStyle}>
-            <CustomCheckBox
+            <CustomRightCheckBox
               leftLabel="YouTube"
+              subLabel="Show your YouTube Channel to user"
+              labelStyle={styles.labelStyle}
               onChange={() => this.OnYouTubeClicked()}
               isSelected={this.state.isYouTube}
               checkboxContainerStyle={styles.checkBoxStyle}
             />
+          </CardSection>
+          <CardSection style={styles.cardSectionStyle}>
+            <Text style={styles.headerStyle}>
+              Blocked Account
+            </Text>
+          </CardSection>
+          <CardSection style={styles.cardSectionStyle}>
+            <Text style={styles.headerStyle}>
+              Hide Requirements
+            </Text>
+          </CardSection>
+          <CardSection style={styles.cardSectionStyle}>
+            <Text style={styles.headerStyle}>
+              Data Usaged
+            </Text>
           </CardSection>
       </View>
     );
@@ -127,6 +163,10 @@ class Settings extends Component {
 }
 
 const styles = {
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#ffffff'
+  },
   cardSectionStyle: {
     height: 46,
     borderBottomWidth: 1,
@@ -137,6 +177,21 @@ const styles = {
   checkBoxStyle: {
     width: '100%',
     justifyContent: 'space-between',
+    paddingRight: 10
+  },
+  labelStyle: {
+    paddingLeft: 16,
+    paddingRight: 10,
+    fontSize: 12,
+    textAlign: 'left',
+    color: '#95989a'
+  },
+  headerStyle: {
+    paddingLeft: 16,
+    paddingRight: 10,
+    fontSize: 18,
+    textAlign: 'left',
+    color: '#000000'
   }
 };
 

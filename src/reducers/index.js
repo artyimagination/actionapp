@@ -9,10 +9,12 @@ import ProjectReducer from './ProjectReducer';
 import CastReducer from './CastReducer';
 import CastListReducer from './CastListReducer';
 import ProjectListReducer from './ProjectListReducer';
+import ResetPasswordReducer from './ResetPasswordReducer';
 
 export default combineReducers({
   auth: AuthReducer,
   signup: SignUpFormReducer,
+  resetPassword: ResetPasswordReducer,
   userprofile: UserProfileReducer,
   categories: CatogoriesReducer,
   statesandcities: StatesAndCitiesReducer,

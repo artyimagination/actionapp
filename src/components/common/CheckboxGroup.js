@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, CheckBox, TouchableOpacity } from 'react-native';
 
+import { CardSection } from './CardSection';
+
 /*
   This is CheckboxGroup Component
 */
@@ -113,13 +115,35 @@ export const CustomCheckBox = (props) => {
         onPress={props.onChange}
         style={[styles.checkboxContainer, props.checkboxContainerStyle]}
       >
-        <Text style={styles.labelStyle}>{props.leftLabel}</Text>
+        <Text style={[styles.labelStyle, props.labelStyle]}>{props.leftLabel}</Text>
           <CheckBox
             disabled={props.disabled}
             value={props.isSelected}
             onValueChange={props.onChange}
           />
           <Text style={styles.labelStyle}>{props.label}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export const CustomRightCheckBox = (props) => {
+  return (
+    <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        activeOpacity={props.disabled ? 1 : 0.7}
+        onPress={props.onChange}
+        style={[styles.checkboxContainer, props.checkboxContainerStyle]}
+      >
+      <CardSection style={{ flexDirection: 'column', paddingTop: 8 }}>
+        <Text style={[styles.labelStyle, props.labelStyle]}>{props.leftLabel}</Text>
+        <Text style={styles.subLabelStyle}>{props.subLabel}</Text>
+      </CardSection>
+          <CheckBox
+            disabled={props.disabled}
+            value={props.isSelected}
+            onValueChange={props.onChange}
+          />
       </TouchableOpacity>
     </View>
   );
@@ -147,9 +171,13 @@ const styles = {
       justifyContent: 'flex-start'
     },
     labelStyle: {
-      alignSelf: 'center',
       fontSize: 10,
       textAlign: 'left'
+    },
+    subLabelStyle: {
+      fontSize: 7,
+      textAlign: 'left',
+      paddingLeft: 16
     }
 };
 
