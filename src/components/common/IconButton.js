@@ -7,7 +7,7 @@ const IconButton = ({ onPress, lable, style, labelStyle, iconname }) => {
 
   return (
     <TouchableOpacity onPress={onPress} style={[buttonStyle, style]}>
-      <Icon name={iconname} size={30} />
+      <Icon name={iconname} size={15} />
       <Text style={[textStyle, labelStyle]}>
         {lable}
       </Text>
@@ -18,10 +18,10 @@ const IconButton = ({ onPress, lable, style, labelStyle, iconname }) => {
 
 const styles = {
   textStyle: {
-    alignSelf: 'center',
     color: '#000',
-    fontSize: 12,
-    fontWeight: '600'
+    fontSize: 8,
+    fontWeight: '600',
+    textAlign: 'center'
   },
   buttonStyle: {
     alignSelf: 'center',

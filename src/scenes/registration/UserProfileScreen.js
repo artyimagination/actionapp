@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Picker } from 'react-native';
+import { View, Text, Picker, Alert } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import { connect } from 'react-redux';
 import { fetchCategories, userProfile, saveUserProfile } from '../../actions';
 import { CardSection, Button, Input, Spinner, DropDown } from '../../components/common';
+import { Validator } from '../../utils/Validator';
 
 class UserProfileScreen extends Component {
 
@@ -11,19 +12,33 @@ class UserProfileScreen extends Component {
     this.props.fetchCategories();
   }
 
-
   onSaveClicked() {
     const { userprofile } = this.props;
-    this.props.saveUserProfile({ userprofile });
+    const
+    { name, category, language, gender, address, selectedstate, city, mobile } = userprofile;
+    console.log('selected category :: ', category);
+    const error = Validator('name', name) ||
+                  Validator('category', category) ||
+                  Validator('language', language) ||
+                  Validator('gender', gender) ||
+                  Validator('address', address) ||
+                  Validator('selectedstate', selectedstate) ||
+                  Validator('city', city) ||
+                  Validator('mobile', mobile);
+
+    if (error !== null) {
+      Alert.alert('Error', error);
+    } else {
+        this.props.saveUserProfile({ userprofile });
+    }
+  }
+
+  renderLoading() {
+    return <Spinner size="large" isVisible={this.props.userprofile.loading} />;
   }
 
 
   renderButton() {
-    const { userprofile } = this.props;
-    if (userprofile.loading) {
-      return <Spinner size="large" />;
-    }
-
     return (
       <Button
         style={{ alignItems: 'center' }}
@@ -36,7 +51,8 @@ class UserProfileScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+          {this.renderLoading()}
           <CardSection>
             <Input
               label="Name"

@@ -10,6 +10,7 @@ import CastReducer from './CastReducer';
 import CastListReducer from './CastListReducer';
 import ProjectListReducer from './ProjectListReducer';
 import ResetPasswordReducer from './ResetPasswordReducer';
+import ProjectUserReducer from './ProjectUserReducer';
 
 export default combineReducers({
   auth: AuthReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   projectdata: ProjectReducer,
   currentcast: CastReducer,
   castlist: CastListReducer,
-  projectlist: ProjectListReducer
+  projectlist: ProjectListReducer,
+  projectuser: ProjectUserReducer
 });

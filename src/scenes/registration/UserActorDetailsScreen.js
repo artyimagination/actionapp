@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, CheckBox, ScrollView } from 'react-native';
+import { View, Text, CheckBox, ScrollView, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { userProfile, saveUserDetails, uploadUserProfileImage } from '../../actions';
 import {
@@ -11,6 +11,8 @@ import {
   ProfilePicture,
   CheckboxGroup
 } from '../../components/common';
+
+import { Validator } from '../../utils/Validator';
 
 class UserActorDetailsScreen extends Component {
 
@@ -46,6 +48,25 @@ class UserActorDetailsScreen extends Component {
     });
   }
 
+  onSaveClicked() {
+    const { userprofile } = this.props;
+    const error = Validator('height', userprofile.height)
+                  || Validator('weight', userprofile.weight)
+                  || Validator('waist', userprofile.waist)
+                  || Validator('experience', userprofile.experience);
+
+    if (error !== null) {
+      Alert.alert('Error', error);
+    } else {
+      this.props.saveUserDetails({ userprofile });
+    }
+  }
+
+  onComplexationChanged(values) {
+    //console.log('value of complexation :: ', values[0].value);
+    this.props.userProfile({ prop: 'complexation', value: values[0].value });
+  }
+
   picUpload(value) {
     console.log('picupload :: ', value);
     const { pics } = this.state;
@@ -71,17 +92,13 @@ class UserActorDetailsScreen extends Component {
     });
   }
 
-  onSaveClicked() {
-    const { userprofile } = this.props;
-    this.props.saveUserDetails({ userprofile });
+  renderLoading() {
+    return (
+      <Spinner size="large" isVisible={this.props.userprofile.loading} />
+    );
   }
 
   renderButton() {
-    const { userprofile } = this.props;
-    if (userprofile.loading) {
-      return <Spinner size="large" />;
-    }
-
     return (
       <Button
         onPress={this.onSaveClicked.bind(this)}
@@ -89,11 +106,6 @@ class UserActorDetailsScreen extends Component {
         Save
       </Button>
     );
-  }
-
-  onComplexationChanged(values) {
-    //console.log('value of complexation :: ', values[0].value);
-    this.props.userProfile({ prop: 'complexation', value: values[0].value });
   }
 
   render() {
@@ -112,6 +124,7 @@ class UserActorDetailsScreen extends Component {
     }];
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
+          {this.renderLoading()}
           <CardSection>
             <ProfilePicture
               onPress={() => this.onProfileImgSelected()}
@@ -120,10 +133,14 @@ class UserActorDetailsScreen extends Component {
             />
           </CardSection>
           <CardSection>
-            <Text>{this.props.userprofile.name}</Text>
+            <View style={{ flex: 1, alignSelf: 'center', paddingTop: 10 }}>
+              <Text style={styles.textStyle}>{this.props.userprofile.name}</Text>
+            </View>
           </CardSection>
           <CardSection>
-            <Text>{this.props.userprofile.category}</Text>
+            <View style={{ flex: 1, alignSelf: 'center', paddingTop: 10 }}>
+              <Text style={styles.textStyle}>{this.props.userprofile.category}</Text>
+            </View>
           </CardSection>
           <CardSection style={{ justifyContent: 'space-between' }}>
             <Input
@@ -247,8 +264,14 @@ const styles = {
     justifyContent: 'space-between',
     paddingLeft: 25,
     paddingRight: 25
+  },
+  textStyle: {
+    alignSelf: 'center',
+    fontSize: 16,
+    textAlign: 'center'
   }
 };
+
 
 const mapStateToProps = state => {
   return state;

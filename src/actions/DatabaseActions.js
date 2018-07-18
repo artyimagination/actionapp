@@ -7,7 +7,10 @@ import {
   FETCH_USER,
   USER_PROFILE_PIC_UPLOADED,
   FETCH_CHAT_USERS,
-  PROJECT_FETCHED
+  PROJECT_FETCHED,
+  FETCH_PROJECT_USER_DETAILS,
+  USER_PROFILE_DATA_SAVE_PROCESS,
+  USER_PROFILE_DATA_SAVED
 } from './types';
 
 import NavigationService from '../components/NavigationService';
@@ -97,6 +100,31 @@ export const uploadUserProfileImage =
           .catch((error) => {
             reject(error);
         });
+    });
+  };
+};
+
+export const fetchProjectUserDetails = (id) => {
+  return (dispatch) => {
+    firebase.database().ref(`/users/${id}`)
+    .on('value', snapshot => {
+      dispatch({ type: FETCH_PROJECT_USER_DETAILS, payload: snapshot.val() });
+    });
+  };
+};
+
+export const updateUserProfile = ({ userprofile }) => {
+  return (dispatch) => {
+    const {
+      height, weight, waist, experience, ProfilePic, description, youtubelink, fblink, instalink, pic1, pic2, pic3
+    } = userprofile;
+    dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
+    const { currentUser } = firebase.auth();
+    firebase.database().ref(`/users/${currentUser.uid}`)
+    .update(
+      { height, weight, waist, experience, ProfilePic, description, youtubelink, fblink, instalink, pic1, pic2, pic3 })
+    .then(() => {
+      dispatch({ type: USER_PROFILE_DATA_SAVED });
     });
   };
 };

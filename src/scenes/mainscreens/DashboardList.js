@@ -1,38 +1,25 @@
 import React, { Component } from 'react';
-import { Text, Image } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
-import { CardSection, IconButton } from '../../components/common';
+import { CardSection } from '../../components/common';
 
 class DashboardList extends Component {
   render() {
     return (
         <CardSection style={styles.container}>
-        <CardSection style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-          <Image
-            style={styles.profileImageStyle}
-            source={require('../../images/ic_person_24px.png')}
-          />
-          <Text> Ravi Oza - Director </Text>
-          <Text>{this.props.data.title}</Text>
-        </CardSection>
-          <Text>{this.props.data.description}</Text>
-          <CardSection style={{ justifyContent: 'space-between' }}>
-            <IconButton
-              onPress={() => this.onStarButtonClicked()}
-              iconname="star"
-              lable="Shortlist"
-            />
-            <IconButton
-              onPress={() => this.onChatClicked()}
-              iconname="comment"
-              lable="chat"
-            />
-            <IconButton
-              onPress={() => this.onAppliedClicked()}
-              iconname="check"
-              lable="Apply"
-            />
+        <TouchableOpacity onPress={() => console.log('dash board clicked')} >
+          <CardSection>
+            <Text style={styles.titleStyle}>{this.props.data.title}</Text>
+            <Text style={{ fontSize: 6, textAlign: 'center', paddingLeft: 10, paddingTop: 8 }}>
+              {this.props.data.uid}
+            </Text>
           </CardSection>
+          <Text style={styles.labelStyle}>Status - Published</Text>
+          <Text style={styles.labelStyle}>Type - {this.props.data.type}</Text>
+          <Text style={styles.labelStyle}>Language : {this.props.data.language}</Text>
+          <Text style={styles.labelStyle}>Description</Text>
+          <Text style={styles.labelStyle}>{this.props.data.description}</Text>
+        </TouchableOpacity>
         </CardSection>
     );
   }
@@ -43,7 +30,10 @@ const styles = {
     flex: 1,
     borderBottomWidth: 1,
     borderColor: '#000',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingLeft: 15,
+    paddingTop: 10,
+    paddingBottom: 10
   },
   profileImageStyle: {
     alignSelf: 'flex-start',
@@ -52,6 +42,13 @@ const styles = {
     width: 40,
     height: 40,
     borderRadius: 75
+  },
+  titleStyle: {
+    fontSize: 14,
+    fontWeight: '600'
+  },
+  labelStyle: {
+    fontSize: 10
   }
 };
 

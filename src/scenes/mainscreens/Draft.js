@@ -52,7 +52,7 @@ class Draft extends Component {
 
     return (
       <View>
-        <Text>Nothing to show</Text>
+        <Text />
       </View>
     );
   }

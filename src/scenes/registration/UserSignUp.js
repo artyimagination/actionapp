@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import { userProfile, signUpUser, signInWithGoogle, signInWithFacebook } from '../../actions';
 
+import { userProfile, signUpUser, signInWithGoogle, signInWithFacebook } from '../../actions';
 import { TextButton, CardSection, Input, Button, Spinner, LogoText } from '../../components/common';
+import { Validator, PasswordValidator } from '../../utils/Validator';
 //import styles from '../../style/commonStyle';
+//import { PhoneVerificationPopup } from './PhoneVerificationPopup';
 
 class UserSignUp extends Component {
 
@@ -13,8 +15,24 @@ class UserSignUp extends Component {
   });
 
   onSignUpUser() {
-    const { name, email, password, mobile } = this.props;
-    this.props.signUpUser({ name, email, password, mobile });
+    const { name, email, password, confirmPassword, mobile } = this.props;
+
+    //const object = { 'name': name, 'email': email };
+    const object = { confirmPassword, password };
+    const error = Validator('name', name)
+      || Validator('email', email)
+      || Validator('password', password)
+      || PasswordValidator(object)
+      || Validator('mobile', mobile);
+      //console.log(confirmPassword);
+      //PasswordValidator(object);
+
+    if (error != null) {
+      console.log('Error in Email id : ', error);
+      Alert.alert('Error', error);
+    } else {
+      this.props.signUpUser({ name, email, password, mobile });
+    }
   }
 
   onGoogleSignIn() {
@@ -29,11 +47,14 @@ class UserSignUp extends Component {
     this.props.signInWithFacebook();
   }
 
-  renderButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
+  renderLoading() {
+    console.log('loading state :: ', this.props.loading);
+    return (
+      <Spinner size="large" isVisible={this.props.loading} />
+    );
+  }
 
+  renderButton() {
     return (
       <Button onPress={this.onSignUpUser.bind(this)}>
         Sign Up
@@ -55,10 +76,6 @@ class UserSignUp extends Component {
 
 
   renderGoogleSignButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
-
     return (
       <TextButton
         onPress={this.onGoogleSignIn.bind(this)}
@@ -69,9 +86,6 @@ class UserSignUp extends Component {
   }
 
   renderFacebookLoginButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
     return (
       <TextButton
         onPress={this.facebookLoginIn.bind(this)}
@@ -84,6 +98,7 @@ class UserSignUp extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+          {this.renderLoading()}
           <CardSection>
             <LogoText>
               Action
@@ -132,8 +147,8 @@ class UserSignUp extends Component {
               isPassword
               label="Re-enter Password"
               placeHolder="Password"
-              value={this.props.password}
-              onChangeText={value => this.props.userProfile({ prop: 'password', value })}
+              value={this.props.confirmPassword}
+              onChangeText={value => this.props.userProfile({ prop: 'confirmPassword', value })}
             />
           </CardSection>
 
@@ -141,7 +156,7 @@ class UserSignUp extends Component {
             <Input
               label="Mobile"
               placeHolder="Enter Number"
-              keyboardType="numeric"
+              keyboardType="phone-pad"
               value={this.props.mobile}
               onChangeText={value => this.props.userProfile({ prop: 'mobile', value })}
             />
@@ -171,8 +186,8 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { name, email, password, mobile, loading } = state.userprofile;
-  return { name, email, password, mobile, loading };
+  const { name, email, password, confirmPassword, mobile, loading } = state.userprofile;
+  return { name, email, password, confirmPassword, mobile, loading };
 };
 
 const SignUpComponent = connect(mapStateToProps, {

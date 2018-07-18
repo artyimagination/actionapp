@@ -32,7 +32,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <CardSection style={styles.projectBtn}>
-          <Text>
+          <Text style={styles.labelStyle}>
             Hello... {this.props.userprofile.name}
           </Text>
           {this.renderProjectButton()}
@@ -48,9 +48,22 @@ const styles = {
     flex: 1
   },
   projectBtn: {
+    height: '7%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    borderColor: '#000',
+    borderBottomWidth: 1
+  },
+  labelStyle: {
+    fontSize: 14,
+    fontWeight: '600',
+    padding: 10
   }
 };
 

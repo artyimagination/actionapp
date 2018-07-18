@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Image, TextInput } from 'react-native';
+import { ScrollView, View, Text, Image, TextInput, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { userProfile, saveUserDetails, uploadUserProfileImage } from '../../actions';
 import { Card, CardSection, Button, Input, Spinner, ProfilePicture } from '../../components/common';
+import { Validator } from '../../utils/Validator';
 
 class UserDetailsScreen extends Component {
 
@@ -44,15 +45,21 @@ class UserDetailsScreen extends Component {
 
   onSaveClicked() {
     const { userprofile } = this.props;
-    this.props.saveUserDetails({ userprofile });
+
+    const error = Validator('experience', userprofile.experience);
+    console.log('user experience ', userprofile.experience);
+    if (error !== null) {
+      Alert.alert('Error', error);
+    } else {
+      this.props.saveUserDetails({ userprofile });
+    }
+  }
+
+  renderLoading() {
+    return <Spinner size="large" isVisible={this.props.userprofile.loading} />;
   }
 
   renderButton() {
-    const { userprofile } = this.props;
-    if (userprofile.loading) {
-      return <Spinner size="large" />;
-    }
-
     return (
       <Button
         onPress={this.onSaveClicked.bind(this)}
@@ -65,6 +72,7 @@ class UserDetailsScreen extends Component {
   render() {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
+          {this.renderLoading()}
           <CardSection>
             <ProfilePicture
               onPress={() => this.onProfileImgSelected()}

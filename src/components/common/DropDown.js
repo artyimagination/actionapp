@@ -25,7 +25,7 @@ const DropDown = ({ children, label, onValueChange, selectedValue, mode, style }
 
 const styles = {
   container: {
-    height: 90,
+    height: '7%',
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#ffffff'

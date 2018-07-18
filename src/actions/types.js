@@ -38,6 +38,8 @@ export const SAVE_PROJECT_ID = 'save_project_id';
 export const PROJECT_LIST_FETCHED = 'project_list_fetched';
 export const DRAFT_PROJECT_FETCHED = 'draft_project_fetched';
 
+export const FETCH_PROJECT_USER_DETAILS = 'fetch_project_user_details';
+
 //Password Reset const types
 export const FORGOT_PASSWORD = 'forgot_password';
 export const MOBILE_PASSWORD_CODE = 'mobile_password_code';
@@ -46,3 +48,7 @@ export const NEW_PASSWORD = 'new_password';
 export const CONFIRM_PASSWORD = 'confirm_password';
 export const OLD_PASSWORD = 'old_password';
 export const PASSCODE_TEXT = 'passcode_text';
+
+
+//Errors
+export const ERROR_SIGNIN = 'error_signin';

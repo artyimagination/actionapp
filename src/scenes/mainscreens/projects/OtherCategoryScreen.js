@@ -15,12 +15,13 @@ class OtherCategoryScreen extends Component {
   }
 
   onPostProject() {
-    const { id } = this.props.projectdata;
+    const { id } = this.props;
+    console.log('what is id ', id);
     this.props.postProject({ id });
   }
 
   onSaveDraftClicked() {
-    const { id } = this.props.projectdata;
+    const { id } = this.props;
     this.props.onProjectSaveToDraft({ id });
   }
 

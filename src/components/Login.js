@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { GoogleSigninButton } from 'react-native-google-signin';
 import {
@@ -11,7 +11,7 @@ import {
 } from '../actions';
 import { Button, CardSection, Input, TextButton, Spinner } from './common';
 import NavigationService from '../components/NavigationService';
-
+import { Validator } from '../utils/Validator';
 
 class Login extends Component {
 
@@ -25,7 +25,12 @@ class Login extends Component {
 
   onLoginBtnClicked() {
     const { email, password } = this.props;
-    this.props.loginUser({ email, password });
+    const error = Validator('email', email) || Validator('password', password);
+    if (error !== null) {
+      Alert.alert(error);
+    } else {
+      this.props.loginUser({ email, password });
+    }
   }
 
   onGoogleSignIn() {

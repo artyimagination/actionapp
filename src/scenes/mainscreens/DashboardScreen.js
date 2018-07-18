@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, ListView, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 import { fetchProjectList } from '../../actions';
 import { DashboardList } from './DashboardList';
+import { CardSection } from '../../components/common';
 
 class DashboardScreen extends Component {
   componentWillMount() {
@@ -33,7 +35,7 @@ class DashboardScreen extends Component {
     }
     return (
       <View>
-        <Text>Nothing to show</Text>
+        <Text />
       </View>
     );
   }
@@ -41,6 +43,10 @@ class DashboardScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+          <CardSection style={styles.headingStyle}>
+            <Icon name='star' size={15} />
+            <Text style={styles.labelStyle}>My Projects</Text>
+          </CardSection>
           <ListView
             style={{ flex: 1 }}
             dataSource={this.dataSource}
@@ -50,6 +56,27 @@ class DashboardScreen extends Component {
     );
   }
 }
+
+const styles = {
+  headingStyle: {
+    height: '7%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    borderColor: '#000',
+    borderBottomWidth: 1,
+    paddingLeft: 10
+  },
+  labelStyle: {
+    fontSize: 14,
+    fontWeight: '600',
+    padding: 10
+  }
+};
 
 const mapStateToProps = (state) => {
   const projectlist = _.map(state.projectlist, (val, uid) => {

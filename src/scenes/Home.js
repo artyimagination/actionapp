@@ -21,20 +21,21 @@ class Home extends Component {
  }
 
   render() {
+    const { container, buttonContainer, buttonStyle } = styles;
     return (
-      <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+      <View style={container}>
         <Logo />
         <View
-          style={{ paddingBottom: 70, flexDirection: 'row', justifyContent: 'space-between' }}
+          style={buttonContainer}
         >
           <Button
-            style={{ width: 150 }}
+          style={buttonStyle}
            onPress={() => this.props.navigation.navigate('Login')}
           >
             Login
           </Button>
           <Button
-            style={{ width: 150 }}
+            style={buttonStyle}
             onPress={() => this.props.navigation.navigate('SignUpScreen')}
           >
             Sign Up
@@ -44,5 +45,20 @@ class Home extends Component {
     );
   }
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff'
+  },
+  buttonContainer: {
+    paddingBottom: 70,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  buttonStyle: {
+    width: 150
+  }
+};
 
 export default connect(null)(Home);

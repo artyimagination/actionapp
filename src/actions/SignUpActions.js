@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import firebase from 'react-native-firebase';
 import { GoogleSignin } from 'react-native-google-signin';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
@@ -7,7 +8,8 @@ import {
   USER_PROFILE_DATA,
   USER_PROFILE_DATA_SAVED,
   USER_PROFILE_DATA_SAVE_PROCESS,
-  CLEAR_USER_DATA
+  CLEAR_USER_DATA,
+  ERROR_SIGNIN
 } from './types';
 
 export const signUp = ({ prop, value }) => {
@@ -77,9 +79,23 @@ export const saveUserDetails = ({ userprofile }) => {
 
 export const signUpUser = ({ name, email, password, mobile }) => {
   return (dispatch) => {
+    /*firebase.auth().verifyPhoneNumber(mobile)
+    .on('state_changed', phoneAuthSnapshot => {
+      switch (phoneAuthSnapshot.state) {
+        case firebase.auth.PhoneAuthState.CODE_SENT:
+          console.log('Verification Code Sent');
+          break;
+        case firebase.auth.PhoneAuthState.ERROR:
+          console.log('Error : ', phoneAuthSnapshot.error);
+        break;
+        default:
+          console.log('Default Case');
+      }
+    });*/
     dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => saveIntoDatabase(dispatch, user, name, email, mobile));
+      .then(user => saveIntoDatabase(dispatch, user, name, email, mobile))
+      .catch(() => ErrorWhileSignIn(dispatch));
   };
 };
 
@@ -177,4 +193,14 @@ const saveIntoDatabase = (dispatch, user, name, email, mobile) => {
     dispatch({ type: USER_PROFILE_DATA_SAVED });
     NavigationService.navigate('Registration');
   });
+};
+
+const ErrorWhileSignIn = (dispatch, error = '') => {
+  if (error !== '') {
+    Alert.alert('Error', error);
+  } else {
+    Alert.alert('Error', 'Some went wrong');
+  }
+
+  dispatch({ type: ERROR_SIGNIN });
 };

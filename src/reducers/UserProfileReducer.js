@@ -5,14 +5,15 @@ import {
         USER_PROFILE_PIC_UPLOADED,
         FETCH_USER,
         CLEAR_USER_DATA,
-        FETCH_USER_NAME
+        FETCH_USER_NAME,
+        ERROR_SIGNIN
       } from '../actions/types';
 
 const INITIAL_STATE = {
   name: '',
   email: '',
   password: '',
-  category: '',
+  category: 'Directors',
   date: '1992-11-30',
   gender: 'male',
   language: 'hindi',
@@ -50,7 +51,9 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_USER_NAME:
      return state.name;
     case CLEAR_USER_DATA:
-      return { ...state, INITIAL_STATE }
+      return { ...state, INITIAL_STATE };
+    case ERROR_SIGNIN:
+      return { ...state, loading: false };
     case FETCH_USER:
       const { name,
               email,
