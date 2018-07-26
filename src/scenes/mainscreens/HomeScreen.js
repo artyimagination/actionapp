@@ -37,10 +37,11 @@ class HomeScreen extends Component {
           </Text>
           {this.renderProjectButton()}
         </CardSection>
-        <HomeProject />
       </View>
     );
   }
+
+  //<HomeProject />
 }
 
 const styles = {

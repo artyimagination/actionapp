@@ -12,3 +12,5 @@ export * from './Draft';
 export * from './DraftList';
 export * from './Settings';
 export * from './HelpAndSupport';
+export * from './UpdateOtherUserProfile';
+export * from './UpdateActorProfile';

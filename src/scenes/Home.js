@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-//import firebase from 'react-native-firebase';
+import firebase from 'react-native-firebase';
 import { Button } from '../components/common';
 import Logo from '../components/Logo';
-//import NavigationService from '../components/NavigationService';
+import NavigationService from '../components/NavigationService';
 
 
 class Home extends Component {
@@ -13,11 +13,11 @@ class Home extends Component {
   });
 
   componentDidMount() {
-    /*firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         NavigationService.navigate('Home');
       }
-    });*/
+    });
  }
 
   render() {
