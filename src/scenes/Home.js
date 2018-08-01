@@ -12,13 +12,13 @@ class Home extends Component {
     header: null
   });
 
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        NavigationService.navigate('Home');
-      }
-    });
- }
+//   componentDidMount() {
+//     firebase.auth().onAuthStateChanged((user) => {
+//       if (user) {
+//         NavigationService.navigate('Home');
+//       }
+//     });
+//  }
 
   render() {
     const { container, buttonContainer, buttonStyle } = styles;
@@ -57,7 +57,8 @@ const styles = {
     justifyContent: 'space-between'
   },
   buttonStyle: {
-    width: 150
+    width: 145,
+    justifyContent: 'space-between'
   }
 };
 
