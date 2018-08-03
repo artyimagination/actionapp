@@ -8,17 +8,18 @@ import NavigationService from '../components/NavigationService';
 
 
 class Home extends Component {
+
   static navigationOptions = ({
     header: null
   });
 
-//   componentDidMount() {
-//     firebase.auth().onAuthStateChanged((user) => {
-//       if (user) {
-//         NavigationService.navigate('Home');
-//       }
-//     });
-//  }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        NavigationService.navigate('Home');
+      }
+    });
+  }
 
   render() {
     const { container, buttonContainer, buttonStyle } = styles;
