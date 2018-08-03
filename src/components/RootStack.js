@@ -65,7 +65,8 @@ const DrawerNavigation = createDrawerNavigator({
   Page1: {
     screen: MainTabNavigator,
     navigationOptions: {
-      drawerLabel: 'Home'
+      drawerLabel: 'Home',
+      activeTintColor: '#e91e63'
     }
   },
   page2: {
@@ -124,12 +125,13 @@ const HomeStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         title: 'Action',
         headerLeft: (
-          <DrawerButton name="navicon" navigation={navigation} />
+          <DrawerButton name="navicon" navigation={navigation} style={styles.Headercss} />
         ),
         headerRight: (
-          <SearchButton navigation={navigation} />
+          <SearchButton navigation={navigation} style={styles.Headercss}  />
         ),
-        headerStyle: { paddingRight: 10, paddingLeft: 10 }
+        // headerStyle: { paddingRight: 10, paddingLeft: 10 },
+        headerTitleStyle: { color: 'rgb(234, 94, 32)' }
       })
     },
     Project: {
@@ -154,7 +156,7 @@ const SearchButton = () => {
       <TouchableOpacity
       onPress={() => { NavigationService.navigate('Notification'); }}
       >
-        <Icon name="bell" size={30} />
+        <Icon name="bell" size={25} style={styles.Headercss} />
       </TouchableOpacity>
     </View>
   );
@@ -166,7 +168,7 @@ const DrawerButton = (props) => {
       <TouchableOpacity
       onPress={() => { props.navigation.dispatch(DrawerActions.toggleDrawer()); }}
       >
-        <Icon name={props.name} size={30} />
+        <Icon name={props.name} size={30} style={styles.Headercss} />
       </TouchableOpacity>
     </View>
   );
@@ -182,6 +184,17 @@ const RootStack = createSwitchNavigator(
     initialRouteName: 'Main'
   }
 );
+
+const styles = {
+  Headercss: {
+    color: 'rgb(234, 94, 32)',
+    justifyContent: 'space-around',
+    paddingleft: 45,
+    paddingRight: 15,
+
+  }
+
+};
 
 
 export default RootStack;
