@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { fetchProjectList } from '../../actions';
 import { ProjectList } from './ProjectList';
 
+
 class HomeProject extends Component {
 
   componentWillMount() {
@@ -45,6 +46,7 @@ class HomeProject extends Component {
             dataSource={this.dataSource}
             renderRow={this.renderRow}
           />
+         
       </View>
     );
   }

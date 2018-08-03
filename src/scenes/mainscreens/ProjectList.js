@@ -83,15 +83,15 @@ class ProjectList extends Component {
               <IconButton
                 style={styles.iconStyle}
                 onPress={() => this.onAppliedClicked()}
-                iconname="check"
-                lable="Apply"
-              />
-              <IconButton
-                style={styles.iconStyle}
-                onPress={() => this.onAppliedClicked()}
                 iconname="eye"
                 lable="View"
               />
+              <IconButton
+              style={styles.iconStyle}
+              onPress={() => this.onAppliedClicked()}
+              iconname="check"
+              lable="Apply"
+            />
             </CardSection>
         </CardSection>
         </CardSection>
