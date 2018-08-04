@@ -73,25 +73,29 @@ const DrawerNavigation = createDrawerNavigator({
   page2: {
     screen: AboutUs,
     navigationOptions: {
-      drawerLabel: 'About Us'
+      drawerLabel: 'About Us',
+      headerTintColor:'rgb(234,94,32)'
     }
   },
   page3: {
     screen: Draft,
     navigationOptions: {
-      drawerLabel: 'Draft'
+      drawerLabel: 'Draft',
+      headerTintColor:'rgb(234,94,32)'
     }
   },
   page4: {
     screen: Settings,
     navigationOptions: {
-      drawerLabel: 'Settings'
+      drawerLabel: 'Settings',
+      headerTintColor:'rgb(234,94,32)'
     }
   },
   page5: {
     screen: HelpAndSupport,
     navigationOptions: {
-      drawerLabel: 'Help And Support'
+      drawerLabel: 'Help And Support',
+      headerTintColor:'rgb(234,94,32)'
     }
   },
   Page6: {
@@ -114,7 +118,8 @@ const RegistrationStack = createStackNavigator(
 },
 {
   navigationOptions: {
-    title: 'Update Profile'
+    title: 'Update Profile',
+    headerTintColor:'rgb(234,94,32)'
   }
 }
 );
@@ -126,7 +131,7 @@ const HomeStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         title: 'Action',
         headerLeft: (
-          <DrawerButton name="navicon" style={styles.Headercss} navigation={navigation} />
+          <DrawerButton name="navicon" navigation={navigation} style={styles.Headercss}  />
         ),
         headerRight: (
           <SearchButton style={styles.Headercss} navigation={navigation} />
@@ -147,7 +152,8 @@ const HomeStack = createStackNavigator(
     ProjectView: {
       screen: ViewProject,
       navigationOptions: () => ({
-        title: 'View Project'
+        title: 'View Project',
+        headerTintColor:'rgb(234,94,32)'
       })
     },
     AppliedProjectScreen: {
@@ -191,7 +197,7 @@ const styles = {
     Headercss: {
      color: 'rgb(234, 94, 32)',
      justifyContent: 'space-around',
-     paddingleft: 45,
+     paddingLeft: 45,
      paddingRight: 15,
    }
 };

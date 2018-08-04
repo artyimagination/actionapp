@@ -71,7 +71,7 @@ class ProjectList extends Component {
             <Text style={styles.labelStyle}>Type - {this.props.data.type}</Text>
             <Text style={styles.labelStyle}>Language : {this.props.data.language}</Text>
             <Text style={styles.labelStyle}>Description</Text>
-            <Text style={styles.labelStyle}>{this.props.data.description}</Text>
+            
           </CardSection>
         </CardSection>
         <CardSection style={styles.iconContainer}>
@@ -98,16 +98,16 @@ class ProjectList extends Component {
             <CardSection style={styles.iconStyle}>
               <IconButton
                 style={styles.iconStyle}
+                onPress={this.onViewProjectClicked.bind(this)}
+                iconname="eye"
+                lable="View"
+              />
+              <IconButton
+                style={styles.iconStyle}
                 onPress={() => this.onAppliedClicked()}
                 iconname="check"
                 lable="Apply"
                 isApplied={this.state.isChanged}
-              />
-              <IconButton
-                style={styles.iconStyle}
-                onPress={this.onViewProjectClicked.bind(this)}
-                iconname="eye"
-                lable="View"
               />
             </CardSection>
         </CardSection>
