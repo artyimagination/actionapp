@@ -12,11 +12,11 @@ class Home extends Component {
   });
 
   componentDidMount() {
-    /*firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         NavigationService.navigate('Home');
       }
-    });*/
+    });
  }
 
   render() {

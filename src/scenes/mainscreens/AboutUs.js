@@ -36,24 +36,29 @@ class AboutUs extends Component {
 
 const styles = {
   containerStyle: {
-    flex: 1
+    flex: 1,
+    paddingTop: 20
   },
   textContainer: {
     alignSelf: 'center',
     width: 326,
-    height: 423,
+    height: 290,
     opacity: 0.4,
     backgroundColor: '#ffffff',
     borderStyle: 'solid',
     borderWidth: 0.7,
     borderColor: '#95989a',
-    padding: 5
+    padding: 10,
+
   },
   labelStyle: {
     fontSize: 10,
     fontWeight: 'normal',
     fontStyle: 'normal',
     color: '#95989a'
+  },
+  drawerIconStyle: {
+    color: '#e91e63'
   }
 };
 

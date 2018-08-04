@@ -75,8 +75,8 @@ export const postProject = ({ id }) => {
 export const applyProject = (projectId) => {
   return (dispatch) => {
     const { currentUser } = firebase.auth();
-    firebase.database().ref(`/users/${currentUser.uid}/appliedProject`)
-    .update({ projectId })
+    firebase.database().ref('/appliedProject')
+    .push({ uid: currentUser.uid, projectId })
     .then(() => {
       console.log('successfully applied for project');
       //applied for project
@@ -124,14 +124,14 @@ export const fetchAppliedUsersToProject = (projectId) => {
         });*/
       /*});*/
     /*});*/
-    const ref = firebase.database().ref('users');
-    const query = ref.orderByChild('appliedProject/projectId').equalTo(`${projectId}`);
+    const ref = firebase.database().ref('appliedProject');
+    const query = ref.orderByChild('projectId').equalTo(`${projectId}`);
     query.on('value', (snapshot) => {
-      dispatch({ type: APPLIED_USERS_FETCHED, payload: snapshot.val() });
+      //dispatch({ type: APPLIED_USERS_FETCHED, payload: snapshot.val() });
       console.log('project id in fetch user detaisl ', snapshot.val());
-      /*snapshot.forEach((child) => {
-        console.log(child.key, child.val().name);
-      });*/
+      snapshot.forEach((child) => {
+        console.log(child.key, child.val().uid);
+      });
     });
   };
 };

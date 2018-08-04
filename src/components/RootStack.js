@@ -126,12 +126,13 @@ const HomeStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         title: 'Action',
         headerLeft: (
-          <DrawerButton name="navicon" navigation={navigation} />
+          <DrawerButton name="navicon" style={styles.Headercss} navigation={navigation} />
         ),
         headerRight: (
-          <SearchButton navigation={navigation} />
+          <SearchButton style={styles.Headercss} navigation={navigation} />
         ),
-        headerStyle: { paddingRight: 10, paddingLeft: 10 }
+        headerStyle: { paddingRight: 10, paddingLeft: 10 },
+        headerTitleStyle: { color: 'rgb(234, 94, 32)' }
       })
     },
     Project: {
@@ -186,6 +187,14 @@ const DrawerButton = (props) => {
   );
 };
 
+const styles = {
+    Headercss: {
+     color: 'rgb(234, 94, 32)',
+     justifyContent: 'space-around',
+     paddingleft: 45,
+     paddingRight: 15,
+   }
+};
 const RootStack = createSwitchNavigator(
   {
     Main: MainStack,

@@ -66,7 +66,7 @@ export const loginUser = ({ email, password }) => {
     .then(user => loginUserSuccess(dispatch, user))
     .catch(() => {
       console.log('some error occurs');
-      Alert('Error', 'Email or Password incorrect');
+      //Alert('Error', 'Email or Password incorrect');
       loginUserFail(dispatch);
       /*firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user))
