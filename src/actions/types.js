@@ -37,8 +37,10 @@ export const PROJECT_FETCHED = 'project_fetched';
 export const SAVE_PROJECT_ID = 'save_project_id';
 export const PROJECT_LIST_FETCHED = 'project_list_fetched';
 export const DRAFT_PROJECT_FETCHED = 'draft_project_fetched';
+export const APPLIED_PROJECT = 'applied_project';
 
 export const FETCH_PROJECT_USER_DETAILS = 'fetch_project_user_details';
+export const APPLIED_USERS_FETCHED = 'applied_user_fetched';
 
 //Password Reset const types
 export const FORGOT_PASSWORD = 'forgot_password';

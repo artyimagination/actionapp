@@ -2,12 +2,12 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const IconButton = ({ onPress, lable, style, labelStyle, iconname }) => {
+const IconButton = ({ onPress, lable, style, labelStyle, iconname, isApplied = false }) => {
   const { buttonStyle, textStyle } = styles;
 
   return (
     <TouchableOpacity onPress={onPress} style={[buttonStyle, style]}>
-      <Icon name={iconname} size={15} />
+      <Icon name={iconname} size={15} color={isApplied === false ? '#cccccc' : '#ff0000'} />
       <Text style={[textStyle, labelStyle]}>
         {lable}
       </Text>

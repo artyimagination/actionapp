@@ -3,9 +3,15 @@ import { Text, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { CardSection, IconButton } from '../../components/common';
-import { fetchProjectUserDetails } from '../../actions';
+import { fetchProjectUserDetails, applyProject } from '../../actions';
+import NavigationService from '../../components/NavigationService';
 
 class ProjectList extends Component {
+
+  state = {
+    isChanged: false,
+    isVisible: false
+  }
 
   componentWillMount() {
     this.props.fetchProjectUserDetails(this.props.data.userid);
@@ -20,6 +26,16 @@ class ProjectList extends Component {
   }
 
   onAppliedClicked() {
+    this.setState({ isChanged: true });
+    console.log('what is project id : ', this.props.data.uid);
+    this.props.applyProject(this.props.data.uid);
+  }
+
+  onViewProjectClicked() {
+    NavigationService.navigate('ProjectView', { projectDetails: this.props });
+  }
+
+  onHideClicked() {
 
   }
 
@@ -68,7 +84,7 @@ class ProjectList extends Component {
             />
             <IconButton
                 style={styles.iconStyle}
-                onPress={() => this.onStarButtonClicked()}
+                onPress={this.onHideClicked.bind(this)}
                 iconname="eye-slash"
                 lable="Hide"
             />
@@ -83,15 +99,16 @@ class ProjectList extends Component {
               <IconButton
                 style={styles.iconStyle}
                 onPress={() => this.onAppliedClicked()}
+                iconname="check"
+                lable="Apply"
+                isApplied={this.state.isChanged}
+              />
+              <IconButton
+                style={styles.iconStyle}
+                onPress={this.onViewProjectClicked.bind(this)}
                 iconname="eye"
                 lable="View"
               />
-              <IconButton
-              style={styles.iconStyle}
-              onPress={() => this.onAppliedClicked()}
-              iconname="check"
-              lable="Apply"
-            />
             </CardSection>
         </CardSection>
         </CardSection>
@@ -149,6 +166,6 @@ const mapStateToProps = (state) => {
 };
 
 const ProjectListComponent =
-      connect(mapStateToProps, { fetchProjectUserDetails })(ProjectList);
+      connect(mapStateToProps, { fetchProjectUserDetails, applyProject })(ProjectList);
 
 export { ProjectListComponent as ProjectList };

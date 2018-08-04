@@ -6,7 +6,9 @@ import {
   SAVE_PROJECT_ID,
   CLEAR_PROJECT_DATA,
   PROJECT_LIST_FETCHED,
-  DRAFT_PROJECT_FETCHED
+  DRAFT_PROJECT_FETCHED,
+  APPILED_PROJECT,
+  APPLIED_USERS_FETCHED
 } from './types';
 import NavigationService from '../components/NavigationService';
 
@@ -70,11 +72,66 @@ export const postProject = ({ id }) => {
 };
 
 
+export const applyProject = (projectId) => {
+  return (dispatch) => {
+    const { currentUser } = firebase.auth();
+    firebase.database().ref(`/users/${currentUser.uid}/appliedProject`)
+    .update({ projectId })
+    .then(() => {
+      console.log('successfully applied for project');
+      //applied for project
+      dispatch({ type: APPILED_PROJECT });
+    });
+  };
+};
+
+
 export const fetchProjectList = () => {
   return (dispatch) => {
     firebase.database().ref('/projects')
     .on('value', snapshot => {
       dispatch({ type: PROJECT_LIST_FETCHED, payload: snapshot.val() });
+    });
+  };
+};
+
+export const fetchAppliedUsersToProject = (projectId) => {
+  return (dispatch) => {
+    //console.log('project id in fetch user detaisl ', projectId);
+    /*firebase.database().ref('users').on('value', (snapshot) => {
+      snapshot.forEach((child) => {
+        const id = child.key;
+        const ref = firebase.database().ref(`users/${id}/appliedProject`);
+        const query = ref.orderByChild('projectId').equalTo(`${projectId}`);
+        query.on('value', (secondSnapshot) => {
+          if (secondSnapshot.val() !== null) {
+            dispatch({ type: APPLIED_USERS_FETCHED, payload: child });
+            console.log('project id in fetch user detaisl ', child.val(), secondSnapshot.val());
+          }
+        /*snapshot.forEach((child) => {
+          console.log(child.key, child.val().name);
+        });*/
+      //});
+        //console.log(child.key, child.val());
+      //});
+    /*});*/
+    /*const query = ref.orderByChild('projectId').equalTo(`${projectId}`);
+    query.on('value', (snapshot) => {
+      snapshot.forEach((child) => {
+        console.log(child.key, child.val());
+        /*child.val().appliedProject.forEach((nextChild) => {
+          console.log(nextChild.key, nextChild.val());
+        });*/
+      /*});*/
+    /*});*/
+    const ref = firebase.database().ref('users');
+    const query = ref.orderByChild('appliedProject/projectId').equalTo(`${projectId}`);
+    query.on('value', (snapshot) => {
+      dispatch({ type: APPLIED_USERS_FETCHED, payload: snapshot.val() });
+      console.log('project id in fetch user detaisl ', snapshot.val());
+      /*snapshot.forEach((child) => {
+        console.log(child.key, child.val().name);
+      });*/
     });
   };
 };

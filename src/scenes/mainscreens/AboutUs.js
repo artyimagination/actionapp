@@ -10,7 +10,7 @@ class AboutUs extends Component {
 
   static navigationOptions = {
     drawerIcon: (
-      <Icon name="address-book" size={25}  />
+      <Icon name="address-book" size={25} />
     )
   };
 
@@ -21,7 +21,7 @@ class AboutUs extends Component {
           <CardSection style={styles.textContainer}>
               <Text style={styles.labelStyle}>
                 Application details and version Application details and version
-                Application details and version Application details and version 
+                Application details and version Application details and version
                 Application details and version Application details and version
                 Application details and version Application details and version
                 Application details and version Application details and version
@@ -36,29 +36,24 @@ class AboutUs extends Component {
 
 const styles = {
   containerStyle: {
-    flex: 1,
-    paddingTop: 20
+    flex: 1
   },
   textContainer: {
     alignSelf: 'center',
     width: 326,
-    height: 290,
+    height: 423,
     opacity: 0.4,
     backgroundColor: '#ffffff',
     borderStyle: 'solid',
     borderWidth: 0.7,
     borderColor: '#95989a',
-    padding: 10,
-   
+    padding: 5
   },
   labelStyle: {
     fontSize: 10,
     fontWeight: 'normal',
     fontStyle: 'normal',
     color: '#95989a'
-  },
-  drawerIconStyle: {
-    color: '#e91e63'
   }
 };
 

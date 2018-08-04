@@ -25,7 +25,9 @@ import {
   Draft,
   Settings,
   HelpAndSupport,
-  NotificationScreen
+  NotificationScreen,
+  ViewProject,
+  AppliedProjectUsers
 } from '../scenes/mainscreens';
 import {
   UploadProjectScreen1,
@@ -65,8 +67,7 @@ const DrawerNavigation = createDrawerNavigator({
   Page1: {
     screen: MainTabNavigator,
     navigationOptions: {
-      drawerLabel: 'Home',
-      activeTintColor: '#e91e63'
+      drawerLabel: 'Home'
     }
   },
   page2: {
@@ -125,13 +126,12 @@ const HomeStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         title: 'Action',
         headerLeft: (
-          <DrawerButton name="navicon" navigation={navigation} style={styles.Headercss} />
+          <DrawerButton name="navicon" navigation={navigation} />
         ),
         headerRight: (
-          <SearchButton navigation={navigation} style={styles.Headercss}  />
+          <SearchButton navigation={navigation} />
         ),
-        // headerStyle: { paddingRight: 10, paddingLeft: 10 },
-        headerTitleStyle: { color: 'rgb(234, 94, 32)' }
+        headerStyle: { paddingRight: 10, paddingLeft: 10 }
       })
     },
     Project: {
@@ -142,6 +142,18 @@ const HomeStack = createStackNavigator(
     },
     Notification: {
       screen: NotificationScreen
+    },
+    ProjectView: {
+      screen: ViewProject,
+      navigationOptions: () => ({
+        title: 'View Project'
+      })
+    },
+    AppliedProjectScreen: {
+      screen: AppliedProjectUsers,
+      navigationOptions: () => ({
+        title: 'Applied Users'
+      })
     }
   },
   {
@@ -156,7 +168,7 @@ const SearchButton = () => {
       <TouchableOpacity
       onPress={() => { NavigationService.navigate('Notification'); }}
       >
-        <Icon name="bell" size={25} style={styles.Headercss} />
+        <Icon name="bell" size={30} />
       </TouchableOpacity>
     </View>
   );
@@ -168,7 +180,7 @@ const DrawerButton = (props) => {
       <TouchableOpacity
       onPress={() => { props.navigation.dispatch(DrawerActions.toggleDrawer()); }}
       >
-        <Icon name={props.name} size={30} style={styles.Headercss} />
+        <Icon name={props.name} size={30} />
       </TouchableOpacity>
     </View>
   );
@@ -184,17 +196,6 @@ const RootStack = createSwitchNavigator(
     initialRouteName: 'Main'
   }
 );
-
-const styles = {
-  Headercss: {
-    color: 'rgb(234, 94, 32)',
-    justifyContent: 'space-around',
-    paddingleft: 45,
-    paddingRight: 15,
-
-  }
-
-};
 
 
 export default RootStack;
