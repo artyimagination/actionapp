@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 
-import { CardSection } from '../../components/common';
+import { CardSection, IconButton } from '../../components/common';
+import { createChatUsers } from '../../actions';
 
 class AppliedUserList extends Component {
+
+  onChatClicked() {
+    console.log('chat button clicked...', this.props.data);
+    this.props.createChatUsers(this.props.data.uid);
+  }
+
   render() {
     return (
       <View>
@@ -18,6 +26,11 @@ class AppliedUserList extends Component {
         <Text style={styles.labelStyle}>Language : {this.props.data.language}</Text>
         <Text style={styles.labelStyle}>Number - {this.props.data.mobile}</Text>
         <Text style={styles.labelStyle}>{this.props.data.description}</Text>
+        <IconButton
+          onPress={this.onChatClicked.bind(this)}
+          iconname="comment"
+          lable="chat"
+        />
       </CardSection>
       </View>
     );
@@ -51,4 +64,5 @@ const styles = {
   }
 };
 
-export { AppliedUserList };
+const AppliedUserListCompnent = connect(null, { createChatUsers })(AppliedUserList);
+export { AppliedUserListCompnent as AppliedUserList };

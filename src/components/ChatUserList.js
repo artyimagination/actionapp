@@ -11,12 +11,11 @@ class ChatUserList extends Component {
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
-    //this.onChatClicked = this.onChatClicked.bind(this);
+    this.onChatClicked = this.onChatClicked.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchChatUsers();
-
     this.createDataSource(this.props);
   }
 
@@ -24,21 +23,21 @@ class ChatUserList extends Component {
     this.createDataSource(nextProps);
   }
 
-  onChatClicked(chatdata) {
-    //console.log('onChatClicke', this.props.userprofile);
-    this.props.openChat({ chatdata });
+  onChatClicked(user) {
+    console.log('onChatClicke', this.props.users);
+    this.props.openChat(user);
   }
 
-  createDataSource({ chatdata }) {
+  createDataSource({ userList }) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
-    this.dataSource = ds.cloneWithRows(chatdata);
+    this.dataSource = ds.cloneWithRows(userList);
   }
 
-  renderRow(chatdata) {
-    return <ChatList user={chatdata} onPress={() => this.onChatClicked(chatdata)} />;
+  renderRow(user) {
+    return <ChatList user={user} onPress={() => this.onChatClicked(user)} />;
   }
 
   render() {
@@ -55,10 +54,11 @@ class ChatUserList extends Component {
 
 const mapStateToProps = state => {
   //const { userprofile } = state.userprofile;
-  const chatdata = _.map(state.chatdata, (val, uid) => {
+  /*const chatdata = _.map(state.chatdata, (val, uid) => {
     return { ...val, uid };
-  });
-  return { chatdata };
+  });*/
+  const { userList } = state.chatdata;
+  return { userList };
 };
 
 export default connect(mapStateToProps, { fetchChatUsers, openChat })(ChatUserList);

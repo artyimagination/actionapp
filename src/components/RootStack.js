@@ -35,6 +35,7 @@ import {
   OtherCategoryScreen
 } from '../scenes/mainscreens/projects';
 
+import Chat from './Chat';
 import NavigationService from './NavigationService';
 
 
@@ -73,29 +74,25 @@ const DrawerNavigation = createDrawerNavigator({
   page2: {
     screen: AboutUs,
     navigationOptions: {
-      drawerLabel: 'About Us',
-      headerTintColor:'rgb(234,94,32)'
+      drawerLabel: 'About Us'
     }
   },
   page3: {
     screen: Draft,
     navigationOptions: {
-      drawerLabel: 'Draft',
-      headerTintColor:'rgb(234,94,32)'
+      drawerLabel: 'Draft'
     }
   },
   page4: {
     screen: Settings,
     navigationOptions: {
-      drawerLabel: 'Settings',
-      headerTintColor:'rgb(234,94,32)'
+      drawerLabel: 'Settings'
     }
   },
   page5: {
     screen: HelpAndSupport,
     navigationOptions: {
-      drawerLabel: 'Help And Support',
-      headerTintColor:'rgb(234,94,32)'
+      drawerLabel: 'Help And Support'
     }
   },
   Page6: {
@@ -118,8 +115,7 @@ const RegistrationStack = createStackNavigator(
 },
 {
   navigationOptions: {
-    title: 'Update Profile',
-    headerTintColor:'rgb(234,94,32)'
+    title: 'Update Profile'
   }
 }
 );
@@ -131,7 +127,7 @@ const HomeStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         title: 'Action',
         headerLeft: (
-          <DrawerButton name="navicon" navigation={navigation} style={styles.Headercss}  />
+          <DrawerButton name="navicon" style={styles.Headercss} navigation={navigation} />
         ),
         headerRight: (
           <SearchButton style={styles.Headercss} navigation={navigation} />
@@ -152,8 +148,7 @@ const HomeStack = createStackNavigator(
     ProjectView: {
       screen: ViewProject,
       navigationOptions: () => ({
-        title: 'View Project',
-        headerTintColor:'rgb(234,94,32)'
+        title: 'View Project'
       })
     },
     AppliedProjectScreen: {
@@ -161,6 +156,12 @@ const HomeStack = createStackNavigator(
       navigationOptions: () => ({
         title: 'Applied Users'
       })
+    },
+    ChattingScreen: {
+      screen: Chat,
+      navigationOptions: {
+        title: 'Chat'
+      }
     }
   },
   {
@@ -197,7 +198,7 @@ const styles = {
     Headercss: {
      color: 'rgb(234, 94, 32)',
      justifyContent: 'space-around',
-     paddingLeft: 45,
+     paddingleft: 45,
      paddingRight: 15,
    }
 };

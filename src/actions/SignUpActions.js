@@ -188,7 +188,7 @@ const updateUserProfileData = (dispatch, { displayName, email }) => {
 const saveIntoDatabase = (dispatch, user, name, email, mobile) => {
   const { currentUser } = firebase.auth();
   firebase.database().ref(`/users/${currentUser.uid}`)
-  .update({ email })
+  .update({ email, uid: currentUser.uid })
   .then(() => {
     dispatch({ type: USER_PROFILE_DATA_SAVED });
     NavigationService.navigate('Registration');

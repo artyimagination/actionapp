@@ -8,7 +8,8 @@ import {
   PROJECT_LIST_FETCHED,
   DRAFT_PROJECT_FETCHED,
   APPILED_PROJECT,
-  APPLIED_USERS_FETCHED
+  APPLIED_USERS_FETCHED,
+  CLEAR_PROJECT_LIST
 } from './types';
 import NavigationService from '../components/NavigationService';
 
@@ -130,10 +131,23 @@ export const fetchAppliedUsersToProject = (projectId) => {
       //dispatch({ type: APPLIED_USERS_FETCHED, payload: snapshot.val() });
       console.log('project id in fetch user detaisl ', snapshot.val());
       snapshot.forEach((child) => {
-        console.log(child.key, child.val().uid);
+        //console.log(child.key, child.val().uid);
+        getUserById(child.val().uid, dispatch);
       });
     });
   };
+};
+
+export const clearProjectList = () => {
+  return (dispatch) => {
+    dispatch({ type: CLEAR_PROJECT_LIST });
+  };
+};
+
+export const getUserById = (uid, dispatch) => {
+  firebase.database().ref(`/users/${uid}`).on('value', (snapshot) => {
+    dispatch({ type: APPLIED_USERS_FETCHED, payload: snapshot.val() });
+  });
 };
 
 export const fetchDraftProject = () => {

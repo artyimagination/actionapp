@@ -110,6 +110,12 @@ const loginUserFail = (dispatch) => {
 };
 
 const loginUserSuccess = (dispatch, user) => {
+  const { currentUser } = firebase.auth();
+  firebase.database().ref(`/users/${currentUser.uid}`)
+  .update({ uid: currentUser.uid })
+  .catch(() => {
+    console.log('some error occuring');
+  });
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user

@@ -26,9 +26,11 @@ class ProjectList extends Component {
   }
 
   onAppliedClicked() {
-    this.setState({ isChanged: true });
-    console.log('what is project id : ', this.props.data.uid);
-    this.props.applyProject(this.props.data.uid);
+    if (!this.state.isChanged) {
+      this.setState({ isChanged: true });
+      //console.log('what is project id : ', this.props.data.uid);
+      this.props.applyProject(this.props.data.uid);
+    }
   }
 
   onViewProjectClicked() {
@@ -57,6 +59,18 @@ class ProjectList extends Component {
     );
   }
 
+  renderAppliedButton() {
+    return (
+      <IconButton
+        style={styles.iconStyle}
+        onPress={() => this.onAppliedClicked()}
+        iconname="check"
+        lable="Apply"
+        isApplied={this.state.isChanged}
+      />
+    );
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -71,7 +85,7 @@ class ProjectList extends Component {
             <Text style={styles.labelStyle}>Type - {this.props.data.type}</Text>
             <Text style={styles.labelStyle}>Language : {this.props.data.language}</Text>
             <Text style={styles.labelStyle}>Description</Text>
-            
+            <Text style={styles.labelStyle}>{this.props.data.description}</Text>
           </CardSection>
         </CardSection>
         <CardSection style={styles.iconContainer}>
@@ -96,18 +110,12 @@ class ProjectList extends Component {
               />
             </CardSection>
             <CardSection style={styles.iconStyle}>
+              {this.renderAppliedButton()}
               <IconButton
                 style={styles.iconStyle}
                 onPress={this.onViewProjectClicked.bind(this)}
                 iconname="eye"
                 lable="View"
-              />
-              <IconButton
-                style={styles.iconStyle}
-                onPress={() => this.onAppliedClicked()}
-                iconname="check"
-                lable="Apply"
-                isApplied={this.state.isChanged}
               />
             </CardSection>
         </CardSection>
