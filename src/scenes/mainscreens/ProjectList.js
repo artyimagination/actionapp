@@ -3,7 +3,8 @@ import { Text, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { CardSection, IconButton } from '../../components/common';
-import { fetchProjectUserDetails } from '../../actions';
+import { fetchProjectUserDetails, applyProject } from '../../actions';
+import NavigationService from '../../components/NavigationService';
 
 class ProjectList extends Component {
 
@@ -16,11 +17,17 @@ class ProjectList extends Component {
   }
 
   onChatClicked() {
-
+   
   }
 
   onAppliedClicked() {
-
+    this.setState({ isChanged: true });
+    console.log('what is project id : ', this.props.data.uid);
+    this.props.applyProject(this.props.data.uid);
+  }
+  onViewProjectClicked() {
+   console.log('test');
+    NavigationService.navigate('ProjectView', { projectDetails: this.props });
   }
 
   renderProfileImage() {
@@ -82,7 +89,7 @@ class ProjectList extends Component {
             <CardSection style={styles.iconStyle}>
               <IconButton
                 style={styles.iconStyle}
-                onPress={() => this.onAppliedClicked()}
+                onPress={() => this.onViewProjectClicked()}
                 iconname="eye"
                 lable="View"
               />
@@ -149,6 +156,6 @@ const mapStateToProps = (state) => {
 };
 
 const ProjectListComponent =
-      connect(mapStateToProps, { fetchProjectUserDetails })(ProjectList);
+      connect(mapStateToProps, { fetchProjectUserDetails, applyProject })(ProjectList);
 
 export { ProjectListComponent as ProjectList };

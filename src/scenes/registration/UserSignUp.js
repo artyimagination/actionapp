@@ -78,6 +78,7 @@ class UserSignUp extends Component {
   renderGoogleSignButton() {
     return (
       <TextButton
+        style={styles.socialLoginButton}
         onPress={this.onGoogleSignIn.bind(this)}
       >
         Google
@@ -88,6 +89,7 @@ class UserSignUp extends Component {
   renderFacebookLoginButton() {
     return (
       <TextButton
+        style={styles.socialLoginButton}
         onPress={this.facebookLoginIn.bind(this)}
       >
         Facebook
@@ -182,7 +184,12 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     paddingLeft: 80,
-  }
+  },
+  socialLoginButton: {
+    color: 'rgb(234, 94, 32)', 
+    // paddingLeft: 3,
+    // paddingRight: 3
+  },
 };
 
 const mapStateToProps = (state) => {

@@ -171,11 +171,11 @@ const styles = {
       justifyContent: 'flex-start'
     },
     labelStyle: {
-      fontSize: 10,
+      fontSize: 12,
       textAlign: 'left'
     },
     subLabelStyle: {
-      fontSize: 7,
+      fontSize: 10,
       textAlign: 'left',
       paddingLeft: 16
     }

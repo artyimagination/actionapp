@@ -65,40 +65,58 @@ const DrawerNavigation = createDrawerNavigator({
   Page1: {
     screen: MainTabNavigator,
     navigationOptions: {
-      drawerLabel: 'Home',
-      activeTintColor: '#e91e63'
+      drawerLabel: 'Home'
+    },
+    contentOptions: {
+      activeTintColor: 'rgb(234, 94, 32)'
     }
   },
   page2: {
     screen: AboutUs,
     navigationOptions: {
       drawerLabel: 'About Us'
+    },
+    contentOptions: {
+      activeTintColor: 'rgb(234, 94, 32)'
     }
   },
   page3: {
     screen: Draft,
     navigationOptions: {
       drawerLabel: 'Draft'
+    },
+    contentOptions: {
+      activeTintColor: 'rgb(234, 94, 32)'
     }
   },
   page4: {
     screen: Settings,
     navigationOptions: {
       drawerLabel: 'Settings'
+    },
+    contentOptions: {
+      activeTintColor: 'rgb(234, 94, 32)'
     }
   },
   page5: {
     screen: HelpAndSupport,
     navigationOptions: {
       drawerLabel: 'Help And Support'
+    },
+    contentOptions: {
+      activeTintColor: 'rgb(234, 94, 32)'
     }
   },
   Page6: {
     screen: LogoutScreen,
     navigationOptions: {
       drawerLabel: 'Logout'
+    },
+    contentOptions: {
+      activeTintColor: 'rgb(234, 94, 32)'
     }
   }
+  
 },
 {
   initialRouteName: 'Page1',
@@ -113,7 +131,8 @@ const RegistrationStack = createStackNavigator(
 },
 {
   navigationOptions: {
-    title: 'Update Profile'
+    title: 'Update Profile',
+    headerTintColor: 'rgb(234, 94, 32)'
   }
 }
 );
@@ -137,7 +156,8 @@ const HomeStack = createStackNavigator(
     Project: {
       screen: ProjectTab,
       navigationOptions: () => ({
-        title: 'Update New Project'
+        title: 'Update New Project',
+        headerTintColor: 'rgb(234, 94, 32)'
       })
     },
     Notification: {
@@ -189,7 +209,7 @@ const styles = {
   Headercss: {
     color: 'rgb(234, 94, 32)',
     justifyContent: 'space-around',
-    paddingleft: 45,
+    paddingLeft: 15,
     paddingRight: 15,
 
   }

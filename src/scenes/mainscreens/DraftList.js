@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import {  Image } from 'react-native';
 import { Button, CardSection } from '../../components/common';
 
 class DraftList extends Component {
@@ -14,6 +14,7 @@ class DraftList extends Component {
         >
           {this.props.data.title}
         </Button>
+        <Image src="" name={this.props.data.title} />
       </CardSection>
     );
   }

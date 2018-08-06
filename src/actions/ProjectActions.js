@@ -6,7 +6,8 @@ import {
   SAVE_PROJECT_ID,
   CLEAR_PROJECT_DATA,
   PROJECT_LIST_FETCHED,
-  DRAFT_PROJECT_FETCHED
+  DRAFT_PROJECT_FETCHED,
+  APPILED_PROJECT
 } from './types';
 import NavigationService from '../components/NavigationService';
 
@@ -66,6 +67,19 @@ export const postProject = ({ id }) => {
       NavigationService.navigate('Page1');
     });
     //console.log('is this not navigating to Home');
+  };
+};
+
+export const applyProject = (projectId) => {
+  return (dispatch) => {
+    const { currentUser } = firebase.auth();
+    firebase.database().ref(`/users/${currentUser.uid}/appliedProject`)
+    .update({ projectId })
+    .then(() => {
+      console.log('successfully applied for project');
+      //applied for project
+      dispatch({ type: APPILED_PROJECT });
+    });
   };
 };
 

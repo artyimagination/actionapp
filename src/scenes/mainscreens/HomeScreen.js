@@ -60,7 +60,10 @@ class HomeScreen extends Component {
       </View>
     );
   }
-
+navigateToPath() {
+  console.log('navigtor');
+   NavigationService.navigate('Project');
+}
   render() {
     return (
       <View style={styles.container}>
@@ -81,7 +84,9 @@ class HomeScreen extends Component {
       color='rgb(234, 94, 32)'
       onPressItem={
         (name) => {
+
           console.log(`selected button: ${name}`);
+          this.navigateToPath();
         }
       }
     />
@@ -96,27 +101,28 @@ const actions = [{
   text: 'Pending',
   color: 'rgb(234, 94, 32)',
   icon: 'bell',
-  name: 'bt_accessibility',
+  name: 'bt_pending',
   position: 2
 }, {
   text: 'Shortlisted',
   color: 'rgb(234, 94, 32)',
-  icon: 'bell',
-  name: 'bt_language',
+  icon: 'home',
+  name: 'bt_shortlisted',
   position: 1
 }, {
   text: 'Selected',
   icon: 'pepole',
   color: 'rgb(234, 94, 32)',
-  name: 'bt_room',
+  name: 'bt_selected',
   position: 3
 }, {
   text: 'Rejected',
   color: 'rgb(234, 94, 32)',
-  icon: 'bell',
-  name: 'Video',
+  icon: 'plus',
+  name: 'bt_rejected',
   position: 4
 }];
+
 const styles = {
   container: {
     flex: 1

@@ -90,37 +90,69 @@ class Login extends Component {
     );
   }
 
-  renderGoogleSignButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
+  // renderGoogleSignButton() {
+  //   if (this.props.loading) {
+  //     return <Spinner size="large" />;
+  //   }
 
+  //   return (
+  //     <GoogleSigninButton
+  //       style={{ width: 480, height: 480 }}
+  //       size={GoogleSigninButton.Size.Icon}
+  //       color={GoogleSigninButton.Color.Dark}
+  //       onPress={this.onGoogleSignIn.bind(this)}
+  //     />
+  //   );
+  // }
+
+  // renderFacebookLoginButton() {
+  //   if (this.props.loading) {
+  //     return <Spinner size="large" />;
+  //   }
+  //   return (
+  //     <Button
+  //       onPress={this.facebookLoginIn.bind(this)}
+  //     >
+  //     Facebook Login
+  //     </Button>
+  //   );
+  // }
+
+  renderGoogleSignButton() {
     return (
-      <GoogleSigninButton
-        style={{ width: 480, height: 480 }}
-        size={GoogleSigninButton.Size.Icon}
-        color={GoogleSigninButton.Color.Dark}
+      <Text
+        style={styles.socialLoginButton}
         onPress={this.onGoogleSignIn.bind(this)}
-      />
+      >
+        Google
+      </Text>
     );
   }
-
   renderFacebookLoginButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
     return (
-      <Button
+      <Text
+        style={styles.socialLoginButton}
         onPress={this.facebookLoginIn.bind(this)}
       >
-      Facebook Login
-      </Button>
+        Facebook
+      </Text>
     );
   }
 
+  
   render() {
       return (
         <View style={this.props.style}>
+        <CardSection style={styles.cardSectionContainer} >
+            <Text style={{  }}>
+            Login With
+            </Text>
+            {this.renderGoogleSignButton()}
+            <Text style={{  }}>
+              OR
+            </Text>
+            {this.renderFacebookLoginButton()}
+         </CardSection>
           <CardSection>
             <Input
               label="User Name"
@@ -138,7 +170,7 @@ class Login extends Component {
               value={this.props.password}
             />
           </CardSection>
-          <CardSection style={{ paddingTop: 10, paddingLeft: 10 }}>
+          <CardSection style={{ paddingTop: 10, paddingLeft: 16 }}>
             {this.renderLoginButton()}
           </CardSection>
           <CardSection style={styles.buttonStyle}>
@@ -161,8 +193,19 @@ const styles = {
   buttonStyle: {
     flex: 1,
     flexDirection: 'row',
-    paddingLeft: 15,
-    justifyContent: 'space-between'
+    //paddingLeft: 15,
+    justifyContent: 'space-around'
+  },
+  socialLoginButton: {
+    color: 'rgb(234, 94, 32)', 
+    paddingLeft: 3,
+    paddingRight: 3
+  },
+  cardSectionContainer: {
+    //flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'center'
+   
   }
 };
 

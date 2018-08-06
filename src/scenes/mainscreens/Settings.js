@@ -182,7 +182,7 @@ const styles = {
   labelStyle: {
     paddingLeft: 16,
     paddingRight: 10,
-    fontSize: 12,
+    fontSize: 14,
     textAlign: 'left',
     color: '#95989a'
   },
