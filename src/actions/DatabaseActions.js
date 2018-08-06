@@ -10,7 +10,8 @@ import {
   PROJECT_FETCHED,
   FETCH_PROJECT_USER_DETAILS,
   USER_PROFILE_DATA_SAVE_PROCESS,
-  USER_PROFILE_DATA_SAVED
+  USER_PROFILE_DATA_SAVED,
+  CLEAR_CHAT_LIST
 } from './types';
 
 import NavigationService from '../components/NavigationService';
@@ -50,24 +51,70 @@ export const fetchProjectDetails = () => {
   };
 };
 
-export const fetchChatUsers = () => {
-  return (dispatch) => {
-    firebase.database().ref('/users/')
-      .on('value', snapshot => {
-        //console.log(snapshot.val());
-        dispatch({ type: FETCH_CHAT_USERS, payload: snapshot.val() });
+
+export const createChatUsers = (fuid) => {
+  return () => {
+    const { currentUser } = firebase.auth();
+    const ref = firebase.database().ref(`/chat/${generateChatId(currentUser.uid, fuid)}`);
+    ref.on('value', (snapshot) => {
+      fetchUserAndRedirectToChat(fuid);
+      console.log('value of chat >>>> ', snapshot.val());
     });
   };
 };
 
-export const openChat = ({ chatdata }) => {
-  return () => {
-    //console.log('what is chat data then ', chatdata);
+const fetchUserAndRedirectToChat = (fuid) => {
+  firebase.database().ref(`/users/${fuid}`).on('value', (snapshot) => {
     NavigationService.navigate('ChattingScreen', {
-      name: chatdata.name,
-      uid: chatdata.uid,
-      avatar: chatdata.pic
+      name: snapshot.val().name,
+      uid: snapshot.val().uid,
+      avatar: snapshot.val().ProfilePic
     });
+  });
+};
+
+export const fetchChatUsers = () => {
+  return (dispatch) => {
+    firebase.database().ref('/users/')
+      .on('value', (snapshot) => {
+        console.log(snapshot);
+        snapshot.forEach((child) => {
+          console.log(child.key, child.val().uid);
+          isChatUser(child, dispatch);
+          /*if () {
+            console.log(child.key, child.val());
+            dispatch({ type: FETCH_CHAT_USERS, payload: child });
+          }*/
+        });
+        //dispatch({ type: FETCH_CHAT_USERS, payload: snapshot.val() });
+    });
+  };
+};
+
+const isChatUser = (child, dispatch) => {
+  const { currentUser } = firebase.auth();
+  firebase.database().ref(`/chat/${generateChatId(currentUser.uid, child.key)}`)
+  .on('value', (snapshot) => {
+      if (snapshot.val() !== null) {
+        dispatch({ type: FETCH_CHAT_USERS, payload: child.val() });
+      }
+  });
+};
+
+export const openChat = (user) => {
+  return () => {
+    console.log('what is chat data then ', user);
+    NavigationService.navigate('ChattingScreen', {
+      name: user.name,
+      uid: user.uid,
+      avatar: user.ProfilePic
+    });
+  };
+};
+
+export const clearChatList = () => {
+  return (dispatch) => {
+    dispatch({ type: CLEAR_CHAT_LIST });
   };
 };
 
@@ -127,4 +174,9 @@ export const updateUserProfile = ({ userprofile }) => {
       dispatch({ type: USER_PROFILE_DATA_SAVED });
     });
   };
+};
+
+const generateChatId = (cuid, fuid) => {
+  if (cuid > fuid) return `${cuid}-${fuid}`;
+  return `${fuid}-${cuid}`;
 };

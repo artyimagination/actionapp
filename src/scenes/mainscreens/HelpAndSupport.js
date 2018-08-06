@@ -17,7 +17,7 @@ class HelpAndSupport extends Component {
           <CardSection style={styles.textContainer}>
           <Text style={styles.labelStyle}>
             Application details and version Application details and version
-            Application details and version Application details and version 
+            Application details and version Application details and version
             Application details and version Application details and version
             Application details and version Application details and version
             Application details and version Application details and version
@@ -29,8 +29,6 @@ class HelpAndSupport extends Component {
     );
   }
 }
-
-
 
 const styles = {
   containerStyle: {
@@ -47,7 +45,7 @@ const styles = {
     borderWidth: 0.7,
     borderColor: '#95989a',
     padding: 10,
-   
+
   },
   labelStyle: {
     fontSize: 10,

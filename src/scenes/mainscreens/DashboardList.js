@@ -1,14 +1,21 @@
-
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
 import { CardSection } from '../../components/common';
+import NavigationService from '../../components/NavigationService';
 
 class DashboardList extends Component {
+
+  onProjectClicked() {
+    //Fetch Applied User And Show to screen
+    NavigationService.navigate('AppliedProjectScreen', { id: this.props.data.uid });
+  }
+
+
   render() {
     return (
         <CardSection style={styles.container}>
-        <TouchableOpacity onPress={() => console.log('dash board clicked')} >
+        <TouchableOpacity onPress={this.onProjectClicked.bind(this)} >
           <CardSection>
             <Text style={styles.titleStyle}>{this.props.data.title}</Text>
             <Text style={{ fontSize: 6, textAlign: 'center', paddingLeft: 10, paddingTop: 8 }}>

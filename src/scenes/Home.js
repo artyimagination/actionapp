@@ -5,21 +5,20 @@ import firebase from 'react-native-firebase';
 import { Button } from '../components/common';
 import Logo from '../components/Logo';
 import NavigationService from '../components/NavigationService';
-
+import CurrentUser from '../utils/CurrentUser';
 
 class Home extends Component {
-
   static navigationOptions = ({
     header: null
   });
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
+      if (user && !CurrentUser.isFirstTimeUser) {
         NavigationService.navigate('Home');
       }
     });
-  }
+ }
 
   render() {
     const { container, buttonContainer, buttonStyle } = styles;

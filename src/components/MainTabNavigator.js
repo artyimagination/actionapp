@@ -12,17 +12,11 @@ import {
   UserProfileScreen
 } from '../scenes/mainscreens';
 
-import Chat from './Chat';
+//import Chat from './Chat';
 
 const ChatScreenNavigation = createStackNavigator({
   ChatMainScreen: {
     screen: ChatScreen,
-    navigationOptions: {
-      title: 'Chat'
-    }
-  },
-  ChattingScreen: {
-    screen: Chat,
     navigationOptions: {
       title: 'Chat'
     }
@@ -36,7 +30,7 @@ const TabNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      title: 'Home',
+      title: 'Home'
     }
   },
   Search: {
@@ -52,7 +46,7 @@ const TabNavigator = createBottomTabNavigator({
     }
   },
   Chat: {
-    screen: ChatScreenNavigation,
+    screen: ChatScreen,
     navigationOptions: {
       title: 'Chat'
     }
@@ -68,43 +62,26 @@ const TabNavigator = createBottomTabNavigator({
 {
   navigationOptions: ({ navigation }) => ({
     title: 'Header Title',
-    tabBarIcon: ({ focused, tintColor }) =>{
-
-      if (focused) {
-        const { routeName } = navigation.state;
-        let iconName = '';
-        if (routeName === 'Home') {
-          iconName = `home${focused ? '' : ''}`;
-        } else if (routeName === 'Dashboard') {
-          iconName = `table${focused ? '' : ''}`;
-        } else if (routeName === 'Search') {
-          iconName = `search${focused ? '' : ''}`;
-        } else if (routeName === 'Chat') {
-          iconName = `comment${focused ? '' : ''}`;
-        } else if (routeName === 'Profile') {
-          iconName = `user${focused ? '' : ''}`;
-        }
-        
-        return <Icon name={iconName} size={25} color='rgb(255, 160, 117)' />;
-      } else {
-        const { routeName } = navigation.state;
-        let iconName = '';
-        if (routeName === 'Home') {
-          iconName = `home${focused ? '' : ''}`;
-        } else if (routeName === 'Dashboard') {
-          iconName = `table${focused ? '' : ''}`;
-        } else if (routeName === 'Search') {
-          iconName = `search${focused ? '' : ''}`;
-        } else if (routeName === 'Chat') {
-          iconName = `comment${focused ? '' : ''}`;
-        } else if (routeName === 'Profile') {
-          iconName = `user${focused ? '' : ''}`;
-        }
-  
-        return <Icon name={iconName} size={25} color='rgb(234, 94, 32)' />;
+    tabBarIcon: ({ focused, tintColor }) => {
+      const { routeName } = navigation.state;
+      let iconName = '';
+      if (routeName === 'Home') {
+        iconName = `home${focused ? '' : ''}`;
+      } else if (routeName === 'Dashboard') {
+        iconName = `table${focused ? '' : ''}`;
+      } else if (routeName === 'Search') {
+        iconName = `search${focused ? '' : ''}`;
+      } else if (routeName === 'Chat') {
+        iconName = `comment${focused ? '' : ''}`;
+      } else if (routeName === 'Profile') {
+        iconName = `user${focused ? '' : ''}`;
       }
- 
-    }
+     if (focused) {
+       return <Icon name={iconName} size={25} color='rgb(255, 160, 117)' />;
+     } else if (!focused) {
+       return <Icon name={iconName} size={25} color='rgb(234, 94, 32)' />;
+     }
+   }
   }),
   tabBarOptions: {
     activeTinkColor: 'rgb(234, 94, 32)',

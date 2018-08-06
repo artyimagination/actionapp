@@ -1,9 +1,7 @@
 import {
-  FETCH_CHAT_USERS,
-  CLEAR_USER_DATA,
-  CLEAR_CHAT_LIST
+  APPLIED_USERS_FETCHED,
+  CLEAR_PROJECT_LIST
 } from '../actions/types';
-
 
 const INITIAL_STATE = {
   userList: []
@@ -11,11 +9,10 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_CHAT_USERS:
+    case APPLIED_USERS_FETCHED:
       return { ...state, userList: [...state.userList, action.payload] };
-    case CLEAR_USER_DATA:
-    case CLEAR_CHAT_LIST:
-      return { ...state, ...INITIAL_STATE };
+    case CLEAR_PROJECT_LIST:
+      return INITIAL_STATE;
     default:
       return state;
   }

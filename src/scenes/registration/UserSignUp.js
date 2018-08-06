@@ -186,10 +186,10 @@ const styles = {
     paddingLeft: 80,
   },
   socialLoginButton: {
-    color: 'rgb(234, 94, 32)', 
+    color: 'rgb(234, 94, 32)',
     // paddingLeft: 3,
     // paddingRight: 3
-  },
+  }
 };
 
 const mapStateToProps = (state) => {
