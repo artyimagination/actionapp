@@ -44,7 +44,8 @@ const MainStack = createStackNavigator(
   ForgotPassword: ForgotPasswordScreen
 },
 {
-  initialRouteName: 'HomeScreen'
+   initialRouteName: 'HomeScreen'
+ 
 }
 );
 
@@ -151,6 +152,7 @@ const HomeStack = createStackNavigator(
         ),
         // headerStyle: { paddingRight: 10, paddingLeft: 10 },
         headerTitleStyle: { color: 'rgb(234, 94, 32)' }
+        
       })
     },
     Project: {

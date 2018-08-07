@@ -62,7 +62,7 @@ class OtherCategoryScreen extends Component {
       <CheckboxGroup
         items={items}
         selectedItems={[0]}
-        checkboxGroupContainerStyle={{ flexDirection: 'row' }}
+        checkboxGroupContainerStyle={{ flexDirection: 'row', margin: 0 }}
         onSelect={(values) => console.log(values)}
       />
     );
@@ -73,9 +73,12 @@ class OtherCategoryScreen extends Component {
     return (
       <ScrollView>
         <CardSection style={cardSectionStyle} >
-          <Text>
+      
+          <Text style={{ paddingLeft: 6 }}>
             Category
           </Text>
+          </CardSection>
+          <CardSection style={cardSectionStyle} >
             <CustomCheckBox
               key={0}
               label="Producer"
@@ -110,7 +113,12 @@ const styles = {
   cardSectionStyle: {
     flexDirection: 'column',
     borderBottomWidth: 1,
-    borderColor: '#000'
+    borderColor: '#000',
+    justifyContent: 'space-around',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10, 
+    paddingBottom: 10
   }
 };
 

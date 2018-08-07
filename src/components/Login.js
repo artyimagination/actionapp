@@ -15,6 +15,12 @@ import { Validator } from '../utils/Validator';
 
 class Login extends Component {
 
+  constructor(props) {
+    super(props);
+    this.a = React.createRef();
+    this.b = React.createRef();
+  
+  }
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
@@ -139,16 +145,20 @@ class Login extends Component {
     );
   }
 
+  // focusNextField(id) {
+  //   this.inputs[id].focus();
+  // }
+
   
   render() {
       return (
         <View style={this.props.style}>
         <CardSection style={styles.cardSectionContainer} >
-            <Text style={{  }}>
+            <Text>
             Login With
             </Text>
             {this.renderGoogleSignButton()}
-            <Text style={{  }}>
+            <Text>
               OR
             </Text>
             {this.renderFacebookLoginButton()}
@@ -159,15 +169,23 @@ class Login extends Component {
               placeHolder="Enter User Name"
               onChangeText={this.onEmailChange.bind(this)}
               value={this.props.email}
+              ref='eml'
+              onSubmitEditing={() => { 
+                this.refs.pwd.focus(); 
+              }}
+       
             />
           </CardSection>
           <CardSection>
             <Input
               isPassword
+              ref='pwd'
               label="Password"
               placeHolder="Enter Password"
               onChangeText={this.onPasswordChange.bind(this)}
               value={this.props.password}
+             //onSubmitEditing={() => this.b.current.focus()}
+              
             />
           </CardSection>
           <CardSection style={{ paddingTop: 10, paddingLeft: 16 }}>
@@ -184,6 +202,7 @@ class Login extends Component {
 
 
 const styles = {
+
   errorTextStyle: {
     color: 'red',
     fontSize: '14',

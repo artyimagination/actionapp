@@ -77,23 +77,23 @@ class UserSignUp extends Component {
 
   renderGoogleSignButton() {
     return (
-      <TextButton
+      <Text
         style={styles.socialLoginButton}
         onPress={this.onGoogleSignIn.bind(this)}
       >
         Google
-      </TextButton>
+      </Text>
     );
   }
 
   renderFacebookLoginButton() {
     return (
-      <TextButton
+      <Text
         style={styles.socialLoginButton}
         onPress={this.facebookLoginIn.bind(this)}
       >
         Facebook
-      </TextButton>
+      </Text>
     );
   }
 
@@ -181,14 +181,14 @@ const styles = {
     justifyContent: 'space-between'
   },
   cardSectionContainer: {
-    flex: 1,
+    //flex: 1,
     flexDirection: 'row',
     paddingLeft: 80,
   },
   socialLoginButton: {
     color: 'rgb(234, 94, 32)', 
-    // paddingLeft: 3,
-    // paddingRight: 3
+    paddingLeft: 3,
+    paddingRight: 3
   },
 };
 

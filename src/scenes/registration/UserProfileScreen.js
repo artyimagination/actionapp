@@ -64,6 +64,10 @@ class UserProfileScreen extends Component {
 
             <DropDown
               label="Category"
+              containerStyle={{
+                width: 140, 
+                zIndex: 60,
+                top: 20 }}
               onValueChange={(value) => this.props.userProfile({ prop: 'category', value })}
               selectedValue={this.props.userprofile.category}
             >
@@ -83,7 +87,7 @@ class UserProfileScreen extends Component {
               mode="date"
               format="YYYY-MM-DD"
               placeholder="Select Birth Date"
-              minDate="1990-01-01"
+              minDate="1920-01-01"
               maxDate="2020-01-01"
               customStyles={{
                 dateIcon: {
@@ -145,7 +149,7 @@ class UserProfileScreen extends Component {
 
           <DropDown
             label="City"
-            style={{ flex: 1 }}
+            style={{ flex: 1}}
             onValueChange={(value) => this.props.userProfile({ prop: 'city', value })}
             selectedValue={this.props.userprofile.city}
           >

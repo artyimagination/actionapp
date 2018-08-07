@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, Text, ListView } from 'react-native';
 import { connect } from 'react-redux';
 
-import { CardSection, Button, Input, CheckboxGroup } from '../../../components/common';
+import { CardSection, Button, Input, CheckboxGroup, IconButton } from '../../../components/common';
 //import NavigationService from '../../../components/NavigationService';
 
 import { addCast, updateCast, fetchCastList, onCastDataSaved, onProjectSaveToDraft } from '../../../actions';
@@ -107,13 +107,8 @@ class CastScreen extends Component {
         dataSource={this.dataSource}
         renderRow={this.renderRow}
       />
-        <CardSection style={{ borderBottomWidth: 1, borderColor: '#000' }}>
-          <Input
-            label="Cast"
-            placeHolder="Cast 1"
-            value={this.props.currentcast.title}
-            onChangeText={value => this.props.updateCast({ prop: 'title', value })}
-          />
+        <CardSection style={{ borderBottomWidth: 1, borderColor: '#000', paddingLeft: 50 }}>
+        <Text >Cast 1</Text>
         </CardSection>
         <CardSection
           style={{ paddingLeft: 40, justifyContent: 'space-between' }}
