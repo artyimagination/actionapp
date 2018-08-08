@@ -32,7 +32,6 @@ const mapStateToProps = ({ auth }) => {
   return { email, password, error, loading };
 };
 
-
 const styles = {
   root: {
     backgroundColor: 'white',

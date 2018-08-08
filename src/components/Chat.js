@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet
+  StyleSheet, View
 } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import firebase from 'react-native-firebase';
+
+import { Button } from './common';
+import { clearChatList } from '../actions';
 
 let uid;
 let name;
 let avatar;
 
 export default class Chat extends Component {
+
+  static navigationOptions = () => ({
+      header: null
+  });
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +26,7 @@ export default class Chat extends Component {
 
     this.user = firebase.auth().currentUser;
     //console.log(`User:${this.user.uid}`);
-    //console.log('navigation data >>>> ', this.props.navigation);
+    console.log('navigation data >>>> ', this.props.navigation);
     const { params } = this.props.navigation.state;
     uid = params.uid;
     name = params.name;
@@ -65,6 +73,11 @@ export default class Chat extends Component {
     });
   }
 
+  onBackPressed() {
+
+    this.props.navigation.goBack(null);
+  }
+
   getRef() {
     return firebase.database().ref();
   }
@@ -101,6 +114,10 @@ export default class Chat extends Component {
 
   render() {
     return (
+      <View style={{ flex: 1 }}>
+      <Button onPress={this.onBackPressed.bind(this)}>
+        Back
+      </Button>
       <GiftedChat
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
@@ -108,6 +125,7 @@ export default class Chat extends Component {
           _id: this.user.uid
         }}
       />
+      </View>
     );
   }
 }

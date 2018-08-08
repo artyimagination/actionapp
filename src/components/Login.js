@@ -96,35 +96,11 @@ class Login extends Component {
     );
   }
 
-  // renderGoogleSignButton() {
-  //   if (this.props.loading) {
-  //     return <Spinner size="large" />;
-  //   }
-
-  //   return (
-  //     <GoogleSigninButton
-  //       style={{ width: 480, height: 480 }}
-  //       size={GoogleSigninButton.Size.Icon}
-  //       color={GoogleSigninButton.Color.Dark}
-  //       onPress={this.onGoogleSignIn.bind(this)}
-  //     />
-  //   );
-  // }
-
-  // renderFacebookLoginButton() {
-  //   if (this.props.loading) {
-  //     return <Spinner size="large" />;
-  //   }
-  //   return (
-  //     <Button
-  //       onPress={this.facebookLoginIn.bind(this)}
-  //     >
-  //     Facebook Login
-  //     </Button>
-  //   );
-  // }
-
   renderGoogleSignButton() {
+    /*if (this.props.loading) {
+      return <Spinner size="large" />;
+    }*/
+
     return (
       <Text
         style={styles.socialLoginButton}
@@ -134,7 +110,11 @@ class Login extends Component {
       </Text>
     );
   }
+
   renderFacebookLoginButton() {
+    /*if (this.props.loading) {
+      return <Spinner size="large" />;
+    }*/
     return (
       <Text
         style={styles.socialLoginButton}
@@ -216,15 +196,14 @@ const styles = {
     justifyContent: 'space-around'
   },
   socialLoginButton: {
-    color: 'rgb(234, 94, 32)', 
+    color: 'rgb(234, 94, 32)',
     paddingLeft: 3,
     paddingRight: 3
   },
   cardSectionContainer: {
-    //flex: 1,
     flexDirection: 'row',
     alignSelf: 'center'
-   
+
   }
 };
 

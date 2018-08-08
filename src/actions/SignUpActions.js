@@ -12,6 +12,8 @@ import {
   ERROR_SIGNIN
 } from './types';
 
+import CurrentUser from '../utils/CurrentUser';
+
 export const signUp = ({ prop, value }) => {
   return {
     type: SIGNUP_DATA,
@@ -72,6 +74,7 @@ export const saveUserDetails = ({ userprofile }) => {
       { height, weight, waist, experience, ProfilePic, description, youtubelink, fblink, instalink, pic1, pic2, pic3 })
     .then(() => {
       dispatch({ type: USER_PROFILE_DATA_SAVED });
+      CurrentUser.isFirstTimeUser = false;
       NavigationService.navigate('Home');
     });
   };
@@ -93,6 +96,7 @@ export const signUpUser = ({ name, email, password, mobile }) => {
       }
     });*/
     dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
+    CurrentUser.isFirstTimeUser = true;
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(user => saveIntoDatabase(dispatch, user, name, email, mobile))
       .catch(() => ErrorWhileSignIn(dispatch));
@@ -118,11 +122,13 @@ export const signInWithGoogle = () => {
         })
         .then((user) => {
           //console.log('Sign in successfully with google ', user.additionalUserInfo.isNewUser);
+          CurrentUser.isFirstTimeUser = true;
           if (isUserNew(user.additionalUserInfo)) {
             const { _user } = user.user;
             updateUserProfileData(dispatch, _user);
             saveIntoDatabase(dispatch, user, _user.displayName, _user.email, '');
           } else {
+            CurrentUser.isFirstTimeUser = false;
             NavigationService.navigate('Home');
           }
         })
@@ -153,11 +159,13 @@ export const signInWithFacebook = () => {
       })
       .then((user) => {
         //console.log('Facebook Login : ', user);
+        CurrentUser.isFirstTimeUser = true;
         if (isUserNew(user.additionalUserInfo)) {
           const { _user } = user.user;
           updateUserProfileData(dispatch, _user);
           saveIntoDatabase(dispatch, user, _user.displayName, _user.email, '');
         } else {
+          CurrentUser.isFirstTimeUser = false;
           NavigationService.navigate('Home');
         }
       })
@@ -188,8 +196,9 @@ const updateUserProfileData = (dispatch, { displayName, email }) => {
 const saveIntoDatabase = (dispatch, user, name, email, mobile) => {
   const { currentUser } = firebase.auth();
   firebase.database().ref(`/users/${currentUser.uid}`)
-  .update({ email })
+  .update({ email, uid: currentUser.uid })
   .then(() => {
+    CurrentUser.isFirstTimeUser = true;
     dispatch({ type: USER_PROFILE_DATA_SAVED });
     NavigationService.navigate('Registration');
   });

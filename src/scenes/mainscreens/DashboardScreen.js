@@ -28,8 +28,8 @@ class DashboardScreen extends Component {
 
   renderRow(data) {
     const { currentUser } = firebase.auth();
-    console.log('currentuser id : ', currentUser.uid);
-    console.log('project user id : ', data.uid);
+    //console.log('currentuser id : ', currentUser.uid);
+    //console.log('project user id : ', data.uid);
     if (data.userid === currentUser.uid) {
         return (<DashboardList data={data} />);
     }
@@ -82,7 +82,8 @@ const mapStateToProps = (state) => {
   const projectlist = _.map(state.projectlist, (val, uid) => {
           return { ...val, uid };
       });
-      console.log('project list array', projectlist);
+      //const { userDetails } = this.state;
+      //console.log('project list array', projectlist);
   return { projectlist };
 };
 

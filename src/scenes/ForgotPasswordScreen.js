@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { HeaderBackButton } from 'react-navigation';
 import { connect } from 'react-redux';
-import { Card, CardSection, Button, Input} from '../components/common';
+import { Card, CardSection, Button, Input } from '../components/common';
 import { enterEmail, confirmForgotPassword } from '../actions';
 
 class ForgotPasswordScreen extends Component {
@@ -28,12 +28,10 @@ class ForgotPasswordScreen extends Component {
   onForgotPassword(text) {
     this.props.enterEmail(text);
   }
- 
+
   render() {
     return (
       <View style={{ flex: 1 }}>
-    
-     
         <Card style={{ flex: 1, backgroundColor: '#ffffff', justifyContent: 'center' }}>
         <CardSection style={{ alignSelf: 'center', paddingBottom: 5, color: '#000' }}>
           <Text style={{ textAlign: 'center', fontSize: 18 }}>

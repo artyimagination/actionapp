@@ -25,7 +25,9 @@ import {
   Draft,
   Settings,
   HelpAndSupport,
-  NotificationScreen
+  NotificationScreen,
+  ViewProject,
+  AppliedProjectUsers
 } from '../scenes/mainscreens';
 import {
   UploadProjectScreen1,
@@ -33,6 +35,7 @@ import {
   OtherCategoryScreen
 } from '../scenes/mainscreens/projects';
 
+import Chat from './Chat';
 import NavigationService from './NavigationService';
 
 
@@ -117,7 +120,6 @@ const DrawerNavigation = createDrawerNavigator({
       activeTintColor: 'rgb(234, 94, 32)'
     }
   }
-  
 },
 {
   initialRouteName: 'Page1',
@@ -132,8 +134,7 @@ const RegistrationStack = createStackNavigator(
 },
 {
   navigationOptions: {
-    title: 'Update Profile',
-    headerTintColor: 'rgb(234, 94, 32)'
+    title: 'Update Profile'
   }
 }
 );
@@ -145,12 +146,12 @@ const HomeStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         title: 'Action',
         headerLeft: (
-          <DrawerButton name="navicon" navigation={navigation} style={styles.Headercss} />
+          <DrawerButton name="navicon" style={styles.Headercss} navigation={navigation} />
         ),
         headerRight: (
-          <SearchButton navigation={navigation} style={styles.Headercss}  />
+          <SearchButton style={styles.Headercss} navigation={navigation} />
         ),
-        // headerStyle: { paddingRight: 10, paddingLeft: 10 },
+        headerStyle: { paddingRight: 10, paddingLeft: 10 },
         headerTitleStyle: { color: 'rgb(234, 94, 32)' }
         
       })
@@ -158,12 +159,29 @@ const HomeStack = createStackNavigator(
     Project: {
       screen: ProjectTab,
       navigationOptions: () => ({
-        title: 'Update New Project',
-        headerTintColor: 'rgb(234, 94, 32)'
+        title: 'Update New Project'
       })
     },
     Notification: {
       screen: NotificationScreen
+    },
+    ProjectView: {
+      screen: ViewProject,
+      navigationOptions: () => ({
+        title: 'View Project'
+      })
+    },
+    AppliedProjectScreen: {
+      screen: AppliedProjectUsers,
+      navigationOptions: () => ({
+        title: 'Applied Users'
+      })
+    },
+    ChattingScreen: {
+      screen: Chat,
+      navigationOptions: {
+        title: 'Chat'
+      }
     }
   },
   {
@@ -178,7 +196,7 @@ const SearchButton = () => {
       <TouchableOpacity
       onPress={() => { NavigationService.navigate('Notification'); }}
       >
-        <Icon name="bell" size={25} style={styles.Headercss} />
+        <Icon name="bell" size={30} />
       </TouchableOpacity>
     </View>
   );
@@ -190,12 +208,20 @@ const DrawerButton = (props) => {
       <TouchableOpacity
       onPress={() => { props.navigation.dispatch(DrawerActions.toggleDrawer()); }}
       >
-        <Icon name={props.name} size={30} style={styles.Headercss} />
+        <Icon name={props.name} size={30} />
       </TouchableOpacity>
     </View>
   );
 };
 
+const styles = {
+    Headercss: {
+     color: 'rgb(234, 94, 32)',
+     justifyContent: 'space-around',
+     paddingleft: 45,
+     paddingRight: 15,
+   }
+};
 const RootStack = createSwitchNavigator(
   {
     Main: MainStack,
@@ -206,17 +232,6 @@ const RootStack = createSwitchNavigator(
     initialRouteName: 'Main'
   }
 );
-
-const styles = {
-  Headercss: {
-    color: 'rgb(234, 94, 32)',
-    justifyContent: 'space-around',
-    paddingLeft: 15,
-    paddingRight: 15,
-
-  }
-
-};
 
 
 export default RootStack;
