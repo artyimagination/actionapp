@@ -67,11 +67,15 @@ class UserProfileScreen extends Component {
               containerStyle={{
                 width: 140, 
                 zIndex: 60,
-                top: 20 }}
+                top: 20,
+                paddingTop: 20, 
+                paddingBottom: 20,
+                }}
               onValueChange={(value) => this.props.userProfile({ prop: 'category', value })}
               selectedValue={this.props.userprofile.category}
             >
               {Object.keys(this.props.categories).map((key) => {
+
                   return (<Picker.Item
                     label={this.props.categories[key]}
                     value={this.props.categories[key]}
@@ -105,7 +109,7 @@ class UserProfileScreen extends Component {
 
           <DropDown
             label="Language"
-            style={{ flex: 1 }}
+            style={{ flex: 1, paddingTop: 20, paddingBottom: 20 }}
             onValueChange={(value) => this.props.userProfile({ prop: 'language', value })}
             selectedValue={this.props.userprofile.language}
           >
@@ -116,7 +120,7 @@ class UserProfileScreen extends Component {
 
           <DropDown
             label="Gender"
-            style={{ flex: 1 }}
+            style={{ flex: 1, paddingTop: 20, paddingBottom: 20 }}
             onValueChange={(value) => this.props.userProfile({ prop: 'gender', value })}
             selectedValue={this.props.userprofile.gender}
           >
@@ -136,7 +140,7 @@ class UserProfileScreen extends Component {
 
           <DropDown
             label="State"
-            style={{ flex: 1 }}
+            style={{ flex: 1, paddingTop: 20, paddingBottom: 20 }}
             onValueChange={(value) => this.props.userProfile({ prop: 'selectedstate', value })}
             selectedValue={this.props.userprofile.selectedstate}
           >
@@ -149,7 +153,7 @@ class UserProfileScreen extends Component {
 
           <DropDown
             label="City"
-            style={{ flex: 1}}
+            style={{ flex: 1, paddingTop: 20, paddingBottom: 20 }}
             onValueChange={(value) => this.props.userProfile({ prop: 'city', value })}
             selectedValue={this.props.userprofile.city}
           >
@@ -182,7 +186,10 @@ class UserProfileScreen extends Component {
 const styles = {
   pickerTextStyle: {
     fontSize: 18,
-    paddingLeft: 20
+    paddingLeft: 20,
+    paddingTop: 20,
+    paddingBottom: 20
+    
   }
 };
 

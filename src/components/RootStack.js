@@ -44,10 +44,11 @@ const MainStack = createStackNavigator(
   HomeScreen: Home,
   Login: LoginScreen,
   SignUpScreen: UserSignUp,
-  ForgotPassword: ForgotPasswordScreen
+  ForgotPassword: ForgotPasswordScreen,
+  updateProfile: UserProfileScreen
 },
 {
-   initialRouteName: 'HomeScreen'
+   initialRouteName: 'updateProfile'
  
 }
 );
@@ -196,7 +197,7 @@ const SearchButton = () => {
       <TouchableOpacity
       onPress={() => { NavigationService.navigate('Notification'); }}
       >
-        <Icon name="bell" size={30} />
+        <Icon name="bell" size={30} style={styles.Headercss} />
       </TouchableOpacity>
     </View>
   );
@@ -208,7 +209,7 @@ const DrawerButton = (props) => {
       <TouchableOpacity
       onPress={() => { props.navigation.dispatch(DrawerActions.toggleDrawer()); }}
       >
-        <Icon name={props.name} size={30} />
+        <Icon name={props.name} size={30} style={styles.Headercss} />
       </TouchableOpacity>
     </View>
   );

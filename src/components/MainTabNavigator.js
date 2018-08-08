@@ -62,6 +62,7 @@ const TabNavigator = createBottomTabNavigator({
 {
   navigationOptions: ({ navigation }) => ({
     title: 'Header Title',
+    headerTintColor: 'rgb(234, 94, 32)',
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;
       let iconName = '';
