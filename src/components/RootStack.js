@@ -48,7 +48,7 @@ const MainStack = createStackNavigator(
   updateProfile: UserProfileScreen
 },
 {
-   initialRouteName: 'updateProfile'
+   initialRouteName: 'HomeScreen'
  
 }
 );
