@@ -17,14 +17,12 @@ class DashboardList extends Component {
         <CardSection style={styles.container}>
         <TouchableOpacity onPress={this.onProjectClicked.bind(this)} >
           <CardSection>
-            <Text style={styles.titleStyle}>{this.props.data.title}</Text>
+            <Text style={styles.titleStyle}>Artist Required</Text>
             <Text style={{ fontSize: 6, textAlign: 'center', paddingLeft: 10, paddingTop: 8 }}>
-              {this.props.data.uid}
+              {this.props.data.time} Ago
             </Text>
           </CardSection>
           <Text style={styles.labelStyle}>Status - Published</Text>
-          <Text style={styles.labelStyle}>Type - {this.props.data.type}</Text>
-          <Text style={styles.labelStyle}>Language : {this.props.data.language}</Text>
           <Text style={styles.labelStyle}>Description</Text>
           <Text style={styles.labelStyle}>{this.props.data.description}</Text>
         </TouchableOpacity>

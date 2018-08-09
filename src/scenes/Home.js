@@ -13,11 +13,11 @@ class Home extends Component {
   });
 
   componentDidMount() {
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user && !CurrentUser.isFirstTimeUser) {
-    //     NavigationService.navigate('Home');
-    //   }
-    // });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user && !CurrentUser.isFirstTimeUser) {
+        NavigationService.navigate('Home');
+      }
+    });
  }
 
   render() {

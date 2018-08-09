@@ -44,7 +44,7 @@ class DashboardScreen extends Component {
     return (
       <View style={{ flex: 1 }}>
           <CardSection style={styles.headingStyle}>
-            <Icon name='star' size={15} />
+            <Icon name='star' size={15} color='rgb(234, 94, 32)' />
             <Text style={styles.labelStyle}>My Projects</Text>
           </CardSection>
           <ListView
@@ -74,7 +74,8 @@ const styles = {
   labelStyle: {
     fontSize: 14,
     fontWeight: '600',
-    padding: 10
+    padding: 10,
+    color: 'rgb(234, 94, 32)'
   }
 };
 

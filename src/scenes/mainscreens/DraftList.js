@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Image } from 'react-native';
-import { Button, CardSection } from '../../components/common';
+import { Image,TextInput, TouchableOpacity } from 'react-native';
+import { Button, CardSection, Input } from '../../components/common';
 
 class DraftList extends Component {
   render() {
     return (
       <CardSection>
-        <Button
+          <Button
           style={{ backgroundColor: '#fff', borderColor: '#fff' }}
           labelStyle={{ color: '#000' }}
           onPress={this.props.onPress}
         >
           {this.props.data.title}
         </Button>
-        <Image src="" name={this.props.data.title} />
+          <TouchableOpacity onPress={() => console.log('Pressed')}>
+            <TextInput
+              style={{
+                height: 40,
+                borderColor: 'gray',
+                borderWidth: 1,
+                marginTop: 8
+              }}
+              underlineColorAndroid="transparent"
+              placeholder='test'
+            />
+          </TouchableOpacity>    
       </CardSection>
     );
   }

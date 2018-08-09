@@ -40,6 +40,18 @@ class ProjectList extends Component {
   onHideClicked() {
 
   }
+  
+  renderAppliedButton() {
+    return (
+      <IconButton
+        style={styles.iconStyle}
+        onPress={() => this.onAppliedClicked()}
+        iconname="check"
+        lable="Apply"
+        isApplied={this.state.isChanged}
+      />
+    );
+  }
 
   renderProfileImage() {
     if (this.props.ProfilePic !== '') {
@@ -59,17 +71,6 @@ class ProjectList extends Component {
     );
   }
 
-  renderAppliedButton() {
-    return (
-      <IconButton
-        style={styles.iconStyle}
-        onPress={() => this.onAppliedClicked()}
-        iconname="check"
-        lable="Apply"
-        isApplied={this.state.isChanged}
-      />
-    );
-  }
 
   render() {
     return (
