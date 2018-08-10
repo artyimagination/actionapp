@@ -154,8 +154,8 @@ export const fetchDraftProject = () => {
   return (dispatch) => {
     //const { currentUser } = firebase.auth();
     const ref = firebase.database().ref('/projects');
-    //const query = ref.orderBy('userid').equalTo(`${currentUser.uid}`);
-    //console.log('query >>> ', query);
+    // const query = ref.orderBy('userid').equalTo(`${currentUser.uid}`);
+    // console.log('query >>> ', query);
     ref.on('value', snapshot => {
       console.log('data >>>> ', snapshot.val());
       dispatch({ type: DRAFT_PROJECT_FETCHED, payload: snapshot.val() });

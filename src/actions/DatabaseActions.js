@@ -73,6 +73,7 @@ const fetchUserAndRedirectToChat = (fuid) => {
   });
 };
 
+
 export const fetchChatUsers = () => {
   return (dispatch) => {
     firebase.database().ref('/users/')
