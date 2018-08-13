@@ -5,6 +5,8 @@ import { userProfile, updateUserProfile, uploadUserProfileImage } from '../../ac
 import { CardSection, Button, Input, Spinner, ProfilePicture } from '../../components/common';
 import { Validator } from '../../utils/Validator';
 
+
+
 class UpdateOtherUserProfile extends Component {
 
   state = {
@@ -80,6 +82,13 @@ class UpdateOtherUserProfile extends Component {
     );
   }
 
+  displayJsxMessage() {
+    if (this.props.userprofile.category = 'Producers') {
+        return <Text> Hello, JSX! </Text>;
+    } else {
+        return <Text> Goodbye, JSX! </Text>;
+    }
+}
   render() {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -96,6 +105,7 @@ class UpdateOtherUserProfile extends Component {
               <Text style={styles.textStyle}>{this.props.userprofile.category}</Text>
             </View>
           </CardSection>
+      
           <CardSection>
             <Input
               label="Experience"

@@ -24,6 +24,7 @@ class UpdateActorProfile extends Component {
     ]
   }
 
+
   onProfileImgSelected() {
     //console.log('Select image from device');
     const imagePicker = require('react-native-image-picker');
@@ -127,7 +128,29 @@ class UpdateActorProfile extends Component {
     );
   }
 
+  renderFileUploader() {
+    const settings = {
+      uri,
+      uploadUrl,
+      method, // default to 'POST'
+      fileName, // default to 'yyyyMMddhhmmss.xxx'
+      fieldName, // default to 'file'
+      contentType, // default to 'application/octet-stream'
+      data: {
+        // extra fields to send in the multipart payload
+      }
+    };
+    FileUploader.upload(settings, (err, res) => {
+      // handle result
+  }, (sent, expectedToSend) => {
+      // handle progress
+  });
+  }
+
   render() {
+
+  
+  
     const items = [{
       key: 0,
       label: 'Fair',
@@ -142,7 +165,7 @@ class UpdateActorProfile extends Component {
       value: 'Dark'
     }];
     return (
-      <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: '#ffffff'}}>
           {this.renderLoading()}
           <CardSection>
             {this.renderProfilePic()}
@@ -193,7 +216,15 @@ class UpdateActorProfile extends Component {
               lStyle={{ paddingLeft: 25 }}
             />
           </CardSection>
-          <CardSection>
+          <CardSection 
+          style={{  
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            paddingLeft: 50,
+            paddingRight: 25 
+          }}
+          >
             <CheckboxGroup
               label='Complexion'
               items={items}
@@ -203,11 +234,11 @@ class UpdateActorProfile extends Component {
           </CardSection>
           <CardSection>
             <Input
-              label="Experience"
-              placeHolder="Enter Experience"
-              keyboardType="numeric"
-              onChangeText={value => this.props.userProfile({ prop: 'experience', value })}
-              value={this.props.userprofile.experience}
+              label="Language Prefered"
+              placeHolder="Enter Language"
+              keyboardType="text"
+              onChangeText={value => this.props.userProfile({ prop: 'language', value })}
+              value={this.props.userprofile.language}
             />
           </CardSection>
           <CardSection>
@@ -216,12 +247,14 @@ class UpdateActorProfile extends Component {
               editable
               maxLength={40}
               multiline
-              numOfLines={4}
+              numOfLines={10}
               placeHolder="Description"
               onChangeText={value => this.props.userProfile({ prop: 'description', value })}
               value={this.props.userprofile.description}
             />
           </CardSection>
+
+      
           <CardSection>
             <Input
               label="YouTube"
@@ -260,6 +293,10 @@ class UpdateActorProfile extends Component {
               source={this.state.pics[2] || require('../../images/ic_person_24px.png')}
             />
           </CardSection>
+          <CardSection>
+          
+           {this.renderFileUploader()}
+        </CardSection>
       </ScrollView>
     );
   }
