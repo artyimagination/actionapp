@@ -79,6 +79,7 @@ class Login extends Component {
   renderSignupButton() {
     return (
       <TextButton
+      
         onPress={() => NavigationService.navigate('SignUpScreen')}
       >
         Sign Up
@@ -89,6 +90,7 @@ class Login extends Component {
   renderForgotPasswordButton() {
     return (
       <TextButton
+    
         onPress={() => NavigationService.navigate('ForgotPassword')}
       >
         Forgot Password?
@@ -133,6 +135,7 @@ class Login extends Component {
   render() {
       return (
         <View style={this.props.style}>
+        
         <CardSection style={styles.cardSectionContainer} >
             <Text>
             Login With
@@ -143,6 +146,20 @@ class Login extends Component {
             </Text>
             {this.renderFacebookLoginButton()}
          </CardSection>
+          <CardSection>
+           <View
+                style={{
+
+                  borderBottomColor: 'black',
+                  borderBottomWidth: 1,
+                  paddingTop: 10,
+                  marginLeft: 70,
+                  width: '60%',
+                  alignSelf: 'center',
+                  justifyContent: 'space-around'
+                }}
+              />
+            </CardSection>
           <CardSection>
             <Input
               label="User Name"
@@ -192,8 +209,8 @@ const styles = {
   buttonStyle: {
     flex: 1,
     flexDirection: 'row',
-    //paddingLeft: 15,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    color: 'rgb(234, 94, 32)'
   },
   socialLoginButton: {
     color: 'rgb(234, 94, 32)',

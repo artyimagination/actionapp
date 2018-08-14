@@ -67,20 +67,23 @@ class ViewProject extends Component {
       />
     );
   }
-
-
   render() {
     console.log('render visibility :: ', this.props);
     const { projectDetails } = this.props.navigation.state.params;
     const { data } = this.props.navigation.state.params.projectDetails;
     return (
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
-         <CardSection style={styles.descriptionStyle}>
-           <Text style={styles.labelStyle}> {projectDetails.name} - {projectDetails.category}</Text>
-           <Text style={styles.titleStyle}>{data.title}</Text>
-           <Text style={styles.labelStyle}>Type - {data.type}</Text>
-           <Text style={styles.labelStyle}>Description</Text>
-           <Text style={styles.labelStyle}>{data.description}</Text>
+        <CardSection style={styles.container}>
+          <CardSection>
+            {this.renderProfileImage()}
+          </CardSection>
+          <CardSection style={styles.descriptionStyle}>
+            <Text style={styles.labelStyle}> {projectDetails.name} - {projectDetails.category}</Text>
+            <Text style={styles.titleStyle}>{data.title}</Text>
+            <Text style={styles.labelStyle}>Type - {data.type}</Text>
+            <Text style={styles.labelStyle}>Description</Text>
+            <Text style={styles.labelStyle}>{data.description}</Text>
+          </CardSection>
         </CardSection>
         <CardSection style={styles.iconContainer}>
         <CardSection>
@@ -117,7 +120,8 @@ const styles = {
   descriptionStyle: {
     paddingTop: 6,
     paddingLeft: 10,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    justifyContent: 'space-around'
   },
   labelStyle: {
     fontSize: 18
@@ -128,7 +132,7 @@ const styles = {
   },
   iconContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around'
   },
   iconStyle: {
     padding: 5

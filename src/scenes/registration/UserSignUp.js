@@ -117,6 +117,19 @@ class UserSignUp extends Component {
             {this.renderFacebookLoginButton()}
           </CardSection>
           <CardSection>
+          <View 
+            style={{
+              borderBottomColor: 'black',
+              borderBottomWidth: 1,
+              paddingTop: 10,
+             marginLeft: 80,
+              width: '60%',
+              alignSelf: 'center',
+              justifyContent: 'space-around'
+            }}
+          />
+          </CardSection>
+          <CardSection>
             <Input
               label="Name"
               placeHolder="Enter Name"

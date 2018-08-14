@@ -12,6 +12,7 @@ import {
 } from '../../components/common';
 
 import { Validator } from '../../utils/Validator';
+import FileUploader from 'react-native-file-uploader';
 
 class UpdateActorProfile extends Component {
 
@@ -128,29 +129,25 @@ class UpdateActorProfile extends Component {
     );
   }
 
-  renderFileUploader() {
-    const settings = {
-      uri,
-      uploadUrl,
-      method, // default to 'POST'
-      fileName, // default to 'yyyyMMddhhmmss.xxx'
-      fieldName, // default to 'file'
-      contentType, // default to 'application/octet-stream'
-      data: {
-        // extra fields to send in the multipart payload
-      }
-    };
-    FileUploader.upload(settings, (err, res) => {
-      // handle result
-  }, (sent, expectedToSend) => {
-      // handle progress
-  });
-  }
+  // renderFileUploader() {
+  //   const settings = {
+
+  //     method: 'post', // default to 'POST'
+  //     fieldName: 'file', // default to 'file'
+  //     contentType: 'image/jpeg', // default to 'application/octet-stream'
+  //     data: {
+  //       // extra fields to send in the multipart payload
+  //     }
+  //   };
+  //   FileUploader.upload(settings, (err, res) => {
+  //     // handle result
+  // }, (sent, expectedToSend) => {
+  //     // handle progress
+  // });
+  // }
 
   render() {
-
-  
-  
+    
     const items = [{
       key: 0,
       label: 'Fair',
@@ -295,7 +292,7 @@ class UpdateActorProfile extends Component {
           </CardSection>
           <CardSection>
           
-           {this.renderFileUploader()}
+          test
         </CardSection>
       </ScrollView>
     );

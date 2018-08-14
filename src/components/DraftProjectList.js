@@ -17,7 +17,8 @@ class DraftProjectList extends Component {
   componentWillMount() {
 
    // this.props.fetchDraftProject();
-    this.props.fetchChatUsers();
+   this.props.fetchProjectDetails();
+    // this.props.fetchChatUsers();
     this.createDataSource(this.props);
   }
 

@@ -245,6 +245,14 @@ class UserActorDetailsScreen extends Component {
               source={this.state.pics[2] || require('../../images/ic_person_24px.png')}
             />
           </CardSection>
+          <CardSection>
+            <Input
+              label="Instagram"
+              placeHolder="Instagram Link"
+              onChangeText={value => this.props.userProfile({ prop: 'instalink', value })}
+              value={this.props.userprofile.instalink}
+            />
+          </CardSection>
           <CardSection style={{ paddingTop: 10, paddingBottom: 10, alignSelf: 'center' }}>
               <Button
                 onPress={this.onSaveClicked.bind(this)}
