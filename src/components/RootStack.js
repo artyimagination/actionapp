@@ -72,59 +72,50 @@ const DrawerNavigation = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: 'Home'
     },
-    contentOptions: {
-      activeTintColor: 'rgb(234, 94, 32)'
-    }
+ 
   },
   page2: {
     screen: AboutUs,
     navigationOptions: {
       drawerLabel: 'About Us'
     },
-    contentOptions: {
-      activeTintColor: 'rgb(234, 94, 32)'
-    }
+  
   },
   page3: {
     screen: Draft,
     navigationOptions: {
       drawerLabel: 'Draft'
     },
-    contentOptions: {
-      activeTintColor: 'rgb(234, 94, 32)'
-    }
+  
   },
   page4: {
     screen: Settings,
     navigationOptions: {
       drawerLabel: 'Settings'
     },
-    contentOptions: {
-      activeTintColor: 'rgb(234, 94, 32)'
-    }
+   
   },
   page5: {
     screen: HelpAndSupport,
     navigationOptions: {
       drawerLabel: 'Help And Support'
     },
-    contentOptions: {
-      activeTintColor: 'rgb(234, 94, 32)'
-    }
+   
   },
   Page6: {
     screen: LogoutScreen,
     navigationOptions: {
       drawerLabel: 'Logout'
     },
-    contentOptions: {
-      activeTintColor: 'rgb(234, 94, 32)'
-    }
+   
   }
 },
 {
   initialRouteName: 'Page1',
-  contentComponent: CustomDrawerContentComponent
+  contentComponent: CustomDrawerContentComponent,
+  contentOptions: {
+    activeTintColor: 'rgb(234, 94, 32)'
+  }
 });
 
 const RegistrationStack = createStackNavigator(

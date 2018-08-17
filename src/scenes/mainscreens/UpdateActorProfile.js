@@ -177,7 +177,7 @@ class UpdateActorProfile extends Component {
               <Text style={styles.textStyle}>{this.props.userprofile.category}</Text>
             </View>
           </CardSection>
-          <CardSection style={{ justifyContent: 'space-between' }}>
+          <CardSection style={{ justifyContent: 'space-around', paddingLeft: 20, paddingRight: 20 }}>
             <Input
               label="Height"
               placeHolder="0'"
@@ -218,7 +218,7 @@ class UpdateActorProfile extends Component {
             flex: 1,
             flexDirection: 'row',
             justifyContent: 'space-around',
-            paddingLeft: 50,
+            paddingLeft: 30,
             paddingRight: 25 
           }}
           >
@@ -290,10 +290,16 @@ class UpdateActorProfile extends Component {
               source={this.state.pics[2] || require('../../images/ic_person_24px.png')}
             />
           </CardSection>
+
           <CardSection>
-          
-          test
+          <Input
+            label="Biodata"
+            placeHolder="PDF/JPG"
+            onChangeText={value => this.props.userProfile({ prop: 'instalink', value })}
+            value={this.props.userprofile.instalink}
+          />
         </CardSection>
+      
       </ScrollView>
     );
   }

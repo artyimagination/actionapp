@@ -46,7 +46,8 @@ class UserProfileScreen extends Component {
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
           {this.renderLoading()}
           {this.renderUserProfile()}
-            <Button
+            <Button 
+              style={{ marginTop: 15, marginBottom: 10 }}
               onPress={this.onSaveClicked.bind(this)}
             >
               Save
