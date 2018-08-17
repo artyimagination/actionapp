@@ -89,6 +89,8 @@ class UpdateOtherUserProfile extends Component {
         return <Text> Goodbye, JSX! </Text>;
     }
 }
+
+
   render() {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>

@@ -6,6 +6,7 @@ import { Validator } from '../../utils/Validator';
 import { Button, Spinner } from '../../components/common';
 import { UpdateOtherUserProfile } from './UpdateOtherUserProfile';
 import { UpdateActorProfile } from './UpdateActorProfile';
+import { UpdateProducerProfile } from './UpdateProducerProfile';
 
 class UserProfileScreen extends Component {
 
@@ -27,17 +28,19 @@ class UserProfileScreen extends Component {
 
   renderUserProfile() {
     const { userprofile } = this.props;
-    if (userprofile.category === 'Actor(Male)' ||
-        userprofile.category === 'Actor(Female)' ||
-        userprofile.category === 'Child Actor(Male)' ||
-        userprofile.category === 'Child Actor(Female)'
-        ) {
-          return <UpdateActorProfile {...this.props} />;
+      if (userprofile.category === 'Actor(Male)' ||
+          userprofile.category === 'Actor(Female)' ||
+          userprofile.category === 'Child Actor(Male)' ||
+          userprofile.category === 'Child Actor(Female)'
+          ) {
+            return <UpdateActorProfile {...this.props} />;
+      } else if (userprofile.category === 'Producers') {
+         // return <UpdateActorProfile {...this.props} />;
+             return <UpdateProducerProfile {...this.props} />;
+      } else {
+        return <UpdateOtherUserProfile {...this.props} />;
+      }
     }
-
-    return <UpdateOtherUserProfile {...this.props} />;
-  }
-
   render() {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>

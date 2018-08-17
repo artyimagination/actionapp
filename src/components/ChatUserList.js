@@ -43,7 +43,7 @@ class ChatUserList extends Component {
   render() {
     return (
       <ListView
-        style={{ flex: 1 }}
+       // style={{ flex: 1 }}
         enableEmplySections
         dataSource={this.dataSource}
         renderRow={this.renderRow}

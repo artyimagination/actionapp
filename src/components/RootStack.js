@@ -161,8 +161,7 @@ const HomeStack = createStackNavigator(
       screen: ProjectTab,
       navigationOptions: () => ({
         title: 'Update New Project',
-        headerTitleStyle: 'rgb(234, 94, 32)',
-        color: 'rgb(234, 94, 32)'
+        headerTintColor: 'rgb(234, 94, 32)', 
       })
     },
     Notification: {
@@ -172,16 +171,14 @@ const HomeStack = createStackNavigator(
       screen: ViewProject,
       navigationOptions: () => ({
         title: 'View Project',
-        headerTitleStyle: 'rgb(234, 94, 32)',
-        color: 'rgb(234, 94, 32)'
+        headerTintColor: 'rgb(234, 94, 32)', 
       })
     },
     AppliedProjectScreen: {
       screen: AppliedProjectUsers,
       navigationOptions: () => ({
         title: 'Applied Users',
-        headerTitleStyle: 'rgb(234, 94, 32)',
-        color: 'rgb(234, 94, 32)'
+        headerTintColor: 'rgb(234, 94, 32)', 
       })
     },
     ChattingScreen: {
