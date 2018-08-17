@@ -62,13 +62,6 @@ class AppliedProjectUsers extends Component {
           dataSource={this.dataSource}
           renderRow={this.renderRow}
         />
-        <CardSection>
-          <Button
-            onPress={this.onBackPress.bind(this)}
-          >
-            GoBack
-          </Button>
-        </CardSection>
       </View>
     );
   }

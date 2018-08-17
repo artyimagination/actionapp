@@ -16,5 +16,6 @@ export * from './UpdateOtherUserProfile';
 export * from './UpdateProducerProfile';
 export * from './UpdateActorProfile';
 export * from './ViewProject';
+export * from './ViewActorProfileScreen';
 export * from './AppliedProjectUsers';
 export * from './AppliedUserList';
