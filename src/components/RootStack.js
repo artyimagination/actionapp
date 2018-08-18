@@ -27,7 +27,9 @@ import {
   HelpAndSupport,
   NotificationScreen,
   ViewProject,
-  AppliedProjectUsers
+  AppliedProjectUsers,
+  ViewActorProfileScreen,
+  ContctPageScreen
 } from '../scenes/mainscreens';
 import {
   UploadProjectScreen1,
@@ -45,14 +47,14 @@ const MainStack = createStackNavigator(
   Login: LoginScreen,
   SignUpScreen: UserSignUp,
   ForgotPassword: ForgotPasswordScreen,
-  updateProfile: UserProfileScreen
+  updateProfile: UserProfileScreen,
+  viewActorProfile:ViewActorProfileScreen,
+  Contact: ContctPageScreen
 },
 {
    initialRouteName: 'HomeScreen'
- 
 }
 );
-
 const ProjectTab = createStackNavigator(
   {
     ProjectScreen1: UploadProjectScreen1,
@@ -74,28 +76,28 @@ const DrawerNavigation = createDrawerNavigator({
     },
  
   },
-  page2: {
+  Page2: {
     screen: AboutUs,
     navigationOptions: {
       drawerLabel: 'About Us'
     },
   
   },
-  page3: {
+  Page3: {
     screen: Draft,
     navigationOptions: {
       drawerLabel: 'Draft'
     },
   
-  },
-  page4: {
+  }, 
+Page4: {
     screen: Settings,
     navigationOptions: {
       drawerLabel: 'Settings'
     },
    
   },
-  page5: {
+  Page5: {
     screen: HelpAndSupport,
     navigationOptions: {
       drawerLabel: 'Help And Support'
@@ -107,8 +109,9 @@ const DrawerNavigation = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: 'Logout'
     },
-   
+    
   }
+
 },
 {
   initialRouteName: 'Page1',
@@ -177,6 +180,13 @@ const HomeStack = createStackNavigator(
       navigationOptions: {
         title: 'Chat'
       }
+    },
+    ViewProfileScreen: {
+      screen: ViewActorProfileScreen,
+      navigationOptions: () => ({
+        title: 'View Profile',
+        headerTintColor: 'rgb(234, 94, 32)',
+      })
     }
   },
   {
