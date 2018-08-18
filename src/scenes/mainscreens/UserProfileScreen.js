@@ -7,6 +7,7 @@ import { Button, Spinner } from '../../components/common';
 import { UpdateOtherUserProfile } from './UpdateOtherUserProfile';
 import { UpdateActorProfile } from './UpdateActorProfile';
 import { UpdateProducerProfile } from './UpdateProducerProfile';
+import NavigationService from '../../components/NavigationService';
 
 class UserProfileScreen extends Component {
 
@@ -22,6 +23,9 @@ class UserProfileScreen extends Component {
     }
   }
 
+  onNextClicked() {
+     NavigationService.navigate('Contact')
+  }
   renderLoading() {
     return <Spinner size="large" isVisible={this.props.userprofile.loading} />;
   }
@@ -52,11 +56,16 @@ class UserProfileScreen extends Component {
             >
               Save
             </Button>
+            <Button 
+              style={{ marginTop: 15, marginBottom: 10 }}
+              onPress={this.onNextClicked.bind(this)}
+            >
+              Next
+            </Button>
       </ScrollView>
     );
   }
 }
-
 const mapStateToProps = state => {
   return state;
 };

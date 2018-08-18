@@ -7,15 +7,16 @@ import { createChatUsers } from '../../actions';
 import NavigationService from '../../components/NavigationService';
 
 class AppliedUserList extends Component {
-
   onChatClicked() {
     console.log('chat button clicked...', this.props.data);
+    
     this.props.createChatUsers(this.props.data.uid);
   }
 
   onUserClicked() {
     //Fetch Applied User And Show to screen
-    NavigationService.navigate('ViewActorProfileScreen', { id: this.props.data.uid });
+    console.log(this.props.data.uid);
+    NavigationService.navigate('viewActorProfile', { id: this.props.data.uid });
   }
 
   render() {
