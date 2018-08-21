@@ -47,8 +47,8 @@ const MainStack = createStackNavigator(
   Login: LoginScreen,
   SignUpScreen: UserSignUp,
   ForgotPassword: ForgotPasswordScreen,
-  updateProfile: UserProfileScreen,
-  viewActorProfile:ViewActorProfileScreen,
+  UpdateProfile: UserProfileScreen,
+  ViewActorProfile: ViewActorProfileScreen,
   Contact: ContctPageScreen
 },
 {

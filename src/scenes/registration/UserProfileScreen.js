@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, Alert } from 'react-native';
+import { ScrollView, Text, Picker, Alert } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import { connect } from 'react-redux';
 import { fetchCategories, userProfile, saveUserProfile } from '../../actions';
@@ -51,7 +51,7 @@ class UserProfileScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
           {this.renderLoading()}
           <CardSection>
             <Input
@@ -66,7 +66,7 @@ class UserProfileScreen extends Component {
               label="Category"
               containerStyle={{
                 width: 140, 
-                zIndex: 60,
+                //zIndex: 60,
                 top: 20,
 
                 }}
@@ -176,7 +176,7 @@ class UserProfileScreen extends Component {
             />
           </CardSection>
           {this.renderButton()}
-      </View>
+      </ScrollView>
     );
   }
 }

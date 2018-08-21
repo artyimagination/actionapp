@@ -25,15 +25,13 @@ const DropDown = ({ children, label, onValueChange, selectedValue, mode, style }
 
 const styles = {
   container: {
-    //height: '7%',
+    height: '7%',
     flex: 1,
     paddingLeft: 40,
     flexDirection: 'column',
     backgroundColor: '#ffffff'
   },
   labelStyle: {
-    //paddingLeft: 40,
-    //paddingTop: 0,
     fontSize: 12,
     textAlign: 'left'
   },
@@ -43,13 +41,13 @@ const styles = {
     width: '88%',
     borderColor: '#D9D5DC',
     borderRadius: 10,
-    alignItems: 'center',
+   //alignItems: 'center',
     flexDirection: 'column',
-    justifyContent: 'center',
+    //justifyContent: 'center',
     backgroundColor: '#ffffff'
   },
   pickerStyle: {
-    width: '80%',
+    width: '88%',
 
   }
 };

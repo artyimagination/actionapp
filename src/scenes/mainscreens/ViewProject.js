@@ -84,6 +84,12 @@ class ViewProject extends Component {
             <Text style={styles.labelStyle}>Description</Text>
             <Text style={styles.labelStyle}>{data.description}</Text>
           </CardSection>
+          <CardSection>
+            <Image
+            style={styles.profileImageStyle}
+            source={require('../../images/logo/logo.png')}
+           />
+        </CardSection>
         </CardSection>
         <CardSection style={styles.iconContainer}>
         <CardSection>

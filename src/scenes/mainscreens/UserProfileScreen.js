@@ -3,7 +3,7 @@ import { ScrollView, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { userProfile, updateUserProfile, uploadUserProfileImage } from '../../actions';
 import { Validator } from '../../utils/Validator';
-import { Button, Spinner } from '../../components/common';
+import { Button, Spinner, CardSection } from '../../components/common';
 import { UpdateOtherUserProfile } from './UpdateOtherUserProfile';
 import { UpdateActorProfile } from './UpdateActorProfile';
 import { UpdateProducerProfile } from './UpdateProducerProfile';
@@ -24,7 +24,7 @@ class UserProfileScreen extends Component {
   }
 
   onNextClicked() {
-     NavigationService.navigate('Contact')
+    NavigationService.navigate('UpdateProfile');
   }
   renderLoading() {
     return <Spinner size="large" isVisible={this.props.userprofile.loading} />;
@@ -50,18 +50,21 @@ class UserProfileScreen extends Component {
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
           {this.renderLoading()}
           {this.renderUserProfile()}
-            <Button 
-              style={{ marginTop: 15, marginBottom: 10 }}
-              onPress={this.onSaveClicked.bind(this)}
-            >
-              Save
-            </Button>
-            <Button 
-              style={{ marginTop: 15, marginBottom: 10 }}
-              onPress={this.onNextClicked.bind(this)}
-            >
-              Next
-            </Button>
+          <CardSection style={{ flexDirection: 'row', paddingLeft: 20 }}>
+          <Button 
+          style={{ marginTop: 15, marginBottom: 10 }}
+          onPress={this.onSaveClicked.bind(this)}
+        >
+          Save
+        </Button>
+        <Button 
+          style={{ marginTop: 15, marginBottom: 10 }}
+          onPress={this.onNextClicked.bind(this)}
+        >
+          Next
+        </Button>
+          </CardSection>
+           
       </ScrollView>
     );
   }
