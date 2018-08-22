@@ -52,7 +52,6 @@ export default class Chat extends Component {
   componentWillUnmount() {
     this.chatRefData.off();
   }
-
   onSend(messages = []) {
     // this.setState({
     //     messages: GiftedChat.append(this.state.messages, messages),

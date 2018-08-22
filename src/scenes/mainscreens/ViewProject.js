@@ -89,10 +89,10 @@ class ViewProject extends Component {
             style={styles.profileImageStyle}
             source={require('../../images/logo/logo.png')}
            />
-        </CardSection>
+          </CardSection>
         </CardSection>
         <CardSection style={styles.iconContainer}>
-        <CardSection>
+      
           <IconButton
               style={styles.iconStyle}
               onPress={() => this.onStarButtonClicked()}
@@ -111,7 +111,6 @@ class ViewProject extends Component {
               iconname="comment"
               lable="chat"
             />
-          </CardSection>
           <CardSection style={styles.iconStyle}>
             {this.renderAppliedButton()}
           </CardSection>
@@ -137,11 +136,11 @@ const styles = {
     fontWeight: '600'
   },
   iconContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around'
+    //flexDirection: 'row',
+    //justifyContent: 'space-around'
   },
   iconStyle: {
-    padding: 5
+    //padding: 5
   },
   profileImageStyle: {
     alignSelf: 'flex-start',

@@ -24,13 +24,17 @@ class HomeScreen extends Component {
     const { category } = this.props.userprofile;
     if (category === 'Directors' || category === 'Producers') {
       return (
-        <Button
-          style={{ backgroundColor: '#ffffff' }}
-          labelStyle={{ color: 'rgb(234, 94, 32)' }}
-          onPress={() => NavigationService.navigate('Project')}
-        >
-          Add Project
-        </Button>
+        <CardSection>
+            <Button
+            style={{ backgroundColor: '#ffffff', fontSize: 10 }}
+            labelStyle={{ color: 'rgb(234, 94, 32)' }}
+            onPress={() => NavigationService.navigate('Project')}
+            > <Icon name="plus" size={10} />
+            Add Project
+          </Button>
+         
+        </CardSection>
+       
       );
     }
   }
@@ -93,7 +97,7 @@ const styles = {
     flex: 1
   },
   projectBtn: {
-    height: '7%',
+    height: '8%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
