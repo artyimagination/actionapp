@@ -73,9 +73,13 @@ class ViewProject extends Component {
     const { data } = this.props.navigation.state.params.projectDetails;
     return (
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
-        <CardSection style={styles.container}>
-          <CardSection>
+        <CardSection >
+          <CardSection style={{ }}>
             {this.renderProfileImage()}
+            <Image
+            style={styles.profileImageStyle}
+            source={require('../../images/logo/logo.png')}
+           />
           </CardSection>
           <CardSection style={styles.descriptionStyle}>
             <Text style={styles.labelStyle}> {projectDetails.name} - {projectDetails.category}</Text>
@@ -84,37 +88,41 @@ class ViewProject extends Component {
             <Text style={styles.labelStyle}>Description</Text>
             <Text style={styles.labelStyle}>{data.description}</Text>
           </CardSection>
-          <CardSection>
-            <Image
-            style={styles.profileImageStyle}
-            source={require('../../images/logo/logo.png')}
-           />
-          </CardSection>
+         
         </CardSection>
-        <CardSection style={styles.iconContainer}>
-      
-          <IconButton
-              style={styles.iconStyle}
-              onPress={() => this.onStarButtonClicked()}
-              iconname="star"
-              lable="Shortlist"
-          />
-          <IconButton
-              style={styles.iconStyle}
-              onPress={this.onHideClicked()}
-              iconname="eye-slash"
-              lable="Hide"
-          />
-            <IconButton
-              style={styles.iconStyle}
-              onPress={() => this.onChatClicked()}
-              iconname="comment"
-              lable="chat"
+         <CardSection style={styles.container}>
+              <Image
+                          source={require('../../images/logo/images.jpg')}
             />
-          <CardSection style={styles.iconStyle}>
-            {this.renderAppliedButton()}
-          </CardSection>
-      </CardSection>
+          </CardSection> 
+        <CardSection style={styles.iconContainer}>
+
+          <CardSection>
+            <IconButton
+                style={styles.iconStyle}
+                onPress={() => this.onStarButtonClicked()}
+                iconname="star"
+                lable="Shortlist"
+            />
+            <IconButton
+                style={styles.iconStyle}
+                onPress={this.onHideClicked.bind(this)}
+                iconname="eye-slash"
+                lable="Hide"
+            />
+              <IconButton
+                style={styles.iconStyle}
+                onPress={() => this.onChatClicked()}
+                iconname="comment"
+                lable="chat"
+              />
+            </CardSection>
+
+            <CardSection style={styles.iconStyle}>
+              {this.renderAppliedButton()}
+             
+            </CardSection>
+        </CardSection>
          
         </View>
     );
@@ -122,6 +130,11 @@ class ViewProject extends Component {
 }
 
 const styles = {
+    container: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 10
+  },
   descriptionStyle: {
     paddingTop: 6,
     paddingLeft: 10,
@@ -136,11 +149,11 @@ const styles = {
     fontWeight: '600'
   },
   iconContainer: {
-    //flexDirection: 'row',
-    //justifyContent: 'space-around'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   iconStyle: {
-    //padding: 5
+    padding: 5
   },
   profileImageStyle: {
     alignSelf: 'flex-start',

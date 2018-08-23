@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { openChat, fetchDraftProject, updateProjectDetails, fetchChatUsers } from '../actions';
+import { openChat, fetchDraftProject, fetchProjectDetails,updateProjectDetails, fetchChatUsers } from '../actions';
 import DraftList from './DraftList';
 import NavigationService from '../components/NavigationService';
 
@@ -16,9 +16,9 @@ class DraftProjectList extends Component {
 
   componentWillMount() {
 
-   // this.props.fetchDraftProject();
-   this.props.fetchProjectDetails();
-    // this.props.fetchChatUsers();
+   //this.props.fetchDraftProject();
+   
+     this.props.fetchChatUsers();
     this.createDataSource(this.props);
   }
 

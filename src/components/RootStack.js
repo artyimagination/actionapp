@@ -28,13 +28,14 @@ import {
   NotificationScreen,
   ViewProject,
   AppliedProjectUsers,
-  ViewActorProfileScreen,
-  ContctPageScreen
+  ViewActorProfileScreen
+  
 } from '../scenes/mainscreens';
 import {
   UploadProjectScreen1,
   CastScreen,
-  OtherCategoryScreen
+  OtherCategoryScreen,
+  FilterScreen
 } from '../scenes/mainscreens/projects';
 
 import Chat from './Chat';
@@ -48,8 +49,8 @@ const MainStack = createStackNavigator(
   SignUpScreen: UserSignUp,
   ForgotPassword: ForgotPasswordScreen,
   UpdateProfile: UserProfileScreen,
-  ViewActorProfile: ViewActorProfileScreen,
-  Contact: ContctPageScreen
+  ViewActorProfile: ViewActorProfileScreen
+ 
 },
 {
    initialRouteName: 'HomeScreen'
@@ -60,6 +61,7 @@ const ProjectTab = createStackNavigator(
     ProjectScreen1: UploadProjectScreen1,
     ProjectScreen2: CastScreen,
     ProjectScreen3: OtherCategoryScreen
+    
   },
   {
     initialRouteName: 'ProjectScreen1',
@@ -160,6 +162,9 @@ const HomeStack = createStackNavigator(
     },
     Notification: {
       screen: NotificationScreen
+    },
+    Filters: {
+     screen: FilterScreen
     },
     ProjectView: {
       screen: ViewProject,
