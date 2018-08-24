@@ -18,7 +18,7 @@ class HomeScreen extends Component {
   navigateToPath() {
     console.log('navigtor');
   
-  NavigationService.navigate('Filters');
+  NavigationService.navigate('UpdateProfile');
   }
 
   renderProjectButton() {
@@ -27,7 +27,7 @@ class HomeScreen extends Component {
       return (
         <CardSection>
             <Button
-            style={{ backgroundColor: '#ffffff', fontSize: 10 }}
+            style={{ backgroundColor: '#ffffff', fontSize: 2, borderRadius: 5, height: 35, }}
             labelStyle={{ color: 'rgb(234, 94, 32)' }}
             onPress={() => NavigationService.navigate('Project')}
             > <Icon name="plus" size={10} />
@@ -51,7 +51,6 @@ class HomeScreen extends Component {
         </CardSection>
         <HomeProject />
         <FloatingAction
-          actions={actions}
           color='rgb(234, 94, 32)'
           onPressItem={
             (name) => {
@@ -67,38 +66,13 @@ class HomeScreen extends Component {
   //<HomeProject />
 }
 
-const actions = [{
-  text: 'Pending',
-  color: 'rgb(234, 94, 32)',
-  icon: 'bell',
-  name: 'bt_pending',
-  position: 2
-}, {
-  text: 'Shortlisted',
-  color: 'rgb(234, 94, 32)',
-  icon: 'home',
-  name: 'bt_shortlisted',
-  position: 1
-}, {
-  text: 'Selected',
-  icon: 'pepole',
-  color: 'rgb(234, 94, 32)',
-  name: 'bt_selected',
-  position: 3
-}, {
-  text: 'Rejected',
-  color: 'rgb(234, 94, 32)',
-  icon: 'plus',
-  name: 'bt_rejected',
-  position: 4
-}];
 
 const styles = {
   container: {
     flex: 1
   },
   projectBtn: {
-    height: '8%',
+    height: '10%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -129,7 +129,7 @@ class UserSignUp extends Component {
             }}
           />
           </CardSection>
-          <CardSection>
+          <CardSection >
             <Input
               label="Name"
               placeHolder="Enter Name"
@@ -138,7 +138,7 @@ class UserSignUp extends Component {
             />
           </CardSection>
 
-          <CardSection>
+          <CardSection >
             <Input
               label="Email"
               placeHolder="Enter Email"
@@ -191,7 +191,8 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     paddingLeft: 15,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingRight: 20
   },
   cardSectionContainer: {
     //flex: 1,

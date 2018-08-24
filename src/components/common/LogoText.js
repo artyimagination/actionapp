@@ -16,6 +16,7 @@ const styles = {
   textStyle: {
     alignSelf: 'center',
     color: '#ea5e20',
+    fontFamily: 'Fonarto',
     fontSize: 40,
     fontWeight: '600',
     paddingTop: 10,
@@ -23,7 +24,8 @@ const styles = {
   },
   logoTextContainer: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    fontFamily: 'Fonarto'
   }
 };
 

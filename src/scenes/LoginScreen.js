@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { GoogleSigninButton } from 'react-native-google-signin';
 import {
@@ -20,7 +20,15 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.root}>
-        <Logo />
+        <View style={styles.logoStyle}>
+          <Image
+            style={{ width: 110, height: 110 }}
+            source={require('../images/logo/logo.png')}
+          />
+          <Text style={styles.logoTextStyle}>
+            action
+          </Text>
+        </View>
         <Login style={styles.loginStyle} />
       </View>
     );
@@ -36,6 +44,22 @@ const styles = {
   root: {
     backgroundColor: 'white',
     flex: 1
+  },
+  logoStyle: {
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: 90
+  },
+  logoTextStyle: {
+    width: 120,
+    height: 80,
+    fontFamily: 'Fonarto',
+    fontSize: 40,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: 'rgb(234, 94, 32)'
   },
   loginStyle: {
     justifyContent: 'center',

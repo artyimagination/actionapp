@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   createSwitchNavigator,
@@ -35,7 +35,7 @@ import {
   UploadProjectScreen1,
   CastScreen,
   OtherCategoryScreen,
-  FilterScreen
+ // FilterScreen
 } from '../scenes/mainscreens/projects';
 
 import Chat from './Chat';
@@ -148,7 +148,7 @@ const HomeStack = createStackNavigator(
         headerRight: (
           <SearchButton style={styles.Headercss} navigation={navigation} />
         ),
-        headerStyle: { paddingRight: 10, paddingLeft: 10 },
+        headerStyle: { paddingRight: 5, paddingLeft: 5 },
         headerTitleStyle: { color: 'rgb(234, 94, 32)' }
         
       })
@@ -156,16 +156,16 @@ const HomeStack = createStackNavigator(
     Project: {
       screen: ProjectTab,
       navigationOptions: () => ({
-        title: 'Update New Project',
+        title: '  Create New Project',
         headerTintColor: 'rgb(234, 94, 32)', 
       })
     },
     Notification: {
       screen: NotificationScreen
     },
-    Filters: {
-     screen: FilterScreen
-    },
+    // Filters: {
+    //  screen: FilterScreen
+    // },
     ProjectView: {
       screen: ViewProject,
       navigationOptions: () => ({
@@ -206,7 +206,8 @@ const SearchButton = () => {
       <TouchableOpacity
       onPress={() => { NavigationService.navigate('Notification'); }}
       >
-        <Icon name="bell" size={30} style={styles.Headercss} />
+      {/* <Image  src={require('../images/logo/Icon/notificationButton.png')}></Image> */}
+        <Icon name="bell" size={20} style={styles.Headercss} />
       </TouchableOpacity>
     </View>
   );
@@ -218,7 +219,7 @@ const DrawerButton = (props) => {
       <TouchableOpacity
       onPress={() => { props.navigation.dispatch(DrawerActions.toggleDrawer()); }}
       >
-        <Icon name={props.name} size={30} style={styles.Headercss} />
+        <Icon name={props.name} size={20} style={styles.Headercss} />
       </TouchableOpacity>
     </View>
   );

@@ -53,8 +53,10 @@ const styles = {
   },
   buttonContainer: {
     paddingBottom: 70,
+    marginRight: 5,
+    paddingLeft: 5,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around'
   },
   buttonStyle: {
     width: 145,

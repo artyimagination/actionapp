@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View } from 'react-native';
+import { Text, Image, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { CardSection, IconButton } from '../../components/common';
@@ -40,6 +40,7 @@ class ProjectList extends Component {
   onHideClicked() {
 
   }
+
   
   renderAppliedButton() {
     return (
@@ -76,6 +77,7 @@ class ProjectList extends Component {
     return (
       <View style={{ flex: 1 }}>
       <CardSection style={styles.mainContainer}>
+      <TouchableOpacity onPress={this.onViewProjectClicked.bind(this)} >
         <CardSection style={styles.container}>
           <CardSection>
             {this.renderProfileImage()}
@@ -89,6 +91,11 @@ class ProjectList extends Component {
             <Text style={styles.labelStyle}>{this.props.data.description}</Text>
           </CardSection>
         </CardSection>
+        <CardSection style={styles.container}>
+              <Image
+                          source={require('../../images/logo/images.jpg')}
+            />
+          </CardSection> 
         <CardSection style={styles.iconContainer}>
           <CardSection>
             <IconButton
@@ -120,6 +127,7 @@ class ProjectList extends Component {
               />
             </CardSection>
         </CardSection>
+        </TouchableOpacity>
         </CardSection>
       </View>
     );
@@ -161,11 +169,11 @@ const styles = {
     flexDirection: 'column'
   },
   titleStyle: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: '600'
   },
   labelStyle: {
-    fontSize: 8
+    fontSize: 12
   }
 };
 

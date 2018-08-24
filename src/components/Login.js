@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Alert } from 'react-native';
+import { View, Text, Alert, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { GoogleSigninButton } from 'react-native-google-signin';
 import {
@@ -79,7 +79,7 @@ class Login extends Component {
   renderSignupButton() {
     return (
       <TextButton
-      
+        style={{  color: 'rgb(234, 94, 32)' } }
         onPress={() => NavigationService.navigate('SignUpScreen')}
       >
         Sign Up
@@ -134,64 +134,41 @@ class Login extends Component {
   
   render() {
       return (
+    
         <View style={this.props.style}>
-        
-        <CardSection style={styles.cardSectionContainer} >
-            <Text>
-            Login With
-            </Text>
-            {this.renderGoogleSignButton()}
-            <Text>
-              OR
-            </Text>
-            {this.renderFacebookLoginButton()}
-         </CardSection>
-          <CardSection>
-           <View
-                style={{
-
-                  borderBottomColor: 'black',
-                  borderBottomWidth: 1,
-                  paddingTop: 10,
-                  marginLeft: 70,
-                  width: '60%',
-                  alignSelf: 'center',
-                  justifyContent: 'space-around'
-                }}
-              />
-            </CardSection>
-          <CardSection>
-            <Input
-              label="User Name"
-              placeHolder="Enter User Name"
-              onChangeText={this.onEmailChange.bind(this)}
-              value={this.props.email}
-              ref='eml'
-              onSubmitEditing={() => { 
-                this.refs.pwd.focus(); 
-              }}
-       
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              isPassword
-              ref='pwd'
-              label="Password"
-              placeHolder="Enter Password"
-              onChangeText={this.onPasswordChange.bind(this)}
-              value={this.props.password}
-             //onSubmitEditing={() => this.b.current.focus()}
-              
-            />
-          </CardSection>
-          <CardSection style={{ paddingTop: 10, paddingLeft: 16 }}>
-            {this.renderLoginButton()}
-          </CardSection>
+                <CardSection style={{ paddingRight: 20}} >
+                  <Input
+                    label="User Name"
+                    placeHolder="Enter User Name"
+                    onChangeText={this.onEmailChange.bind(this)}
+                    value={this.props.email}
+                    ref='eml'
+                    onSubmitEditing={() => { 
+                      this.refs.pwd.focus(); 
+                    }}
+            
+                  />
+                </CardSection>
+                <CardSection style={{ paddingRight: 20}}>
+                  <Input
+                    isPassword
+                    ref='pwd'
+                    label="Password"
+                    placeHolder="Enter Password"
+                    onChangeText={this.onPasswordChange.bind(this)}
+                    value={this.props.password}
+                  //onSubmitEditing={() => this.b.current.focus()}
+                    
+                  />
+                </CardSection>
+                <CardSection style={{ paddingTop: 10, paddingLeft: 15 }}>
+                  {this.renderLoginButton()}
+                </CardSection>
           <CardSection style={styles.buttonStyle}>
             {this.renderForgotPasswordButton()}
             {this.renderSignupButton()}
           </CardSection>
+        
         </View>
       );
   }
@@ -199,7 +176,7 @@ class Login extends Component {
 
 
 const styles = {
-
+  
   errorTextStyle: {
     color: 'red',
     fontSize: '14',
@@ -210,7 +187,7 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    color: 'rgb(234, 94, 32)'
+    paddingRight: 20
   },
   socialLoginButton: {
     color: 'rgb(234, 94, 32)',

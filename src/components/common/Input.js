@@ -20,6 +20,8 @@ const Input = ({ label, value, onChangeText, placeHolder, isPassword,
         multiline={multiline}
         numOfLines={numOfLines}
         onChangeText={onChangeText}
+        onFocus={(e) => e.target.placeholder = ""} 
+        onBlur={(e) => e.target.placeholder = " "}
         windowSoftInputMode="adjustResize"
         underlineColorAndroid='rgba(0,0,0,0)'
       />

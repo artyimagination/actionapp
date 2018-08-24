@@ -6,16 +6,15 @@ import NavigationService from '../../components/NavigationService';
 
 class DashboardList extends Component {
 
-  onProjectClicked() {
-    //Fetch Applied User And Show to screen
-    NavigationService.navigate('AppliedProjectScreen', { id: this.props.data.uid });
-  }
 
+  onViewProjectClicked() {
+    NavigationService.navigate('AppliedProjectScreen', { projectDetails: this.props });
+  }
 
   render() {
     return (
         <CardSection style={styles.container}>
-        <TouchableOpacity onPress={this.onProjectClicked.bind(this)} >
+        <TouchableOpacity onPress={this.onViewProjectClicked.bind(this)} >
           <CardSection>
             <Text style={styles.titleStyle}>Artist Required</Text>
             <Text style={{ fontSize: 6, textAlign: 'center', paddingLeft: 10, paddingTop: 8 }}>

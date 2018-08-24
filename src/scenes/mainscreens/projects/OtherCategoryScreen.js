@@ -100,7 +100,7 @@ class OtherCategoryScreen extends Component {
           />
           {this.renderCheckBoxGroup()}
         </CardSection>
-        <CardSection style={{ justifyContent: 'space-between' }}>
+        <CardSection style={{ justifyContent: 'space-between', marginBottom: 15 }}>
           {this.renderSaveDraftButton()}
           {this.renderNextButton()}
         </CardSection>

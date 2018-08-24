@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <View style={styles.logoStyle}>
       <Image
-        style={{ width: 119, height: 118 }}
+        style={{ width: 110, height: 110 }}
         source={require('../images/logo/logo.png')}
       />
       <Text style={styles.logoTextStyle}>
@@ -20,10 +20,10 @@ const styles = {
   logoStyle: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 44
+    paddingTop: 150
   },
   logoTextStyle: {
-    width: 117,
+    width: 120,
     height: 80,
     fontFamily: 'Fonarto',
     fontSize: 40,

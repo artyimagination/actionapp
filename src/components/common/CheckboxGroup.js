@@ -159,6 +159,7 @@ const styles = {
       justifyContent: 'space-between'
     },
     mainLabelStyle: {
+    
       paddingLeft: 10,
       fontSize: 12,
       textAlign: 'left',
@@ -171,6 +172,7 @@ const styles = {
       justifyContent: 'flex-start'
     },
     labelStyle: {
+      paddingTop: 7,
       fontSize: 12,
       textAlign: 'left'
     },

@@ -112,7 +112,7 @@ class UploadProjectScreen1 extends Component {
             value={this.props.language}
           />
         </CardSection>
-        <CardSection style={{ justifyContent: 'space-between' }}>
+        <CardSection style={{ justifyContent: 'space-around', marginBottom: 15 }}>
           {this.renderSaveDraftButton()}
           {this.renderNextButton()}
         </CardSection>

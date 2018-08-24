@@ -7,7 +7,7 @@ const IconButton = ({ onPress, lable, style, labelStyle, iconname, isApplied = f
 
   return (
     <TouchableOpacity onPress={onPress} style={[buttonStyle, style]}>
-      <Icon name={iconname} size={15} color={isApplied === false ? '#cccccc' : '#ff0000'} />
+      <Icon name={iconname} size={15} color={isApplied === false ? '#cccccc' : '#ff0000'} style={{ paddinLeft: 10 }} />
       <Text style={[textStyle, labelStyle]}>
         {lable}
       </Text>
@@ -18,8 +18,9 @@ const IconButton = ({ onPress, lable, style, labelStyle, iconname, isApplied = f
 
 const styles = {
   textStyle: {
+    paddinLeft: 10,
     color: '#000',
-    fontSize: 8,
+    fontSize: 9,
     fontWeight: '600',
     textAlign: 'center'
   },

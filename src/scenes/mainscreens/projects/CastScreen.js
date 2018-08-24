@@ -107,9 +107,14 @@ class CastScreen extends Component {
         dataSource={this.dataSource}
         renderRow={this.renderRow}
       />
-        <CardSection style={{ borderBottomWidth: 1, borderColor: '#000', paddingLeft: 50 }}>
-        <Text >Cast 1</Text>
+        <CardSection style={styles.cardSectionStyle} >
+          <Text style={{ paddingLeft: 6 }}>
+          Cast 1
+          </Text>
         </CardSection>
+        {/* <CardSection style={{ borderBottomWidth: 1, borderColor: '#000', paddingLeft: 50 }}>
+        <Text >Cast 1</Text>
+        </CardSection> */}
         <CardSection
           style={{ paddingLeft: 40, justifyContent: 'space-between' }}
         >
@@ -127,46 +132,46 @@ class CastScreen extends Component {
             onSelect={(values) => this.onGenderSelected(values)}
           />
         </CardSection>
-        <CardSection>
+        <CardSection style={{ width: 187, paddingLeft: 20 }}>
           <Input
             label="Age"
             placeHolder="0"
             keyboardType="numeric"
             iStyle={{ width: 40 }}
-            lStyle={{ paddingLeft: 40 }}
+            // lStyle={{ paddingLeft: 40 }}
             value={this.props.currentcast.minAge}
             onChangeText={value => this.props.updateCast({ prop: 'minAge', value })}
           />
-          <Text style={{ alignSelf: 'center' }}>
+          <Text style={{ alignSelf: 'center', paddingTop: 20 }}>
             To
           </Text>
           <Input
             label=" "
-            placeHolder="0''"
+            placeHolder="0"
             iStyle={{ width: 40 }}
             keyboardType="numeric"
             value={this.props.currentcast.maxAge}
             onChangeText={value => this.props.updateCast({ prop: 'maxAge', value })}
           />
         </CardSection>
-        <CardSection>
+        <CardSection >
           <Input
             label="Language"
             value={this.props.currentcast.language}
             onChangeText={value => this.props.updateCast({ prop: 'language', value })}
           />
         </CardSection>
-        <CardSection>
+        <CardSection style={{ width: 280 }}>
           <Input
             label="Height(Optional)"
             placeHolder="0"
             keyboardType="numeric"
             iStyle={{ width: 40 }}
-            lStyle={{ paddingLeft: 40 }}
+            // lStyle={{ paddingLeft: 40 }}
             value={this.props.currentcast.minHeight}
             onChangeText={value => this.props.updateCast({ prop: 'minHeight', value })}
           />
-          <Text style={{ alignSelf: 'center' }}>
+          <Text style={{ alignSelf: 'center', paddingTop: 20  }}>
             To
           </Text>
           <Input
@@ -205,7 +210,7 @@ class CastScreen extends Component {
             Add Cast
           </Button>
         </CardSection>
-        <CardSection style={{ justifyContent: 'space-between' }}>
+        <CardSection style={{ justifyContent: 'space-between', marginBottom: 15 }}>
           {this.renderSaveDraftButton()}
           {this.renderNextButton()}
         </CardSection>
@@ -215,6 +220,16 @@ class CastScreen extends Component {
 }
 
 const styles = {
+  cardSectionStyle: {
+    flexDirection: 'column',
+    borderBottomWidth: 1,
+    borderColor: '#000',
+    justifyContent: 'space-around',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10, 
+    paddingBottom: 10
+  },
   container: {
     flex: 1,
     borderWidth: 1,

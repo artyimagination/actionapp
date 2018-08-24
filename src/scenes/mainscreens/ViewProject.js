@@ -153,7 +153,9 @@ const styles = {
     justifyContent: 'space-between'
   },
   iconStyle: {
-    padding: 5
+    padding: 5,
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
   profileImageStyle: {
     alignSelf: 'flex-start',
