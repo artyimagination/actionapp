@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Alert } from 'react-native';
+import { ScrollView, View, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 
 import { userProfile, signUpUser, signInWithGoogle, signInWithFacebook } from '../../actions';
@@ -99,37 +99,16 @@ class UserSignUp extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
           {this.renderLoading()}
           <CardSection>
-            <LogoText>
-              Action
-            </LogoText>
-          </CardSection>
-          <CardSection style={styles.cardSectionContainer}>
-            <Text style={{ alignSelf: 'center' }}>
-              Sign Up With
-            </Text>
-            {this.renderGoogleSignButton()}
-            <Text style={{ alignSelf: 'center' }}>
-              OR
-            </Text>
-            {this.renderFacebookLoginButton()}
+          <View style={styles.logoStyle}>
+          <Text style={styles.logoTextStyle}>
+            Action
+          </Text>
+        </View>
           </CardSection>
           <CardSection>
-          <View 
-            style={{
-              borderBottomColor: 'black',
-              borderBottomWidth: 1,
-              paddingTop: 10,
-             marginLeft: 80,
-              width: '60%',
-              alignSelf: 'center',
-              justifyContent: 'space-around'
-            }}
-          />
-          </CardSection>
-          <CardSection >
             <Input
               label="Name"
               placeHolder="Enter Name"
@@ -137,8 +116,7 @@ class UserSignUp extends Component {
               onChangeText={value => this.props.userProfile({ prop: 'name', value })}
             />
           </CardSection>
-
-          <CardSection >
+          <CardSection>
             <Input
               label="Email"
               placeHolder="Enter Email"
@@ -176,17 +154,30 @@ class UserSignUp extends Component {
               onChangeText={value => this.props.userProfile({ prop: 'mobile', value })}
             />
           </CardSection>
-
           <CardSection style={styles.buttonStyle}>
             {this.renderButton()}
             {this.renderCancelButton()}
           </CardSection>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = {
+  logoStyle: {
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: 50
+  },
+  logoTextStyle: {
+    width: 170,
+    height: 80,
+    fontFamily: 'Fonarto',
+    fontSize: 50,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    color: 'rgb(234, 94, 32)'
+  },
   buttonStyle: {
     flex: 1,
     flexDirection: 'row',

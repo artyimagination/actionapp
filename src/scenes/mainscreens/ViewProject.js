@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { ScrollView, Text, Image } from 'react-native';
 
 import { Button, CardSection, IconButton } from '../../components/common';
 import {  applyProject } from '../../actions';
@@ -72,9 +72,9 @@ class ViewProject extends Component {
     const { projectDetails } = this.props.navigation.state.params;
     const { data } = this.props.navigation.state.params.projectDetails;
     return (
-        <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+        <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
         <CardSection >
-          <CardSection style={{ }}>
+          <CardSection style={styles.avtarcontainer}>
             {this.renderProfileImage()}
             <Image
             style={styles.profileImageStyle}
@@ -95,9 +95,49 @@ class ViewProject extends Component {
                           source={require('../../images/logo/images.jpg')}
             />
           </CardSection> 
-        <CardSection style={styles.iconContainer}>
-
+          <CardSection style={styles.descriptionStyle}>
+            <Text style={styles.labelStyle}> Cast 1</Text>
+            <Text style={styles.labelStyle}>Age : 20 yrs and above</Text>
+            <Text style={styles.labelStyle}>Language: Marathi</Text>
+            <Text style={styles.labelStyle}>Height :  5’ and Above</Text>
+            <Text style={styles.labelStyle}>Category  :  Lead</Text>
+            <Text style={styles.labelStyle}>Experience  : New comer as well as experienced</Text>
+          </CardSection>
+          <CardSection style={styles.iconContainer}>
           <CardSection>
+              <IconButton
+                  style={styles.iconStyle}
+                  onPress={() => this.onStarButtonClicked()}
+                  iconname="star"
+                  lable="Shortlist"
+              />
+              <IconButton
+                  style={styles.iconStyle}
+                  onPress={this.onHideClicked.bind(this)}
+                  iconname="eye-slash"
+                  lable="Hide"
+              />
+              <IconButton
+                style={styles.iconStyle}
+                onPress={() => this.onChatClicked()}
+                iconname="comment"
+                lable="chat"
+              />
+            </CardSection>
+            <CardSection style={styles.iconStyle}>
+              {this.renderAppliedButton()}
+            </CardSection>
+          </CardSection>
+          <CardSection style={styles.descriptionStyle}>
+          <Text style={styles.labelStyle}> Cast 2</Text>
+          <Text style={styles.labelStyle}>Age : 20 yrs and above</Text>
+          <Text style={styles.labelStyle}>Language: Marathi</Text>
+          <Text style={styles.labelStyle}>Height :  5’ and Above</Text>
+          <Text style={styles.labelStyle}>Category  :  Lead</Text>
+          <Text style={styles.labelStyle}>Experience  : New comer as well as experienced</Text>
+        </CardSection>
+        <CardSection style={styles.iconContainer}>
+        <CardSection>
             <IconButton
                 style={styles.iconStyle}
                 onPress={() => this.onStarButtonClicked()}
@@ -110,30 +150,30 @@ class ViewProject extends Component {
                 iconname="eye-slash"
                 lable="Hide"
             />
-              <IconButton
-                style={styles.iconStyle}
-                onPress={() => this.onChatClicked()}
-                iconname="comment"
-                lable="chat"
-              />
-            </CardSection>
-
-            <CardSection style={styles.iconStyle}>
-              {this.renderAppliedButton()}
-             
-            </CardSection>
+            <IconButton
+              style={styles.iconStyle}
+              onPress={() => this.onChatClicked()}
+              iconname="comment"
+              lable="chat"
+            />
+          </CardSection>
+          <CardSection style={styles.iconStyle}>
+            {this.renderAppliedButton()}
+          </CardSection>
         </CardSection>
-         
-        </View>
+        </ScrollView>
     );
   }
 }
 
 const styles = {
     container: {
-    flex: 1,
-    flexDirection: 'row',
-    padding: 10
+      flex: 1,
+      flexDirection: 'row',
+      padding: 10
+  },
+  avtarcontainer: {
+    padding: 5
   },
   descriptionStyle: {
     paddingTop: 6,
