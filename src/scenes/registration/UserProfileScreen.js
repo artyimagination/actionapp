@@ -152,7 +152,7 @@ class UserProfileScreen extends Component {
 
           <DropDown
             label="City"
-            style={{ flex: 1, paddingTop: 0, paddingBottom: 20 }}
+            style={{ flex: 1, paddingTop: 0, paddingBottom: 10 }}
             onValueChange={(value) => this.props.userProfile({ prop: 'city', value })}
             selectedValue={this.props.userprofile.city}
           >

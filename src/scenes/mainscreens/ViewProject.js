@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, Image } from 'react-native';
-
 import { Button, CardSection, IconButton } from '../../components/common';
-import {  applyProject } from '../../actions';
+
+import { applyProject } from '../../actions';
 
 class ViewProject extends Component {
 
@@ -19,7 +19,7 @@ class ViewProject extends Component {
   onAppliedClicked() {
     if (!this.state.isChanged) {
       this.setState({ isChanged: true });
-      //console.log('what is project id : ', this.props.data.uid);
+      console.log('what is project id : ', this.props.data.uid);
       this.props.applyProject(this.props.data.uid);
     }
   }
@@ -91,12 +91,10 @@ class ViewProject extends Component {
          
         </CardSection>
          <CardSection style={styles.container}>
-              <Image
-                          source={require('../../images/logo/images.jpg')}
-            />
+              <Image source={require('../../images/logo/images.jpg')} />
           </CardSection> 
           <CardSection style={styles.descriptionStyle}>
-            <Text style={styles.labelStyle}> Cast 1</Text>
+            <Text style={styles.labelStyle}>Cast 1</Text>
             <Text style={styles.labelStyle}>Age : 20 yrs and above</Text>
             <Text style={styles.labelStyle}>Language: Marathi</Text>
             <Text style={styles.labelStyle}>Height :  5’ and Above</Text>
@@ -125,11 +123,11 @@ class ViewProject extends Component {
               />
             </CardSection>
             <CardSection style={styles.iconStyle}>
-              {this.renderAppliedButton()}
+               {this.renderAppliedButton()}
             </CardSection>
           </CardSection>
           <CardSection style={styles.descriptionStyle}>
-          <Text style={styles.labelStyle}> Cast 2</Text>
+          <Text style={styles.labelStyle}>Cast 2</Text>
           <Text style={styles.labelStyle}>Age : 20 yrs and above</Text>
           <Text style={styles.labelStyle}>Language: Marathi</Text>
           <Text style={styles.labelStyle}>Height :  5’ and Above</Text>
@@ -190,7 +188,9 @@ const styles = {
   },
   iconContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingLeft: 10,
+    paddingRight: 10
   },
   iconStyle: {
     padding: 5,

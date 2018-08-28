@@ -25,23 +25,20 @@ class ProjectList extends Component {
 
   }
 
-  onAppliedClicked() {
-    if (!this.state.isChanged) {
-      this.setState({ isChanged: true });
-      //console.log('what is project id : ', this.props.data.uid);
-      this.props.applyProject(this.props.data.uid);
-    }
-  }
-
   onViewProjectClicked() {
     NavigationService.navigate('ProjectView', { projectDetails: this.props });
   }
 
   onHideClicked() {
-
+    this.setState(this.isVisible, 'true');
   }
-
-  
+  onAppliedClicked() {
+    if (!this.state.isChanged) {
+      this.setState({ isChanged: true });
+      console.log('what is project id : ', this.props.data.uid);
+      this.props.applyProject(this.props.data.uid);
+    }
+  }
   renderAppliedButton() {
     return (
       <IconButton
@@ -53,7 +50,6 @@ class ProjectList extends Component {
       />
     );
   }
-
   renderProfileImage() {
     if (this.props.ProfilePic !== '') {
       return (
@@ -118,7 +114,7 @@ class ProjectList extends Component {
               />
             </CardSection>
             <CardSection style={styles.iconStyle}>
-              {this.renderAppliedButton()}
+          
               <IconButton
                 style={styles.iconStyle}
                 onPress={this.onViewProjectClicked.bind(this)}

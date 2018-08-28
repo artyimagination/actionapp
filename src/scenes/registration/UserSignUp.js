@@ -99,7 +99,7 @@ class UserSignUp extends Component {
 
   render() {
     return (
-      <ScrollView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
           {this.renderLoading()}
           <CardSection>
           <View style={styles.logoStyle}>
@@ -118,15 +118,6 @@ class UserSignUp extends Component {
           </CardSection>
           <CardSection>
             <Input
-              label="Email"
-              placeHolder="Enter Email"
-              value={this.props.email}
-              onChangeText={value => this.props.userProfile({ prop: 'email', value })}
-            />
-          </CardSection>
-
-          <CardSection>
-            <Input
               isPassword
               label="Password"
               placeHolder="Password"
@@ -134,7 +125,6 @@ class UserSignUp extends Component {
               onChangeText={value => this.props.userProfile({ prop: 'password', value })}
             />
           </CardSection>
-
           <CardSection>
             <Input
               isPassword
@@ -144,7 +134,6 @@ class UserSignUp extends Component {
               onChangeText={value => this.props.userProfile({ prop: 'confirmPassword', value })}
             />
           </CardSection>
-
           <CardSection>
             <Input
               label="Mobile"
@@ -158,7 +147,7 @@ class UserSignUp extends Component {
             {this.renderButton()}
             {this.renderCancelButton()}
           </CardSection>
-      </ScrollView>
+      </View>
     );
   }
 }
@@ -183,7 +172,8 @@ const styles = {
     flexDirection: 'row',
     paddingLeft: 15,
     justifyContent: 'space-between',
-    paddingRight: 20
+    paddingRight: 20,
+    paddingBottom: 30
   },
   cardSectionContainer: {
     //flex: 1,
