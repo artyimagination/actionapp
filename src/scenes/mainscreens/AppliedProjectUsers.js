@@ -25,6 +25,7 @@ class AppliedProjectUsers extends Component {
   }
 
   componentWillMount() {
+    console.log(this.props.navigation.state.params.id);
     this.props.fetchAppliedUsersToProject(this.props.navigation.state.params.id);
     this.createDataSource(this.props);
   }

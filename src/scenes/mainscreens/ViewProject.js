@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, Image } from 'react-native';
-import { Button, CardSection, IconButton } from '../../components/common';
+import { CardSection, IconButton } from '../../components/common';
 
-import { applyProject } from '../../actions';
 
 class ViewProject extends Component {
 
@@ -14,15 +13,10 @@ class ViewProject extends Component {
     const { isVisible } = this.props;
     this.setState({ isVisible });
     console.log('visibility :: ', this.props.isVisible);
+   
   }
 
-  onAppliedClicked() {
-    if (!this.state.isChanged) {
-      this.setState({ isChanged: true });
-      console.log('what is project id : ', this.props.data.uid);
-      this.props.applyProject(this.props.data.uid);
-    }
-  }
+
   onHideClicked() {
 
   }
@@ -38,6 +32,13 @@ class ViewProject extends Component {
     let isVisible = this.state.isVisible;
     isVisible = false;
     this.setState({ isVisible });
+  }
+  onAppliedClicked() {
+    if (!this.state.isChanged) {
+      this.setState({ isChanged: true });
+      console.log('what is project id : ', this.props.data.uid);
+      this.props.applyProject(this.props.data.uid);
+    }
   }
   renderAppliedButton() {
     return (

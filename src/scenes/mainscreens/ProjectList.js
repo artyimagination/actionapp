@@ -88,9 +88,7 @@ class ProjectList extends Component {
           </CardSection>
         </CardSection>
         <CardSection style={styles.container}>
-              <Image
-                          source={require('../../images/logo/images.jpg')}
-            />
+              <Image source={require('../../images/logo/images.jpg')}  />
           </CardSection> 
         <CardSection style={styles.iconContainer}>
           <CardSection>
@@ -100,12 +98,12 @@ class ProjectList extends Component {
                 iconname="star"
                 lable="Shortlist"
             />
-            <IconButton
+              <IconButton
                 style={styles.iconStyle}
                 onPress={this.onHideClicked.bind(this)}
                 iconname="eye-slash"
                 lable="Hide"
-            />
+              />
               <IconButton
                 style={styles.iconStyle}
                 onPress={() => this.onChatClicked()}
