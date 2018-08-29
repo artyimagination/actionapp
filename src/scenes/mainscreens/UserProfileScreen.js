@@ -7,6 +7,7 @@ import { Button, Spinner, CardSection } from '../../components/common';
 import { UpdateOtherUserProfile } from './UpdateOtherUserProfile';
 import { UpdateActorProfile } from './UpdateActorProfile';
 import { UpdateProducerProfile } from './UpdateProducerProfile';
+import { ViewProducerProfile } from './ViewProducerProfile';
 import NavigationService from '../../components/NavigationService';
 
 class UserProfileScreen extends Component {
@@ -40,7 +41,7 @@ class UserProfileScreen extends Component {
             return <UpdateActorProfile {...this.props} />;
       } else if (userprofile.category === 'Producers') {
          // return <UpdateActorProfile {...this.props} />;
-             return <UpdateProducerProfile {...this.props} />;
+             return <ViewProducerProfile {...this.props} />;
       } else {
         return <UpdateOtherUserProfile {...this.props} />;
       }

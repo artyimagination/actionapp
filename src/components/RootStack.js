@@ -28,7 +28,8 @@ import {
   NotificationScreen,
   ViewProject,
   AppliedProjectUsers,
-  ViewActorProfileScreen
+  ViewActorProfileScreen,
+  ViewProducerProfile
   
 } from '../scenes/mainscreens';
 import {
@@ -49,7 +50,8 @@ const MainStack = createStackNavigator(
   SignUpScreen: UserSignUp,
   ForgotPassword: ForgotPasswordScreen,
   UpdateProfile: UserProfileScreen,
-  ViewActorProfile: ViewActorProfileScreen
+  ViewActorProfile: ViewActorProfileScreen,
+  ViewProducer : ViewProducerProfile
  
 },
 {

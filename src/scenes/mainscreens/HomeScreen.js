@@ -17,8 +17,7 @@ class HomeScreen extends Component {
 
   navigateToPath() {
     console.log('navigtor');
-  
-  NavigationService.navigate('UpdateProfile');
+    NavigationService.navigate('Project');
   }
 
   renderProjectButton() {
