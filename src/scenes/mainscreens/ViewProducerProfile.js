@@ -235,11 +235,10 @@ toggleCancel() {
           <Text style={styles.labelStyle}>
             Biodata
             </Text>
-            <TouchableHighlight
-               onPress={this.toggleCancel()}>
+           
                 <IconButton iconname="pencil"  style={styles.iconStyle}
                   onPress={() => this.onClicked()}></IconButton>  
-            </TouchableHighlight>
+          
             <Text  style={styles.textStyle}>
             xxxxxyyyyy.pdf
             </Text>     
@@ -274,7 +273,7 @@ const styles = {
   labelStyle: {
     fontSize: 14,
     fontWeight: '600',
-    padding: 100
+    padding: 10
   },
   iconStyle: {
     flex: 1,

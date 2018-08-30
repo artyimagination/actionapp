@@ -42,6 +42,7 @@ class UserProfileScreen extends Component {
       } else if (userprofile.category === 'Producers') {
          // return <UpdateActorProfile {...this.props} />;
              return <ViewProducerProfile {...this.props} />;
+            // return <UpdateProducerProfile {...this.props} />;
       } else {
         return <UpdateOtherUserProfile {...this.props} />;
       }

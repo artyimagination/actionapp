@@ -3,7 +3,7 @@ export const PASSWORD_CHANGED = 'password_changed';
 export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
-
+export const CONTACT_CHANGED = 'contact_changed'
 
 export const SIGNUP_PROCESS = 'signup_process';
 export const SIGNUP_USER = 'signup_user';

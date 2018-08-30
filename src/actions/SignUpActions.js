@@ -3,6 +3,7 @@ import firebase from 'react-native-firebase';
 import { GoogleSignin } from 'react-native-google-signin';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import NavigationService from '../components/NavigationService';
+
 import {
   SIGNUP_DATA,
   USER_PROFILE_DATA,
@@ -13,6 +14,7 @@ import {
 } from './types';
 
 import CurrentUser from '../utils/CurrentUser';
+
 
 export const signUp = ({ prop, value }) => {
   return {
@@ -80,7 +82,7 @@ export const saveUserDetails = ({ userprofile }) => {
   };
 };
 
-export const signUpUser = ({ name, email, password, mobile }) => {
+export const signUpUser = ({ name,  password, mobile }) => {
   return (dispatch) => {
     /*firebase.auth().verifyPhoneNumber(mobile)
     .on('state_changed', phoneAuthSnapshot => {
@@ -97,9 +99,43 @@ export const signUpUser = ({ name, email, password, mobile }) => {
     });*/
     dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
     CurrentUser.isFirstTimeUser = true;
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => saveIntoDatabase(dispatch, user, name, email, mobile))
-      .catch(() => ErrorWhileSignIn(dispatch));
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    //   .then(user => saveIntoDatabase(dispatch, user, name, mobile))
+    //   .catch(() => ErrorWhileSignIn(dispatch));
+
+    console.log(mobile);
+    firebase.auth().signInWithPhoneNumber(mobile)
+      .then((confirmResult) => {
+        console.log( confirmResult);
+        // This means that the SMS has been sent to the user
+        // You need to:
+        //   1) Save the `confirmResult` object to use later
+        this.setState({ confirmResult });
+        //   2) Hide the phone number form
+        //   3) Show the verification code form
+      })
+      .catch((error) => {
+        const { code, message } = error;
+        // For details of error codes, see the docs
+        // The message contains the default Firebase string
+        // representation of the error
+      });
+
+      onVerificationCode = () => {
+        const { confirmResult, verificationCode } = this.state;
+        confirmResult.confirm(verificationCode)
+          .then((user) => {
+            // If you need to do anything with the user, do it here
+            // The user will be logged in automatically by the
+            // `onAuthStateChanged` listener we set up in App.js earlier
+          })
+          .catch((error) => {
+            const { code, message } = error;
+            // For details of error codes, see the docs
+            // The message contains the default Firebase string
+            // representation of the error
+          });
+      }
   };
 };
 

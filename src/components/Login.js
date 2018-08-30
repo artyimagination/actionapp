@@ -7,6 +7,7 @@ import {
   passwordChanged,
   loginUser,
   signInWithGoogle,
+  cntChanged,
   signInWithFacebook
 } from '../actions';
 import { Button, CardSection, Input, TextButton, Spinner } from './common';
@@ -24,18 +25,22 @@ class Login extends Component {
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
+  onContactChange(text) {
+    this.props.cntChanged(text);
+  }
 
   onPasswordChange(text) {
     this.props.passwordChanged(text);
   }
 
   onLoginBtnClicked() {
-    const { email, password } = this.props;
-    const error = Validator('email', email) || Validator('password', password);
+    const { contact, password } = this.props;
+    console.log('contact'+contact);
+    const error = Validator('mobile', contact) || Validator('password', password);
     if (error !== null) {
       Alert.alert(error);
     } else {
-      this.props.loginUser({ email, password });
+      this.props.loginUser({ contact, password });
     }
   }
 
@@ -138,11 +143,11 @@ class Login extends Component {
         <View style={this.props.style}>
                 <CardSection style={{ paddingRight: 20}} >
                   <Input
-                    label="User Name"
-                    placeHolder="Enter User Name"
-                    onChangeText={this.onEmailChange.bind(this)}
-                    value={this.props.email}
-                    ref='eml'
+                    label="Phone Number"
+                    placeHolder="Enter Contact Number"
+                    onChangeText={this.onContactChange.bind(this)}
+                    value={this.props.contact}
+                    ref='cnt'
                     onSubmitEditing={() => { 
                       this.refs.pwd.focus(); 
                     }}
@@ -202,9 +207,9 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth;
-  return { email, password, error, loading };
+  const { password, error, loading, contact } = auth;
+  return { password, error, loading, contact };
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser, signInWithGoogle, signInWithFacebook })(Login);
+  emailChanged, cntChanged, passwordChanged, loginUser, signInWithGoogle, signInWithFacebook })(Login);
