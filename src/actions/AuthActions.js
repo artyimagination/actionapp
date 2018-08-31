@@ -64,31 +64,31 @@ export const passwordChanged = (text) => {
 };
 
 
-export const loginUser = ({ phoneNumber, password }) => {
+export const loginUser = ({ phoneNumber, password, email }) => {
   return (dispatch) => {
     dispatch({ type: LOGIN_USER });
 
-    // firebase.auth().signInWithEmailAndPassword(email, password)
-    // .then(user => loginUserSuccess(dispatch, user))
-    // .catch(() => {
-    //   console.log('some error occurs');
-    //   //Alert('Error', 'Email or Password incorrect');
-    //   loginUserFail(dispatch);
-    //   /*firebase.auth().createUserWithEmailAndPassword(email, password)
-    //   .then(user => loginUserSuccess(dispatch, user))
-    //   .catch(() => loginUserFail(dispatch));*/
-    // });
-
-
-    firebase.auth().signInWithPhoneNumber(phoneNumber)
-    .then(function (confirmationResult) {
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-      window.confirmationResult = confirmationResult;
-    }).catch(function (error) {
-      // Error; SMS not sent
-      // ...
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(user => loginUserSuccess(dispatch, user))
+    .catch(() => {
+      console.log('some error occurs');
+      //Alert('Error', 'Email or Password incorrect');
+      loginUserFail(dispatch);
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => loginUserSuccess(dispatch, user))
+      .catch(() => loginUserFail(dispatch));
     });
+
+
+    // firebase.auth().signInWithPhoneNumber(phoneNumber)
+    // .then(function (confirmationResult) {
+    //   // SMS sent. Prompt user to type the code from the message, then sign the
+    //   // user in with confirmationResult.confirm(code).
+    //   window.confirmationResult = confirmationResult;
+    // }).catch(function (error) {
+    //   // Error; SMS not sent
+    //   // ...
+    // });
   };
 };
 

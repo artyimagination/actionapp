@@ -34,23 +34,17 @@ class Login extends Component {
   }
 
   onLoginBtnClicked() {
-    const { contact, password } = this.props;
+    const { email,contact, password } = this.props;
     console.log('contact'+contact);
-    const error = Validator('mobile', contact) || Validator('password', password);
+    const error =  Validator('password', password) ||  Validator('email', email);
+   // const error = Validator('email', email) || Validator('password', password);
     if (error !== null) {
       Alert.alert(error);
     } else {
-      this.props.loginUser({ contact, password });
+      this.props.loginUser({ contact, password, email });
     }
   }
 
-  onGoogleSignIn() {
-    this.props.signInWithGoogle();
-  }
-
-  facebookLoginIn() {
-    this.props.signInWithFacebook();
-  }
 
   renderError() {
     if (this.props.error) {
@@ -103,45 +97,25 @@ class Login extends Component {
     );
   }
 
-  renderGoogleSignButton() {
-    /*if (this.props.loading) {
-      return <Spinner size="large" />;
-    }*/
-
-    return (
-      <Text
-        style={styles.socialLoginButton}
-        onPress={this.onGoogleSignIn.bind(this)}
-      >
-        Google
-      </Text>
-    );
-  }
-
-  renderFacebookLoginButton() {
-    /*if (this.props.loading) {
-      return <Spinner size="large" />;
-    }*/
-    return (
-      <Text
-        style={styles.socialLoginButton}
-        onPress={this.facebookLoginIn.bind(this)}
-      >
-        Facebook
-      </Text>
-    );
-  }
-
-  // focusNextField(id) {
-  //   this.inputs[id].focus();
-  // }
-
   
   render() {
       return (
     
         <View style={this.props.style}>
-                <CardSection style={{ paddingRight: 20}} >
+        <CardSection style={{ paddingRight: 20}} >
+                  <Input
+                    label="email"
+                    placeHolder="Enter email"
+                    onChangeText={this.onEmailChange.bind(this)}
+                    value={this.props.email}
+                    ref='eml'
+                    onSubmitEditing={() => { 
+                      this.refs.pwd.focus(); 
+                    }}
+            
+                  />
+                </CardSection>
+                {/* <CardSection style={{ paddingRight: 20}} >
                   <Input
                     label="Phone Number"
                     placeHolder="Enter Contact Number"
@@ -153,7 +127,7 @@ class Login extends Component {
                     }}
             
                   />
-                </CardSection>
+                </CardSection> */}
                 <CardSection style={{ paddingRight: 20}}>
                   <Input
                     isPassword

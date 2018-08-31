@@ -60,7 +60,7 @@ class UserSignUp extends Component {
       this.setState({ mobile: '8401081227' });
       
       console.log(mobile);
-      firebase.auth().signInWithPhoneNumber('+918080328322')
+      firebase.auth().signInWithPhoneNumber('+918401081227')
         .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
         .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
     };
@@ -85,9 +85,7 @@ class UserSignUp extends Component {
      const { mobile } = this.state;
         
       return (
-
         <CardSection >
-       
          <Input
               label="Mobile"
               placeHolder="Enter Number"
