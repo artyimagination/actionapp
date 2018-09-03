@@ -12,6 +12,8 @@ import {
 import Logo from '../components/Logo';
 import Login from '../components/Login';
 
+import PhoneAuth from 'react-native-phone-auth-component';
+
 class LoginScreen extends Component {
 
   static navigationOptions = ({
@@ -20,6 +22,20 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.root}>
+
+      {/* <PhoneAuth
+  signInWithPhone={phone => console.log('Please attach method to signInWithPhone prop')}
+  redeemCode={code => console.log('Please attach method to redeemCode prop')}
+  codeLength={4}
+  buttonTextColor={'black'}
+  spinnerColor={'black'}
+  color={'#ff8203'}
+  androidFont={'monospace'}
+  iOSFont={'Menlo'}
+  containerStyle={{flex: 1}}
+  verifyButtonMessage={'Verify Phone Number*'}
+  disclaimerMessage={'*Message & data rates may apply.'}
+/> */}
         <View style={styles.logoStyle}>
           <Image
             style={{ width: 110, height: 110 }}
@@ -30,6 +46,8 @@ class LoginScreen extends Component {
           </Text>
         </View>
         <Login style={styles.loginStyle} />
+
+        
       </View>
     );
   }

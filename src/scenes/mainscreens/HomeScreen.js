@@ -9,6 +9,8 @@ import { CardSection, Button } from '../../components/common';
 import NavigationService from '../../components/NavigationService';
 import { HomeProject } from './HomeProject';
 
+
+
 class HomeScreen extends Component {
 
   componentWillMount() {
@@ -49,6 +51,7 @@ class HomeScreen extends Component {
           {this.renderProjectButton()}
         </CardSection>
         <HomeProject />
+
         <FloatingAction
           color='rgb(234, 94, 32)'
           onPressItem={

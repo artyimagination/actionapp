@@ -102,7 +102,7 @@ class Login extends Component {
       return (
     
         <View style={this.props.style}>
-        <CardSection style={{ paddingRight: 20}} >
+        {/* <CardSection style={{ paddingRight: 20}} >
                   <Input
                     label="email"
                     placeHolder="Enter email"
@@ -114,8 +114,8 @@ class Login extends Component {
                     }}
             
                   />
-                </CardSection>
-                {/* <CardSection style={{ paddingRight: 20}} >
+                </CardSection> */}
+                <CardSection style={{ paddingRight: 20}} >
                   <Input
                     label="Phone Number"
                     placeHolder="Enter Contact Number"
@@ -127,7 +127,7 @@ class Login extends Component {
                     }}
             
                   />
-                </CardSection> */}
+                </CardSection>
                 <CardSection style={{ paddingRight: 20}}>
                   <Input
                     isPassword

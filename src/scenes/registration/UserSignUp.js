@@ -22,11 +22,8 @@ class UserSignUp extends Component {
       confirmResult: null,
     };
 
-
-
   }
   
-
     static navigationOptions = ({
       header: null
     });
