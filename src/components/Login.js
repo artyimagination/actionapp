@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { GoogleSigninButton } from 'react-native-google-signin';
 import {
-  emailChanged,
+
   passwordChanged,
   loginUser,
-  signInWithGoogle,
   cntChanged,
-  signInWithFacebook
 } from '../actions';
 import { Button, CardSection, Input, TextButton, Spinner } from './common';
 import NavigationService from '../components/NavigationService';
@@ -22,9 +19,9 @@ class Login extends Component {
     this.b = React.createRef();
   
   }
-  onEmailChange(text) {
-    this.props.emailChanged(text);
-  }
+  // onEmailChange(text) {
+  //   this.props.emailChanged(text);
+  // }
   onContactChange(text) {
     this.props.cntChanged(text);
   }
@@ -34,14 +31,15 @@ class Login extends Component {
   }
 
   onLoginBtnClicked() {
-    const { email,contact, password } = this.props;
-    console.log('contact'+contact);
-    const error =  Validator('password', password) ||  Validator('email', email);
+    const { contact, password } = this.props;
+
+    const error =  Validator('password', password) ||  Validator('contact', contact);
+
    // const error = Validator('email', email) || Validator('password', password);
     if (error !== null) {
       Alert.alert(error);
     } else {
-      this.props.loginUser({ contact, password, email });
+      this.props.loginUser({ contact, password});
     }
   }
 
@@ -89,7 +87,6 @@ class Login extends Component {
   renderForgotPasswordButton() {
     return (
       <TextButton
-    
         onPress={() => NavigationService.navigate('ForgotPassword')}
       >
         Forgot Password?
@@ -102,25 +99,12 @@ class Login extends Component {
       return (
     
         <View style={this.props.style}>
-        {/* <CardSection style={{ paddingRight: 20}} >
-                  <Input
-                    label="email"
-                    placeHolder="Enter email"
-                    onChangeText={this.onEmailChange.bind(this)}
-                    value={this.props.email}
-                    ref='eml'
-                    onSubmitEditing={() => { 
-                      this.refs.pwd.focus(); 
-                    }}
-            
-                  />
-                </CardSection> */}
                 <CardSection style={{ paddingRight: 20}} >
                   <Input
                     label="Phone Number"
                     placeHolder="Enter Contact Number"
                     onChangeText={this.onContactChange.bind(this)}
-                    value={this.props.contact}
+                    value={this.props.mobile}
                     ref='cnt'
                     onSubmitEditing={() => { 
                       this.refs.pwd.focus(); 
@@ -186,4 +170,4 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, cntChanged, passwordChanged, loginUser, signInWithGoogle, signInWithFacebook })(Login);
+  cntChanged, passwordChanged, loginUser })(Login);

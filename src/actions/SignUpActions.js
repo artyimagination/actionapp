@@ -82,7 +82,7 @@ export const saveUserDetails = ({ userprofile }) => {
   };
 };
 
-export const signUpUser = ({ name,  password, mobile }) => {
+export const signUpUser = ({ name,  password, mobileNo }) => {
   return (dispatch) => {
     /*firebase.auth().verifyPhoneNumber(mobile)
     .on('state_changed', phoneAuthSnapshot => {
@@ -97,15 +97,22 @@ export const signUpUser = ({ name,  password, mobile }) => {
           console.log('Default Case');
       }
     });*/
-    dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
-    CurrentUser.isFirstTimeUser = true;
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => saveIntoDatabase(dispatch, user, name, mobile))
-      .catch(() => ErrorWhileSignIn(dispatch));
+  
+        // dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
+    // CurrentUser.isFirstTimeUser = true;
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    //   .then(user => saveIntoDatabase(dispatch, user, name, mobile))
+    //   .catch(() => ErrorWhileSignIn(dispatch));
       
+      console.log(mobileNo);
+      firebase.auth().signInWithPhoneNumber(mobileNo)
+        .then(confirmResult => 
+          console.log('confirmResult'+JSON.stringify(confirmResult) ))
+        .catch(error => 
+          console.log(error)
+         );
   };
 };
-
 
 export const signInWithGoogle = () => {
   return (dispatch) => {
