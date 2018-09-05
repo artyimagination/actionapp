@@ -104,13 +104,24 @@ export const signUpUser = ({ name,  password, mobileNo }) => {
     //   .then(user => saveIntoDatabase(dispatch, user, name, mobile))
     //   .catch(() => ErrorWhileSignIn(dispatch));
       
-      console.log(mobileNo);
+      // console.log(mobileNo);
+      // firebase.auth().signInWithPhoneNumber(mobileNo)
+      //   .then(confirmResult => 
+      //     console.log('confirmResult'+JSON.stringify(confirmResult) ))
+      //   .catch(error => 
+      //     console.log(error)
+      //    );
+
+           // If user is not exist signup
       firebase.auth().signInWithPhoneNumber(mobileNo)
-        .then(confirmResult => 
-          console.log('confirmResult'+JSON.stringify(confirmResult) ))
-        .catch(error => 
-          console.log(error)
-         );
+        .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
+        .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
+      
+      //saveToDatabase
+        const { currentUser } = firebase.auth();
+        console.log(currentUser.uid);
+        const ref = firebase.database().ref(`/users/${currentUser.uid}`)
+       .set({ 'name': name,'mobile' :mobile});
   };
 };
 

@@ -6,7 +6,7 @@ import firebase from 'react-native-firebase';
 import { userProfile, signUpUser, signInWithGoogle, signInWithFacebook } from '../../actions';
 import { TextButton, CardSection, Input, Button, Spinner, LogoText } from '../../components/common';
 import { Validator, PasswordValidator } from '../../utils/Validator';
-//import NavigationService from '../components/NavigationService';
+import NavigationService from '../../components/NavigationService';
 //import styles from '../../style/commonStyle';
 //import { PhoneVerificationPopup } from './PhoneVerificationPopup';
 
@@ -26,8 +26,6 @@ class UserSignUp extends Component {
 
   }
   
-
-
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
@@ -58,38 +56,66 @@ class UserSignUp extends Component {
     }
   
     signIn = () => {
-      const { mobile, name } = this.state;
-     
-      this.setState({ message: 'Sending code ...' });
-      //this.setState({ mobile: '8401081227' });
+   
+      console.log('test');
+
+      const { name,  password, confirmPassword, mobile } = this.props;
+
+      const object = { confirmPassword, password };
+      const error = Validator('name', name)
+        || Validator('password', password)
+        || PasswordValidator(object)
+        || Validator('mobile', mobile);
+        
+     // const mobileNo = '+91'+mobile;
+      //console.log(mobileNo);
+      if (error != null) {
+        console.log('Error in Phoe number: ', error);
+        Alert.alert('Error', error);
+      } else {
+        
+        const mobileNo = '+91'+this.props.mobile;
+        const mobile = this.props.mobile;
+        const name = this.props.name;
+       
+        const userRef = firebase.database().ref("/users");
+      
+        userRef.once('value', function(snapshot) {
+        
+          //If user is existed redirect to login page
+          if(snapshot.val().mobile == mobile){
+            Alert.alert('Error', 'Phone number is already registered! Please login with your credentials');
+              NavigationService.navigate('Login');
+          }
+          
+        });
+      }
+    
+    
       const mobileNo = '+91'+this.props.mobile;
-      console.log(mobileNo);
-     
+      // If user is not exist signup
       firebase.auth().signInWithPhoneNumber(mobileNo)
         .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
         .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
-
-       // const { currentUser } = firebase.auth();
-        const ref = firebase.database().ref('/users')
-        .push({
-           'name': this.props.name,'mobile' :this.props.mobile});
+      
+      //saveToDatabase
+        const { currentUser } = firebase.auth();
+       //console.log(currentUser.uid);
+      // const userif = currentUser.uid
+        const ref = firebase.database().ref(`/users/`)
+       .push({ 'name': name,'mobile' :mobile});
     };
   
     confirmCode = () => {
       const { codeInput, confirmResult, message } = this.state;
-      console.log('confirmResult'+JSON.stringify(confirmResult));
-
-      console.log('contact'+confirmResult.phoneNumber);
-      console.log('message'+message);
+     
       if (confirmResult && codeInput.length) {
         confirmResult.confirm(codeInput)
        
           .then((user) => {
             this.setState({ message: 'Code Confirmed!' });
             console.log(message);
-          
-                //NavigationService.navigate('HomeScreen');
-           
+            NavigationService.navigate('Home');
           })
           .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
       }
@@ -236,7 +262,7 @@ class UserSignUp extends Component {
 
   render() {
     const { user, confirmResult } = this.state;
-    console.log( confirmResult);
+    console.log( 'render'+confirmResult);
     return (
       <ScrollView style={{ flex: 1 }}>
           {this.renderLoading()}
@@ -256,25 +282,6 @@ class UserSignUp extends Component {
             />
           </CardSection>
           <CardSection>
-
-            {/* {!user && !confirmResult && this.renderPhoneNumberInput()} */}
-
-            {/* {user && (
-              <View
-                style={{
-                  padding: 15,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#77dd77',
-                  flex: 1,
-                }}
-              >
-                <Image  source={require('../../images/ic_person_24px.png')} style={{ width: 100, height: 100, marginBottom: 25 }} />
-                <Text style={{ fontSize: 25 }}>Signed In!</Text>
-                <Text>{JSON.stringify(user)}</Text>
-                <Button title="Sign Out" color="red" onPress={this.signOut} />
-              </View>
-            )} */}
             <Input
               label="Mobile"
               placeHolder="Enter Number"
