@@ -31,6 +31,7 @@ class Login extends Component {
   }
 
   onLoginBtnClicked() {
+   // console.log('btn clicked');
     const { contact, password } = this.props;
 
     const error =  Validator('password', password) ||  Validator('contact', contact);
@@ -76,7 +77,7 @@ class Login extends Component {
   renderSignupButton() {
     return (
       <TextButton
-        style={{  color: 'rgb(234, 94, 32)' } }
+        style={{ color: 'rgb(234, 94, 32)' }}
         onPress={() => NavigationService.navigate('SignUpScreen')}
       >
         Sign Up

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { GoogleSigninButton } from 'react-native-google-signin';
+//import { GoogleSigninButton } from 'react-native-google-signin';
 import {
   emailChanged,
   passwordChanged,
@@ -9,10 +9,10 @@ import {
   signInWithGoogle,
   signInWithFacebook
 } from '../actions';
-import Logo from '../components/Logo';
+//import Logo from '../components/Logo';
 import Login from '../components/Login';
 
-import PhoneAuth from 'react-native-phone-auth-component';
+//import PhoneAuth from 'react-native-phone-auth-component';
 
 class LoginScreen extends Component {
 
@@ -32,8 +32,6 @@ class LoginScreen extends Component {
           </Text>
         </View>
         <Login style={styles.loginStyle} />
-
-        
       </View>
     );
   }

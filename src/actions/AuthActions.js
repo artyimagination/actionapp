@@ -69,7 +69,7 @@ export const loginUser = ({ contact, password }) => {
 
   console.log('action login'+contact);
   const mobileNo = '+91'+contact;
-  console.log(mobileNo);
+
   return (dispatch) => {
     dispatch({ type: LOGIN_USER });
 
@@ -91,7 +91,6 @@ export const loginUser = ({ contact, password }) => {
     //   .then(user => loginUserSuccess(dispatch, user))
     //   .catch(() => loginUserFail(dispatch));
     // });
-
   };
 };
 
@@ -131,8 +130,12 @@ const loginUserFail = (dispatch) => {
 
 const loginUserSuccess = (dispatch, user) => {
   
+  console.log('user' + JSON.parse(user));
+  console.log('dispatch' + JSON.parse(dispatch));
+
   const { currentUser } = firebase.auth();
-  firebase.database().ref(`/users/${currentUser.uid}`)
+  //firebase.database().ref(`/users/${currentUser.uid}`)
+  firebase.database().ref(`/users/`)
   .update({ uid: currentUser.uid })
   .catch(() => {
     console.log('some error occuring');
