@@ -67,19 +67,19 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ contact, password }) => {
 
-  console.log('action login'+contact);
+  //console.log('action login'+contact);
   const mobileNo = '+91'+contact;
-
+  console.log('action login1'+mobileNo);
   return (dispatch) => {
     dispatch({ type: LOGIN_USER });
-
-    firebase.auth().signInWithPhoneNumber(mobileNo)
-    .then(user => loginUserSuccess(dispatch, user))
-    .catch(() => {
-      console.log('some error occurs');
-       Alert('Error', 'Email or Password incorrect');
-      loginUserFail(dispatch);
-    });
+    
+    // firebase.auth().signInWithPhoneNumber(mobileNo)
+    // .then(user => loginUserSuccess(dispatch, user), console.log(mobileNo))
+    // .catch((error) => {
+    //   console.log('some error occurs:'+error);
+    //    Alert('Error', 'Email or Password incorrect');
+    //   loginUserFail(dispatch);
+    // });
 
     // firebase.auth().signInWithEmailAndPassword(email, password)
     // .then(user => loginUserSuccess(dispatch, user))
@@ -93,6 +93,7 @@ export const loginUser = ({ contact, password }) => {
     // });
   };
 };
+
 
 
 export const confirmForgotPassword = (email) => {
@@ -145,6 +146,5 @@ const loginUserSuccess = (dispatch, user) => {
     payload: user
   });
 
-  NavigationService.navigate('Home');
-  //NavigationService.navigate('UserDetails');
+  NavigationService.navigate('UserDetails');
 };

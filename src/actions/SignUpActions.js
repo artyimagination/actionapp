@@ -83,22 +83,24 @@ export const saveUserDetails = ({ userprofile }) => {
 };
 
 export const signUpUser = ({ name,  password, mobileNo }) => {
+
+  console.log(name);
   return (dispatch) => {
-    /*firebase.auth().verifyPhoneNumber(mobile)
-    .on('state_changed', phoneAuthSnapshot => {
-      switch (phoneAuthSnapshot.state) {
-        case firebase.auth.PhoneAuthState.CODE_SENT:
-          console.log('Verification Code Sent');
-          break;
-        case firebase.auth.PhoneAuthState.ERROR:
-          console.log('Error : ', phoneAuthSnapshot.error);
-        break;
-        default:
-          console.log('Default Case');
-      }
-    });*/
+    // firebase.auth().verifyPhoneNumber(mobileNo)
+    // .on('state_changed', phoneAuthSnapshot => {
+    //   switch (phoneAuthSnapshot.state) {
+    //     case firebase.auth.PhoneAuthState.CODE_SENT:
+    //       console.log('Verification Code Sent');
+    //       break;
+    //     case firebase.auth.PhoneAuthState.ERROR:
+    //       console.log('Error : ', phoneAuthSnapshot.error);
+    //     break;
+    //     default:
+    //       console.log('Default Case');
+    //   }
+    // });
   
-        // dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
+        //dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
     // CurrentUser.isFirstTimeUser = true;
     // firebase.auth().createUserWithEmailAndPassword(email, password)
     //   .then(user => saveIntoDatabase(dispatch, user, name, mobile))

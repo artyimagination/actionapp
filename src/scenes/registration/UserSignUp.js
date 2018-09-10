@@ -3,7 +3,7 @@ import { ScrollView, View, Text, Alert, Image, Modal, TouchableHighlight } from 
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 
-import { userProfile, signUpUser, signInWithGoogle, signInWithFacebook } from '../../actions';
+import { userProfile, signUpUser } from '../../actions';
 import { TextButton, CardSection, Input, Button, Spinner, LogoText } from '../../components/common';
 import { Validator, PasswordValidator } from '../../utils/Validator';
 import NavigationService from '../../components/NavigationService';
@@ -67,43 +67,44 @@ class UserSignUp extends Component {
         || PasswordValidator(object)
         || Validator('mobile', mobile);
         
-     // const mobileNo = '+91'+mobile;
-      //console.log(mobileNo);
+     const mobileNo = '+91'+mobile;
+      console.log('mobileNo'+mobileNo);
+      console.log(name);
+
+      
       if (error != null) {
-        console.log('Error in Phoe number: ', error);
+        console.log('Error: ', error);
         Alert.alert('Error', error);
       } else {
-        
-        const mobileNo = '+91'+this.props.mobile;
+        console.log('else');
         const mobile = this.props.mobile;
-        const name = this.props.name;
-       
-        const userRef = firebase.database().ref("/users");
+        console.log('mobile'+mobile);
+        const userRef = firebase.database().ref(`/users/`);
       
         userRef.once('value', function(snapshot) {
-        
+          console.log('snapshot' + snapshot.val());
           //If user is existed redirect to login page
           if(snapshot.val().mobile == mobile){
             Alert.alert('Error', 'Phone number is already registered! Please login with your credentials');
               NavigationService.navigate('Login');
           }
-          
+     
         });
+       
       }
-    
-    
-      const mobileNo = '+91'+this.props.mobile;
-      // If user is not exist signup
-      firebase.auth().signInWithPhoneNumber(mobileNo)
-        .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
-        .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
-      
-      //saveToDatabase
-        const { currentUser } = firebase.auth();
-       //console.log(currentUser.uid);
-      // const userif = currentUser.uid
-        const ref = firebase.database().ref(`/users/`)
-       .push({ 'name': name,'mobile' :mobile});
+       //const mobileNo = '+91'+this.props.mobile;
+        // If user is not exist signup
+        firebase.auth().signInWithPhoneNumber(mobileNo)
+          .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
+          .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
+        
+        //saveToDatabase
+        // const { currentUser } = firebase.auth();
+        //  console.log(currentUser.uid);
+        // const userif = currentUser.uid
+          const ref = firebase.database().ref(`/users/`)
+         .push({ 'name': name,'mobile' :mobile});
+         //NavigationService.navigate('Home');
     };
   
     confirmCode = () => {
@@ -113,9 +114,10 @@ class UserSignUp extends Component {
         confirmResult.confirm(codeInput)
        
           .then((user) => {
+            console.log(confirmResult);
             this.setState({ message: 'Code Confirmed!' });
             console.log(message);
-            NavigationService.navigate('Home');
+            NavigationService.navigate('UserProfile');
           })
           .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
       }
@@ -125,59 +127,6 @@ class UserSignUp extends Component {
       firebase.auth().signOut();
     }
 
-    openHeaderModal() {
-      console.log('test');
-      return (
-      <View style={{marginTop: 22}}>
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={this.state.modalVisible}
-        onRequestClose={() => {
-          alert('Modal has been closed.');
-        }}>
-        <View style={{marginTop: 22}}>
-          <View>
-            <Text>Hello World!</Text>
-
-            <TouchableHighlight
-              onPress={() => {
-                this.setModalVisible(!this.state.modalVisible);
-              }}>
-              <Text>Hide Modal</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-      </Modal>
-
-      <TouchableHighlight
-        onPress={() => {
-          this.setModalVisible(true);
-        }}>
-        <Text>Show Modal</Text>
-      </TouchableHighlight>
-    </View>
-      );
-    }
-    
-    renderPhoneNumberInput() {
-     const { mobile } = this.state;
-        
-      return (
-        <CardSection >
-         <Input
-              label="Mobile"
-              placeHolder="Enter Number"
-              keyboardType="phone-pad"
-              value={this.props.mobile}
-              onChangeText={value => this.props.userProfile({ prop: 'mobile', value })}
-            />
-             <Button title="Sign In" color="green" onPress={this.signIn} />
-      </CardSection>
-       
-      );
-    }
-    
     renderMessage() {
       const { message } = this.state;
     
@@ -207,24 +156,25 @@ class UserSignUp extends Component {
       );
     }
 
-  onSignUpUser() {
-    const { name,  password, confirmPassword, mobile } = this.props;
+  // onSignUpUser() {
+  //   const { name,  password, confirmPassword, mobile } = this.props;
 
-    const object = { confirmPassword, password };
-    const error = Validator('name', name)
-      || Validator('password', password)
-      || PasswordValidator(object)
-      || Validator('mobile', mobile);
+  //   const object = { confirmPassword, password };
+  //   const error = Validator('name', name)
+  //     || Validator('password', password)
+  //     || PasswordValidator(object)
+  //     || Validator('mobile', mobile);
       
-    const mobileNo = '+91'+mobile;
-    console.log(mobileNo);
-    if (error != null) {
-      console.log('Error in Email id : ', error);
-      Alert.alert('Error', error);
-    } else {
-      this.props.signUpUser({ name, password, mobileNo });
-    }
-  }
+  //   const mobileNo = '+91'+mobile;
+  //   console.log(mobileNo);
+  //   console.log(name);
+  //   if (error != null) {
+  //     console.log('Error in Email id : ', error);
+  //     Alert.alert('Error', error);
+  //   } else {
+  //     this.props.signUpUser({ name, password, mobileNo });
+  //   }
+  // }
 
  
   onCancelClicked() {
@@ -264,14 +214,14 @@ class UserSignUp extends Component {
     const { user, confirmResult } = this.state;
     console.log( 'render'+confirmResult);
     return (
-      <ScrollView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
           {this.renderLoading()}
           <CardSection>
           <View style={styles.logoStyle}>
-          <Text style={styles.logoTextStyle}>
-            Action
-          </Text>
-        </View>
+            <Text style={styles.logoTextStyle}>
+              Action
+            </Text>
+          </View>
           </CardSection>
           <CardSection>
             <Input
@@ -291,9 +241,9 @@ class UserSignUp extends Component {
             />
                          {/* <Button title="Sign In" color="green" onPress={this.signIn} /> */}
           </CardSection>
-          <CardSection style={styles.buttonStyle}>
+          {/* <CardSection style={styles.buttonStyle}> */}
                {this.renderMessage()}
-          </CardSection>
+          {/* </CardSection> */}
          <CardSection>
          {confirmResult && this.renderVerificationCodeInput()}
          </CardSection>
@@ -321,7 +271,7 @@ class UserSignUp extends Component {
             {this.renderCancelButton()}
           </CardSection>
          
-      </ScrollView>
+      </View>
       
     );
   }
@@ -368,5 +318,5 @@ const mapStateToProps = (state) => {
 };
 
 const SignUpComponent = connect(mapStateToProps, {
-  userProfile, signUpUser, signInWithGoogle, signInWithFacebook })(UserSignUp);
+  userProfile, signUpUser })(UserSignUp);
 export { SignUpComponent as UserSignUp };

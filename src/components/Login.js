@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, ScrollView, TextInput } from 'react-native';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 import {
 
   passwordChanged,
@@ -31,19 +32,77 @@ class Login extends Component {
   }
 
   onLoginBtnClicked() {
-   // console.log('btn clicked');
+   console.log('btn clicked');
     const { contact, password } = this.props;
-
+    const mobileNo = '+91'+contact;
     const error =  Validator('password', password) ||  Validator('contact', contact);
 
    // const error = Validator('email', email) || Validator('password', password);
     if (error !== null) {
       Alert.alert(error);
     } else {
-      this.props.loginUser({ contact, password});
+      //this.props.loginUser({ contact, password});
+    console.log('else');
+     firebase.auth().signInWithPhoneNumber(mobileNo)
+     .then((confirmResult) => {
+       console.log(confirmResult);
+     
+       // This means that the SMS has been sent to the user
+       // You need to:
+       //   1) Save the `confirmResult` object to use later
+       this.setState({ confirmResult });
+       //   2) Hide the phone number form
+       //   3) Show the verification code form
+
+       NavigationService.navigate('Home');
+     })
+     .catch((error) => {
+       const { code, message } = error;
+      // console.log('Error: '+error);
+       // For details of error codes, see the docs
+       // The message contains the default Firebase string
+       // representation of the error
+     });
     }
   }
+  onLoginOrRegister = () => {
+   
+   // const { phoneNumber } = this.state;
 
+   const { contact, password } = this.props;
+   const mobileNo = '+91'+contact;
+    firebase.auth().signInWithPhoneNumber(mobileNo)
+      .then((confirmResult) => {
+        // This means that the SMS has been sent to the user
+        // You need to:
+        //   1) Save the `confirmResult` object to use later
+        this.setState({ confirmResult });
+        //   2) Hide the phone number form
+        //   3) Show the verification code form
+      })
+      .catch((error) => {
+        const { code, message } = error;
+        // For details of error codes, see the docs
+        // The message contains the default Firebase string
+        // representation of the error
+      });
+  }
+  onVerificationCode = () => {
+    const { confirmResult, verificationCode } = this.state;
+    confirmResult.confirm(verificationCode)
+      .then((user) => {
+        // If you need to do anything with the user, do it here
+        // The user will be logged in automatically by the
+        // `onAuthStateChanged` listener we set up in App.js earlier
+      })
+      .catch((error) => {
+        const { code, message } = error;
+        // For details of error codes, see the docs
+        // The message contains the default Firebase string
+        // representation of the error
+      });
+  }
+  
 
   renderError() {
     if (this.props.error) {
@@ -103,10 +162,10 @@ class Login extends Component {
                 <CardSection style={{ paddingRight: 20}} >
                   <Input
                     label="Phone Number"
+                    keyboardType="phone-pad"
                     placeHolder="Enter Contact Number"
                     onChangeText={this.onContactChange.bind(this)}
                     value={this.props.mobile}
-                    ref='cnt'
                     onSubmitEditing={() => { 
                       this.refs.pwd.focus(); 
                     }}

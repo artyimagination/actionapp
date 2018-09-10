@@ -133,7 +133,10 @@ const RegistrationStack = createStackNavigator(
 },
 {
   navigationOptions: {
-    title: 'Update Profile'
+    title: 'Update Profile',
+    contentOptions: {
+      activeTintColor: 'rgb(234, 94, 32)'
+    }
   }
 }
 );
