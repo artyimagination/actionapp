@@ -14,6 +14,7 @@ import {
 } from '../../components/common';
 
 import { Validator } from '../../utils/Validator';
+import NavigationService from '../../components/NavigationService';
 
 class ViewProducerProfile extends Component {
 
@@ -67,7 +68,9 @@ class ViewProducerProfile extends Component {
     //console.log('value of complexation :: ', values[0].value);
     this.props.userProfile({ prop: 'complexation', value: values[0].value });
   }
-
+  onClicked(){
+    NavigationService.navigate('UpdateProducerProfile');
+  }
   picUpload(value) {
     console.log('picupload :: ', value);
     const { pics } = this.state;
@@ -141,22 +144,19 @@ toggleCancel() {
           </CardSection>
 
           <CardSection style={styles.uploadPicStyle}>
-            <View style={{ flex: 1, paddingTop: 10 }}>
+            <View style={{ flex: 1, paddingTop: 10}}>
               <Text style={styles.labelStyle}>About details</Text>
-              <IconButton iconname="pencil"  style={styles.iconStyle}
-        onPress={() => this.onClicked()}></IconButton>
+              <IconButton iconname="pencil"  style={styles.editIconStyle} onPress={() => this.onClicked()}></IconButton>
              <Text style={styles.textStyle}>i am Producer. Dummy copy please do not read this copy
                   Dummy copy please do not read this copy Dummy copy 
                   please do not read this copy</Text>
             </View>
           </CardSection>
           <CardSection style={styles.uploadPicStyle}>
-            <View style={{ flex: 1, paddingTop: 10 }}>
-            <IconButton iconname="contact"
-        onPress={() => this.onClicked()}></IconButton>
-             <Text style={styles.labelStyle}>Basic Details</Text>
-              <IconButton iconname="pencil"  style={styles.iconStyle}
-        onPress={() => this.onClicked()}></IconButton>
+            <View style={{ flex: 1, paddingTop: 10}}>
+            <IconButton iconname="address-book" style={styles.iconStyle}  onPress={() => this.onClicked()}></IconButton>
+             <Text style={styles.labelStyle} >Basic Details</Text>
+              <IconButton iconname="pencil"  style={styles.editIconStyle}  onPress={() => this.onClicked()}></IconButton>
             
               <Text style={styles.textStyle}>Name : Aarti Patil</Text>
               <Text style={styles.textStyle}>Gender: Female</Text>
@@ -165,12 +165,10 @@ toggleCancel() {
           </CardSection>
           <CardSection style={styles.uploadPicStyle}>
           <View style={{ flex: 1, paddingTop: 10 }}>
-          <IconButton iconname="graduation-cap"  
+          <IconButton iconname="graduation-cap" style={styles.iconStyle}
         onPress={() => this.onClicked()}></IconButton>
-            <Text style={styles.labelStyle}>
-            Professional Information
-            </Text>
-             <IconButton iconname="pencil"  style={styles.iconStyle}
+            <Text style={styles.labelStyle}>  Professional Information  </Text>
+             <IconButton iconname="pencil"  style={styles.editIconStyle}
         onPress={() => this.onClicked()}></IconButton>
             <Text style={styles.textStyle} >
               Category: Producer
@@ -179,12 +177,10 @@ toggleCancel() {
           </CardSection>
           <CardSection style={styles.uploadPicStyle}>
           <View style={{ flex: 1,  paddingTop: 10 }}>
-          <IconButton iconname="map-marker"
+          <IconButton iconname="map-marker" style={styles.iconStyle}
         onPress={() => this.onClicked()}></IconButton>
-            <Text style={styles.labelStyle} >
-            Contacts
-            </Text>
-            <IconButton iconname="pencil"  style={styles.iconStyle}
+            <Text style={styles.labelStyle}> Contacts </Text>
+            <IconButton iconname="pencil"  style={styles.editIconStyle}
         onPress={() => this.onClicked()}></IconButton>
             
             <Text  style={styles.textStyle}>
@@ -208,40 +204,32 @@ toggleCancel() {
             </Text>
             </View>
           </CardSection>
-          <CardSection style={styles.uploadPicStyle} >
+          <CardSection style={styles.uploadPicStyle}>
           <View style={{ flex: 1,  paddingTop: 10 }}>
-          <IconButton iconname="globe" 
-        onPress={() => this.onClicked()}></IconButton>
-            <Text style={styles.labelStyle}>
-            Social
-            </Text>
-            <IconButton iconname="pencil"  style={styles.iconStyle}
-        onPress={() => this.onClicked()}></IconButton>
-            <Text style={styles.textStyle} >
-            Facebook: Not defined
-            </Text>  
-            <Text style={styles.textStyle} >
-            Youtube: https://www.youtube.com/?gl=IN
-            </Text>  
-            <Text style={styles.textStyle} >
-            Instagram: Not defined
-            </Text>      
+            <IconButton iconname="globe" style={styles.iconStyle}
+          onPress={() => this.onClicked()}></IconButton>
+              <Text style={styles.labelStyle} >
+              Social
+              </Text>
+              <IconButton iconname="pencil"  style={styles.editIconStyle}
+          onPress={() => this.onClicked()}></IconButton>
+              <Text style={styles.textStyle} >
+              Facebook: Not defined
+              </Text>  
+              <Text style={styles.textStyle} >
+              Youtube: https://www.youtube.com/?gl=IN
+              </Text>  
+              <Text style={styles.textStyle} >
+              Instagram: Not defined
+              </Text>      
             </View>    
           </CardSection>
           <CardSection style={styles.uploadPicStyle}>
-          <View style={{ flex: 1,  paddingTop: 10 }}>
-            <IconButton iconname="pencil"  style={styles.LableIconStyle}
-             onPress={() => this.onClicked()}></IconButton>
-          <Text style={styles.labelStyle}>
-            Biodata
-            </Text>
-           
-                <IconButton iconname="pencil"  style={styles.iconStyle}
-                  onPress={() => this.onClicked()}></IconButton>  
-          
-            <Text  style={styles.textStyle}>
-            xxxxxyyyyy.pdf
-            </Text>     
+            <View style={{ flex: 1,  paddingTop: 10 }}>
+            <IconButton iconname="file"  style={styles.iconStyle} onPress={() => this.onClicked()}></IconButton>
+            <Text style={styles.labelStyle}> Biodata</Text>
+            <IconButton iconname="pencil"  style={styles.editIconStyle} onPress={() => this.onClicked()}></IconButton>  
+            <Text  style={styles.textStyle}> xxxxxyyyyy.pdf </Text>     
             </View>     
           </CardSection>
       
@@ -251,12 +239,7 @@ toggleCancel() {
 }
 
 const styles = {
-  LableIconStyle:{
-      flex:1,
-      flexDirection: 'row',
-      paddingLeft: 10,
-      justifyContent: 'flex-start'
-  },
+
   uploadPicStyle: {
     flex: 1,
     flexDirection: 'row',
@@ -267,19 +250,30 @@ const styles = {
   },
   textStyle:{
     fontSize: 12,
-    paddingLeft: 10,
-    paddingRight: 10
+      flexDirection: 'column',
+    //paddingLeft: 10,
+    //paddingRight: 10
   },
   labelStyle: {
+    flex: 1,
     fontSize: 14,
     fontWeight: '600',
-    padding: 10
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+   
   },
   iconStyle: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
-   marginRight: 100
+    marginRight: 290,
+    color: 'rgb(0,0,0)'
+  },
+  editIconStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginLeft: 270
   },
 };
 

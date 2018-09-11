@@ -18,6 +18,10 @@ class Login extends Component {
     super(props);
     this.a = React.createRef();
     this.b = React.createRef();
+    this.unsubscribe = null;
+    this.state = {
+      user: null
+    };
   
   }
   // onEmailChange(text) {
@@ -31,39 +35,39 @@ class Login extends Component {
     this.props.passwordChanged(text);
   }
 
+  componentDidMount() {
+    //  user1 = firebase.auth().getInstance().getUid();
+   
+    this.unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user: user.toJSON() });
+      } else {
+        // User has been signed out, reset the state
+        this.setState({
+          user: null,
+          message: '',
+          codeInput: '',
+          mobile: '+91',
+          confirmResult: null,
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+     if (this.unsubscribe) this.unsubscribe();
+  }
   onLoginBtnClicked() {
+
    console.log('btn clicked');
     const { contact, password } = this.props;
-    const mobileNo = '+91'+contact;
     const error =  Validator('password', password) ||  Validator('contact', contact);
-
-   // const error = Validator('email', email) || Validator('password', password);
+  
     if (error !== null) {
       Alert.alert(error);
     } else {
-      //this.props.loginUser({ contact, password});
-    console.log('else');
-     firebase.auth().signInWithPhoneNumber(mobileNo)
-     .then((confirmResult) => {
-       console.log(confirmResult);
+      this.props.loginUser({ contact, password});
      
-       // This means that the SMS has been sent to the user
-       // You need to:
-       //   1) Save the `confirmResult` object to use later
-       this.setState({ confirmResult });
-       //   2) Hide the phone number form
-       //   3) Show the verification code form
-
-       NavigationService.navigate('Home');
-     })
-     .catch((error) => {
-       const { code, message } = error;
-      // console.log('Error: '+error);
-       // For details of error codes, see the docs
-       // The message contains the default Firebase string
-       // representation of the error
-     });
-    }
   }
   onLoginOrRegister = () => {
    
@@ -157,7 +161,6 @@ class Login extends Component {
   
   render() {
       return (
-    
         <View style={this.props.style}>
                 <CardSection style={{ paddingRight: 20}} >
                   <Input
