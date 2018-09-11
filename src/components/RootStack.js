@@ -51,8 +51,7 @@ const MainStack = createStackNavigator(
   ForgotPassword: ForgotPasswordScreen,
   UpdateProfile: UserProfileScreen,
   ViewActorProfile: ViewActorProfileScreen,
-  ViewProducer : ViewProducerProfile
- 
+  ViewProducer : ViewProducerProfile,
 },
 {
    initialRouteName: 'HomeScreen'

@@ -184,10 +184,10 @@ class UserProfileScreen extends Component {
 
 const styles = {
   pickerTextStyle: {
-    fontSize: 18,
+    fontSize: 12,
     paddingLeft: 20,
-    paddingTop: 20,
-    paddingBottom: 20
+    paddingTop: 10,
+    paddingBottom: 10
     
   }
 };

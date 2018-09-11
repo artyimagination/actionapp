@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, Image, TouchableOpacity} from 'react-native';
 import firebase, { Notification } from 'react-native-firebase';
 //import firebase from 'react-native-firebase';
 
-import { CardSection } from '../../components/common';
+import { CardSection, ProfilePicture } from '../../components/common';
 
 class NotificationScreen extends Component {
 
@@ -103,10 +103,32 @@ class NotificationScreen extends Component {
 
   render() {
     return (
-      <View>
-        <CardSection>
+      <View style={{backgroundColor: 'white'}}>
+        <CardSection style={{backgroundColor: 'lightgrey', padding: 20 }}>
+        <Image
+          style={{ width: 40, height: 40 }}
+          source={require('../../images/ic_person_24px.png')}
+        /> 
           <Text>
-            show notification here
+            XXXXX has viewed your profile
+          </Text>
+        </CardSection>
+        <CardSection style={{backgroundColor: 'lightgrey', padding: 20}}>
+        <Image
+          style={{ width: 40, height: 40 }}
+          source={require('../../images/ic_person_24px.png')}
+        /> 
+          <Text>
+            XXXXX has viewed your profile
+          </Text>
+        </CardSection>
+        <CardSection style={{backgroundColor: 'lightgrey', padding: 20}}>
+        <Image
+          style={{ width: 40, height: 40 }}
+          source={require('../../images/ic_person_24px.png')}
+        /> 
+          <Text>
+            XXXXX has viewed your profile
           </Text>
         </CardSection>
       </View>

@@ -7,8 +7,9 @@ import { userProfile, signUpUser } from '../../actions';
 import { TextButton, CardSection, Input, Button, Spinner, LogoText } from '../../components/common';
 import { Validator, PasswordValidator } from '../../utils/Validator';
 import NavigationService from '../../components/NavigationService';
+import PhoneVerificationPopup  from './PhoneVerificationPopup';
 //import styles from '../../style/commonStyle';
-//import { PhoneVerificationPopup } from './PhoneVerificationPopup';
+
 
 class UserSignUp extends Component {
 
@@ -21,14 +22,12 @@ class UserSignUp extends Component {
       codeInput: '',
       mobile: '+91',
       confirmResult: null,
-      modalVisible: false,
+     
     };
 
   }
   
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
+
     static navigationOptions = ({
       header: null
     });
@@ -56,8 +55,6 @@ class UserSignUp extends Component {
     }
   
     signIn = () => {
-   
-      console.log('test');
 
       const { name,  password, confirmPassword, mobile } = this.props;
 
@@ -91,19 +88,11 @@ class UserSignUp extends Component {
      
         });
        
-      }
-       //const mobileNo = '+91'+this.props.mobile;
+      }     
         // If user is not exist signup
         firebase.auth().signInWithPhoneNumber(mobileNo)
           .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
           .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
-        
-        //saveToDatabase
-        // const { currentUser } = firebase.auth();
-        //  console.log(currentUser.uid);
-        // const userif = currentUser.uid
-        
-         //NavigationService.navigate('Home');
     };
   
     confirmCode = () => {
@@ -129,8 +118,8 @@ class UserSignUp extends Component {
     }
 
     renderMessage() {
-      const { message } = this.state;
-    
+      const { message, confirmResult } = this.state;
+    console.log(confirmResult);
       if (!message.length) return null;
     
       return (
@@ -139,22 +128,28 @@ class UserSignUp extends Component {
     }
     
     renderVerificationCodeInput() {
-      const { codeInput } = this.state;
+          console.log('0')
+
+          console.log('code');
+          return (
+                <PhoneVerificationPopup/>
+          )
+      // const { codeInput } = this.state;
     
-      return (
-        <ScrollView style={{ marginTop: 25, padding: 25 }}>
-          <Text>Enter verification code below:</Text>
-          <Input
-            autoFocus
-            style={{ height: 40, marginTop: 15, marginBottom: 15 }}
-            onChangeText={value => this.setState({ codeInput: value })}
-            placeholder={'Code ... '}
-            value={codeInput}
-          />
-          {/* <Button onPress={() => this.openHeaderModal()} vertical/> */}
-          <Button title="Confirm Code" color="#841584" onPress={this.confirmCode} />
-        </ScrollView>
-      );
+      // return (
+      //   <ScrollView style={{ marginTop: 25, padding: 25 }}>
+      //     <Text>Enter verification code below:</Text>
+      //     <Input
+      //       autoFocus
+      //       style={{ height: 40, marginTop: 15, marginBottom: 15 }}
+      //       onChangeText={value => this.setState({ codeInput: value })}
+      //       placeholder={'Code ... '}
+      //       value={codeInput}
+      //     />
+      //     {/* <Button onPress={() => this.openHeaderModal()} vertical/> */}
+      //     <Button title="Confirm Code" color="#841584" onPress={this.confirmCode} />
+      //   </ScrollView>
+      // );
     }
 
   // onSignUpUser() {
@@ -247,6 +242,7 @@ class UserSignUp extends Component {
           {/* </CardSection> */}
          <CardSection>
          {confirmResult && this.renderVerificationCodeInput()}
+        
          </CardSection>
           <CardSection>
             <Input

@@ -39,7 +39,8 @@ class UserProfileScreen extends Component {
           userprofile.category === 'Child Actor(Female)'
           ) {
             return <UpdateActorProfile {...this.props} />;
-      } else if (userprofile.category === 'Producers' ||
+      } else if (userprofile.category === 'Producer' ||
+      userprofile.category === 'Director' ||
        userprofile.category === 'Cinematographer (DOP)' ||
        userprofile.category === 'Music director' ||
        userprofile.category === 'Lyricist' ||

@@ -162,145 +162,266 @@ class UpdateActorProfile extends Component {
       value: 'Dark'
     }];
     return (
-      <ScrollView style={{ flex: 1, backgroundColor: '#ffffff'}}>
-          {this.renderLoading()}
-          <CardSection>
-            {this.renderProfilePic()}
-          </CardSection>
-          <CardSection>
-            <View style={{ flex: 1, alignSelf: 'center', paddingTop: 10 }}>
-              <Text style={styles.textStyle}>{this.props.userprofile.name}</Text>
-            </View>
-          </CardSection>
-          <CardSection>
-            <View style={{ flex: 1, alignSelf: 'center', paddingTop: 10 }}>
-              <Text style={styles.textStyle}>{this.props.userprofile.category}</Text>
-            </View>
-          </CardSection>
-          <CardSection style={{ justifyContent: 'space-around', paddingLeft: 20, paddingRight: 20 }}>
-            <Input
-              label="Height"
-              placeHolder="0'"
-              keyboardType="numeric"
-              onChangeText={value => this.props.userProfile({ prop: 'height', value })}
-              value={this.props.userprofile.height}
-              iStyle={{ width: 40 }}
-              lStyle={{ paddingLeft: 28 }}
-            />
-            <Input
-              label=" "
-              placeHolder="0''"
-              iStyle={{ width: 40 }}
-              keyboardType="numeric"
-            />
-            <Input
-              label="Weight"
-              keyboardType="numeric"
-              onChangeText={value => this.props.userProfile({ prop: 'weight', value })}
-              value={this.props.userprofile.weight}
-              iStyle={{ width: 40 }}
-              lStyle={{ paddingLeft: 25 }}
-            />
-            <Text style={{ alignSelf: 'center' }}>
-              KG
-            </Text>
-            <Input
-              label="Waist"
-              keyboardType="numeric"
-              onChangeText={value => this.props.userProfile({ prop: 'waist', value })}
-              value={this.props.userprofile.waist}
-              iStyle={{ width: 40 }}
-              lStyle={{ paddingLeft: 25 }}
-            />
-          </CardSection>
-          <CardSection 
-          style={{  
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            paddingLeft: 30,
-            paddingRight: 25 
-          }}
-          >
-            <CheckboxGroup
-              label='Complexion'
-              items={items}
-              selectedItems={[0]}
-              onSelect={(values) => this.onComplexationChanged(values)}
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              label="Language Prefered"
-              placeHolder="Enter Language"
-              keyboardType="text"
-              onChangeText={value => this.props.userProfile({ prop: 'language', value })}
-              value={this.props.userprofile.language}
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              label="Description"
-              editable
-              maxLength={40}
-              multiline
-              numOfLines={10}
-              placeHolder="Description"
-              onChangeText={value => this.props.userProfile({ prop: 'description', value })}
-              value={this.props.userprofile.description}
-            />
-          </CardSection>
+
+      <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
+      {this.renderLoading()}
+      <CardSection style={{ padding: 20}}>
+        <ProfilePicture
+          onPress={() => this.onProfileImgSelected()}
+          picStyle={{ width: 100, height: 100 }}
+          source={this.state.avtar || require('../../images/ic_person_24px.png')}
+        />
+      </CardSection>
+
+      <CardSection style={styles.uploadPicStyle}>
+        <UploadPicture
+          onPress={() => this.picUpload(0)}
+          source={this.state.pics[0] || require('../../images/ic_person_24px.png')}
+        />
+        <UploadPicture
+          onPress={() => this.picUpload(1)}
+          source={this.state.pics[1] || require('../../images/ic_person_24px.png')}
+        />
+        <UploadPicture
+          onPress={() => this.picUpload(2)}
+          source={this.state.pics[2] || require('../../images/ic_person_24px.png')}
+        />
+      </CardSection>
+
+      <CardSection style={styles.uploadPicStyle}>
+        <View style={{ flex: 1, paddingTop: 10}}>
+          <Text style={styles.labelStyle}>About details</Text>
+          <IconButton iconname="pencil"  style={styles.editIconStyle} onPress={() => this.onClicked()}></IconButton>
+         <Text style={styles.textStyle}>i am Producer. Dummy copy please do not read this copy
+              Dummy copy please do not read this copy Dummy copy 
+              please do not read this copy</Text>
+        </View>
+      </CardSection>
+      <CardSection style={styles.uploadPicStyle}>
+        <View style={{ flex: 1, paddingTop: 10}}>
+        <IconButton iconname="address-book" style={styles.iconStyle}  onPress={() => this.onClicked()}></IconButton>
+         <Text style={styles.labelStyle} >Basic Details</Text>
+          <IconButton iconname="pencil"  style={styles.editIconStyle}  onPress={() => this.onClicked()}></IconButton>
+        
+          <Text style={styles.textStyle}>Name : Aarti Patil</Text>
+          <Text style={styles.textStyle}>Gender: Female</Text>
+          <Text style={styles.textStyle}>Language:   Marathi, Hindi English</Text>
+          <Text style={styles.textStyle}>Complexion: Fair</Text>
+          <Text style={styles.textStyle}>Height:   5.6ft</Text>
+          <Text style={styles.textStyle}>Weight:   65KG</Text>
+          <Text style={styles.textStyle}>Waist:   30</Text>
+        </View>
+      </CardSection>
+      <CardSection style={styles.uploadPicStyle}>
+      <View style={{ flex: 1, paddingTop: 10 }}>
+      <IconButton iconname="graduation-cap" style={styles.iconStyle}
+    onPress={() => this.onClicked()}></IconButton>
+        <Text style={styles.labelStyle}>  Professional Information  </Text>
+         <IconButton iconname="pencil"  style={styles.editIconStyle}
+    onPress={() => this.onClicked()}></IconButton>
+        <Text style={styles.textStyle} >
+          Category: Actor
+        </Text>    
+        </View>      
+      </CardSection>
+      <CardSection style={styles.uploadPicStyle}>
+      <View style={{ flex: 1,  paddingTop: 10 }}>
+      <IconButton iconname="map-marker" style={styles.iconStyle}
+    onPress={() => this.onClicked()}></IconButton>
+        <Text style={styles.labelStyle}> Contacts </Text>
+        <IconButton iconname="pencil"  style={styles.editIconStyle}
+    onPress={() => this.onClicked()}></IconButton>
+        
+        <Text  style={styles.textStyle}>
+        Location:  Not defined
+        </Text>
+        
+        <Text  style={styles.textStyle}>
+       City: Mumbai
+        </Text>
+        
+        <Text  style={styles.textStyle}>
+        State: Maharashtra
+        </Text>
+        
+        <Text  style={styles.textStyle}>
+        Address: Not defined
+        </Text>
+        
+        <Text  style={styles.textStyle} >
+        Contact no: 9833117715
+        </Text>
+        </View>
+      </CardSection>
+      <CardSection style={styles.uploadPicStyle}>
+      <View style={{ flex: 1,  paddingTop: 10 }}>
+        <IconButton iconname="globe" style={styles.iconStyle}
+      onPress={() => this.onClicked()}></IconButton>
+          <Text style={styles.labelStyle} >
+          Social
+          </Text>
+          <IconButton iconname="pencil"  style={styles.editIconStyle}
+      onPress={() => this.onClicked()}></IconButton>
+          <Text style={styles.textStyle} >
+          Facebook: Not defined
+          </Text>  
+          <Text style={styles.textStyle} >
+          Youtube: https://www.youtube.com/?gl=IN
+          </Text>  
+          <Text style={styles.textStyle} >
+          Instagram: Not defined
+          </Text>      
+        </View>    
+      </CardSection>
+      <CardSection style={styles.uploadPicStyle}>
+        <View style={{ flex: 1,  paddingTop: 10 }}>
+        <IconButton iconname="file"  style={styles.iconStyle} onPress={() => this.onClicked()}></IconButton>
+        <Text style={styles.labelStyle}> Biodata</Text>
+        <IconButton iconname="pencil"  style={styles.editIconStyle} onPress={() => this.onClicked()}></IconButton>  
+        <Text  style={styles.textStyle}> xxxxxyyyyy.pdf </Text>     
+        </View>     
+      </CardSection>
+  
+  </ScrollView>
+      // <ScrollView style={{ flex: 1, backgroundColor: '#ffffff'}}>
+      //     {this.renderLoading()}
+      //     <CardSection>
+      //       {this.renderProfilePic()}
+      //     </CardSection>
+      //     <CardSection>
+      //       <View style={{ flex: 1, alignSelf: 'center', paddingTop: 10 }}>
+      //         <Text style={styles.textStyle}>{this.props.userprofile.name}</Text>
+      //       </View>
+      //     </CardSection>
+      //     <CardSection>
+      //       <View style={{ flex: 1, alignSelf: 'center', paddingTop: 10 }}>
+      //         <Text style={styles.textStyle}>{this.props.userprofile.category}</Text>
+      //       </View>
+      //     </CardSection>
+      //     <CardSection style={{ justifyContent: 'space-around', paddingLeft: 20, paddingRight: 20 }}>
+      //       <Input
+      //         label="Height"
+      //         placeHolder="0'"
+      //         keyboardType="numeric"
+      //         onChangeText={value => this.props.userProfile({ prop: 'height', value })}
+      //         value={this.props.userprofile.height}
+      //         iStyle={{ width: 40 }}
+      //         lStyle={{ paddingLeft: 28 }}
+      //       />
+      //       <Input
+      //         label=" "
+      //         placeHolder="0''"
+      //         iStyle={{ width: 40 }}
+      //         keyboardType="numeric"
+      //       />
+      //       <Input
+      //         label="Weight"
+      //         keyboardType="numeric"
+      //         onChangeText={value => this.props.userProfile({ prop: 'weight', value })}
+      //         value={this.props.userprofile.weight}
+      //         iStyle={{ width: 40 }}
+      //         lStyle={{ paddingLeft: 25 }}
+      //       />
+      //       <Text style={{ alignSelf: 'center' }}>
+      //         KG
+      //       </Text>
+      //       <Input
+      //         label="Waist"
+      //         keyboardType="numeric"
+      //         onChangeText={value => this.props.userProfile({ prop: 'waist', value })}
+      //         value={this.props.userprofile.waist}
+      //         iStyle={{ width: 40 }}
+      //         lStyle={{ paddingLeft: 25 }}
+      //       />
+      //     </CardSection>
+      //     <CardSection 
+      //     style={{  
+      //       flex: 1,
+      //       flexDirection: 'row',
+      //       justifyContent: 'space-around',
+      //       paddingLeft: 30,
+      //       paddingRight: 25 
+      //     }}
+      //     >
+      //       <CheckboxGroup
+      //         label='Complexion'
+      //         items={items}
+      //         selectedItems={[0]}
+      //         onSelect={(values) => this.onComplexationChanged(values)}
+      //       />
+      //     </CardSection>
+      //     <CardSection>
+      //       <Input
+      //         label="Language Prefered"
+      //         placeHolder="Enter Language"
+      //         keyboardType="text"
+      //         onChangeText={value => this.props.userProfile({ prop: 'language', value })}
+      //         value={this.props.userprofile.language}
+      //       />
+      //     </CardSection>
+      //     <CardSection>
+      //       <Input
+      //         label="Description"
+      //         editable
+      //         maxLength={40}
+      //         multiline
+      //         numOfLines={10}
+      //         placeHolder="Description"
+      //         onChangeText={value => this.props.userProfile({ prop: 'description', value })}
+      //         value={this.props.userprofile.description}
+      //       />
+      //     </CardSection>
 
       
-          <CardSection>
-            <Input
-              label="YouTube"
-              placeHolder="Youtube Link"
-              onChangeText={value => this.props.userProfile({ prop: 'youtubelink', value })}
-              value={this.props.userprofile.youtubelink}
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              label="Facebook"
-              placeHolder="Facebook Link"
-              onChangeText={value => this.props.userProfile({ prop: 'fblink', value })}
-              value={this.props.userprofile.fblink}
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              label="Instagram"
-              placeHolder="Instagram Link"
-              onChangeText={value => this.props.userProfile({ prop: 'instalink', value })}
-              value={this.props.userprofile.instalink}
-            />
-          </CardSection>
-          <CardSection style={styles.uploadPicStyle}>
-            <UploadPicture
-              onPress={() => this.picUpload(0)}
-              source={this.state.pics[0] || require('../../images/ic_person_24px.png')}
-            />
-            <UploadPicture
-              onPress={() => this.picUpload(1)}
-              source={this.state.pics[1] || require('../../images/ic_person_24px.png')}
-            />
-            <UploadPicture
-              onPress={() => this.picUpload(2)}
-              source={this.state.pics[2] || require('../../images/ic_person_24px.png')}
-            />
-          </CardSection>
+      //     <CardSection>
+      //       <Input
+      //         label="YouTube"
+      //         placeHolder="Youtube Link"
+      //         onChangeText={value => this.props.userProfile({ prop: 'youtubelink', value })}
+      //         value={this.props.userprofile.youtubelink}
+      //       />
+      //     </CardSection>
+      //     <CardSection>
+      //       <Input
+      //         label="Facebook"
+      //         placeHolder="Facebook Link"
+      //         onChangeText={value => this.props.userProfile({ prop: 'fblink', value })}
+      //         value={this.props.userprofile.fblink}
+      //       />
+      //     </CardSection>
+      //     <CardSection>
+      //       <Input
+      //         label="Instagram"
+      //         placeHolder="Instagram Link"
+      //         onChangeText={value => this.props.userProfile({ prop: 'instalink', value })}
+      //         value={this.props.userprofile.instalink}
+      //       />
+      //     </CardSection>
+      //     <CardSection style={styles.uploadPicStyle}>
+      //       <UploadPicture
+      //         onPress={() => this.picUpload(0)}
+      //         source={this.state.pics[0] || require('../../images/ic_person_24px.png')}
+      //       />
+      //       <UploadPicture
+      //         onPress={() => this.picUpload(1)}
+      //         source={this.state.pics[1] || require('../../images/ic_person_24px.png')}
+      //       />
+      //       <UploadPicture
+      //         onPress={() => this.picUpload(2)}
+      //         source={this.state.pics[2] || require('../../images/ic_person_24px.png')}
+      //       />
+      //     </CardSection>
 
-          <CardSection>
-          <Input
-            label="Biodata"
-            placeHolder="PDF/JPG"
-            onChangeText={value => this.props.userProfile({ prop: 'instalink', value })}
-            value={this.props.userprofile.instalink}
-          />
-        </CardSection>
+      //     <CardSection>
+      //     <Input
+      //       label="Biodata"
+      //       placeHolder="PDF/JPG"
+      //       onChangeText={value => this.props.userProfile({ prop: 'instalink', value })}
+      //       value={this.props.userprofile.instalink}
+      //     />
+      //   </CardSection>
       
-      </ScrollView>
+      // </ScrollView>
     );
   }
 }

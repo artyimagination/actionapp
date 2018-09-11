@@ -68,7 +68,8 @@ class Login extends Component {
     } else {
       this.props.loginUser({ contact, password});
      
-  }
+    }
+}
   onLoginOrRegister = () => {
    
    // const { phoneNumber } = this.state;
@@ -105,20 +106,20 @@ class Login extends Component {
         // The message contains the default Firebase string
         // representation of the error
       });
-  }
+  };
   
 
-  renderError() {
-    if (this.props.error) {
-      return (
-        <View style={{ backgroundColor: 'white' }}>
-          <Text style={styles.errorTextStyle}>
-            {this.props.error}
-          </Text>
-        </View>
-      );
-    }
-  }
+  // renderError() {
+  //   if (this.props.error) {
+  //     return (
+  //       <View style={{ backgroundColor: 'white' }}>
+  //         <Text style={styles.errorTextStyle}>
+  //           {this.props.error}
+  //         </Text>
+  //       </View>
+  //     );
+  //   }
+  // }
 
   renderLoginButton() {
     if (this.props.loading) {
@@ -190,17 +191,15 @@ class Login extends Component {
                 <CardSection style={{ paddingTop: 10, paddingLeft: 15 }}>
                   {this.renderLoginButton()}
                 </CardSection>
-          <CardSection style={styles.buttonStyle}>
-            {this.renderForgotPasswordButton()}
-            {this.renderSignupButton()}
-          </CardSection>
+                <CardSection style={styles.buttonStyle}>
+                  {this.renderForgotPasswordButton()}
+                  {this.renderSignupButton()}
+                </CardSection>
         
         </View>
       );
   }
 }
-
-
 const styles = {
   
   errorTextStyle: {
