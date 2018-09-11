@@ -32,14 +32,14 @@ const Input = ({ label, value, onChangeText, placeHolder, isPassword,
 const styles = {
   inputStyle: {
     width: '80%',
-    height: 40,
+    height: 50,
     alignSelf: 'center',
     paddingTop: 4,
     paddingBottom: 4,
     borderColor: '#D9D5DC',
     borderWidth: 1,
     borderRadius: 5,
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'Roboto',
     lineHeight: 16,
     color: '#000'

@@ -44,7 +44,7 @@ const constraints = {
     presence: true,
     length: {
       minimum: 5,
-      maximum: 25,
+      maximum: 500,
       message: 'Enter Valid address'
     }
   },
@@ -107,4 +107,4 @@ const PasswordValidator = (object) => {
   return null;
 };
 
-export { Validator, PasswordValidator };
+export {Validator, PasswordValidator};

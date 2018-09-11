@@ -1,14 +1,14 @@
 import { Component } from 'react';
 
-class CurrentUser extends Component {
-  static currentUser = null;
+class currUser extends Component {
+  static currUser = null;
   static isOtherUser = false;
   static isFirstTimeUser = false;
 
   static getCurrentUser() {
-    return this.currentUser;
+    return this.currUser;
   }
 }
 
 
-export default CurrentUser;
+export default currUser;

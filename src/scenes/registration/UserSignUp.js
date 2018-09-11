@@ -219,7 +219,7 @@ class UserSignUp extends Component {
           <CardSection>
           <View style={styles.logoStyle}>
             <Text style={styles.logoTextStyle}>
-              Action
+              action
             </Text>
           </View>
           </CardSection>

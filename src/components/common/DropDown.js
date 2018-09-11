@@ -25,30 +25,38 @@ const DropDown = ({ children, label, onValueChange, selectedValue, mode, style }
 
 const styles = {
   container: {
-    height: '7%',
+    height: '5%',
     flex: 1,
     paddingLeft: 40,
     flexDirection: 'column',
     backgroundColor: '#ffffff'
   },
   labelStyle: {
-    fontSize: 12,
-    textAlign: 'left'
+    fontSize: 14,
+    textAlign: 'left',
+    paddingTop:10
   },
   pickerContainer: {
     flex: 1,
     borderWidth: 1,
-    width: '88%',
+    width: '89%',
+    
+    height:'80%',
     borderColor: '#D9D5DC',
-    borderRadius: 10,
+    borderRadius: 5,
    //alignItems: 'center',
     flexDirection: 'column',
     //justifyContent: 'center',
     backgroundColor: '#ffffff'
   },
-  pickerStyle: {
-    width: '88%',
 
+  label:{
+    fontSize:5
+  },
+
+  pickerStyle: {
+    width: '100%',
+    lineHeight:50
   }
 };
 
