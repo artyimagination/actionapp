@@ -17,6 +17,7 @@
     "react-native-firebase": "^4.2.0",
     "react-native-floating-action": "^1.13.0",
     "react-native-gifted-chat": "^0.4.3",
+    
     "react-native-image-picker": "^0.26.10",
     "react-native-imagepicker": "^2.0.0",
     "react-native-keyboard-spacer": "^0.4.1",

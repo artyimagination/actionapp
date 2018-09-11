@@ -83,15 +83,16 @@ class UserProfileScreen extends Component {
               })}
             </DropDown>
 
-            <Text style={{ paddingLeft: 40, paddingTop: 0 }}>Date of Birth</Text>
+            <Text style={{ paddingLeft: 40, paddingTop:10 }}>Date of Birth</Text>
             <DatePicker
               style={{ width: 200, paddingLeft: 40 }}
               date={this.props.userprofile.date}
               mode="date"
+              androidMode="default"
               format="YYYY-MM-DD"
               placeholder="Select Birth Date"
-              minDate="1920-01-01"
-              maxDate="2020-01-01"
+              minDate="1950-01-01"
+              maxDate="2050-01-01"
               customStyles={{
                 dateIcon: {
                   position: 'absolute',
@@ -100,6 +101,7 @@ class UserProfileScreen extends Component {
                   marginLeft: 0
                 },
                 dateInput: {
+
                   marginLeft: 36
                 }
               }}
@@ -112,7 +114,8 @@ class UserProfileScreen extends Component {
             onValueChange={(value) => this.props.userProfile({ prop: 'language', value })}
             selectedValue={this.props.userprofile.language}
           >
-            <Picker.Item label="Hindi" value="hindi" key="H" />
+          
+            <Picker.Item  label="Hindi" value="hindi" key="H" />
             <Picker.Item label="English" value="english" key="E" />
             <Picker.Item label="Other" value="other" key="O" />
           </DropDown>
@@ -123,7 +126,7 @@ class UserProfileScreen extends Component {
             onValueChange={(value) => this.props.userProfile({ prop: 'gender', value })}
             selectedValue={this.props.userprofile.gender}
           >
-            <Picker.Item label="Male" value="male" key="M" />
+            <Picker.Item style={styles.pickerTextStyle} label="Male" value="male" key="M" />
             <Picker.Item label="Female" value="female" key="F" />
             <Picker.Item label="Other" value="other" key="O" />
           </DropDown>
@@ -184,13 +187,25 @@ class UserProfileScreen extends Component {
 
 const styles = {
   pickerTextStyle: {
-    fontSize: 12,
-    paddingLeft: 20,
-    paddingTop: 10,
-    paddingBottom: 10
+    fontSize: 5,
+    paddingLeft: 1,
+    paddingTop: 1,
+    paddingBottom: 1
     
   }
 };
+
+
+// const styles = {
+//      listItem: {
+//        flex: 1,
+//        fontSize: 16,
+//        color: 'white'
+//      },
+//      selectedListItem: {
+//        color: 'green'
+//      }
+//    };
 
 const mapStateToProps = state => {
   return state;
