@@ -102,14 +102,13 @@ class UserSignUp extends Component {
         // const { currentUser } = firebase.auth();
         //  console.log(currentUser.uid);
         // const userif = currentUser.uid
-          const ref = firebase.database().ref(`/users/`)
-         .push({ 'name': name,'mobile' :mobile});
+        
          //NavigationService.navigate('Home');
     };
   
     confirmCode = () => {
       const { codeInput, confirmResult, message } = this.state;
-     
+      const { name, mobile } = this.props;
       if (confirmResult && codeInput.length) {
         confirmResult.confirm(codeInput)
        
@@ -117,6 +116,8 @@ class UserSignUp extends Component {
             console.log(confirmResult);
             this.setState({ message: 'Code Confirmed!' });
             console.log(message);
+            const ref = firebase.database().ref(`/users/`)
+            .push({ 'name': name,'mobile' :mobile});
             NavigationService.navigate('UserProfile');
           })
           .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));

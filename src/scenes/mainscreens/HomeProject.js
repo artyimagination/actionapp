@@ -27,9 +27,9 @@ class HomeProject extends Component {
 
   renderRow(data) {
     const { currentUser } = firebase.auth();
-    if (data.userid !== currentUser.uid && !data.isDraft) {
+  //  if (data.userid !== currentUser.uid && !data.isDraft) {
         return (<ProjectList data={data} />);
-    }
+  //  }
     return (
       <View>
         <Text />
