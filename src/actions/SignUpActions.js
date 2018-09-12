@@ -1,6 +1,5 @@
 import { Alert } from 'react-native';
 import firebase from 'react-native-firebase';
-import { GoogleSignin } from 'react-native-google-signin';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import NavigationService from '../components/NavigationService';
 

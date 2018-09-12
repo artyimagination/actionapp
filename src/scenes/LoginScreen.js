@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
-//import { GoogleSigninButton } from 'react-native-google-signin';
 import {
   emailChanged,
   passwordChanged,
-  loginUser,
-  signInWithGoogle,
-  signInWithFacebook
+  loginUser
 } from '../actions';
 //import Logo from '../components/Logo';
 import Login from '../components/Login';
@@ -82,4 +79,4 @@ const styles = {
 
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser, signInWithGoogle, signInWithFacebook })(LoginScreen);
+  emailChanged, passwordChanged, loginUser })(LoginScreen);

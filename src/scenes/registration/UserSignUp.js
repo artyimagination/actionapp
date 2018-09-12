@@ -22,6 +22,7 @@ class UserSignUp extends Component {
       codeInput: '',
       mobile: '+91',
       confirmResult: null,
+      modalVisible: false
      
     };
 
@@ -65,21 +66,18 @@ class UserSignUp extends Component {
         || Validator('mobile', mobile);
         
      const mobileNo = '+91'+mobile;
-      console.log('mobileNo'+mobileNo);
-      console.log(name);
-
-      
+  
       if (error != null) {
-        console.log('Error: ', error);
+      
         Alert.alert('Error', error);
       } else {
         console.log('else');
         const mobile = this.props.mobile;
-        console.log('mobile'+mobile);
+      
         const userRef = firebase.database().ref(`/users/`);
       
         userRef.once('value', function(snapshot) {
-          console.log('snapshot' + snapshot.val());
+         
           //If user is existed redirect to login page
           if(snapshot.val().mobile == mobile){
             Alert.alert('Error', 'Phone number is already registered! Please login with your credentials');
@@ -91,22 +89,21 @@ class UserSignUp extends Component {
       }     
         // If user is not exist signup
         firebase.auth().signInWithPhoneNumber(mobileNo)
-          .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
+          .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' },
+          this.renderVerificationCodeInput()
+        ))
           .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
     };
   
     confirmCode = () => {
       const { codeInput, confirmResult, message } = this.state;
-      const { name, mobile } = this.props;
       if (confirmResult && codeInput.length) {
         confirmResult.confirm(codeInput)
        
           .then((user) => {
             console.log(confirmResult);
             this.setState({ message: 'Code Confirmed!' });
-            console.log(message);
-            const ref = firebase.database().ref(`/users/`)
-            .push({ 'name': name,'mobile' :mobile});
+         
             NavigationService.navigate('UserProfile');
           })
           .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
@@ -117,9 +114,17 @@ class UserSignUp extends Component {
       firebase.auth().signOut();
     }
 
+    setModalVisible(visible) {
+      this.setState({modalVisible: visible});
+    }
+    onBackClicked() {
+      //const { modalVisible } = this.state;
+     // console.log('on back button clicked');
+      this.setState({ modalVisible: false });
+    }
+
     renderMessage() {
       const { message, confirmResult } = this.state;
-    console.log(confirmResult);
       if (!message.length) return null;
     
       return (
@@ -128,14 +133,15 @@ class UserSignUp extends Component {
     }
     
     renderVerificationCodeInput() {
-          console.log('0')
-
-          console.log('code');
-          return (
-                <PhoneVerificationPopup/>
-          )
-      // const { codeInput } = this.state;
-    
+  
+           console.log('code');
+           const { codeInput } = this.state;
+           this.setModalVisible(!this.state.modalVisible);
+           console.log(this.state.modalVisible);
+          // return (
+          //       <PhoneVerificationPopup/>
+          // )
+   
       // return (
       //   <ScrollView style={{ marginTop: 25, padding: 25 }}>
       //     <Text>Enter verification code below:</Text>
@@ -150,6 +156,33 @@ class UserSignUp extends Component {
       //     <Button title="Confirm Code" color="#841584" onPress={this.confirmCode} />
       //   </ScrollView>
       // );
+
+      <View style={{  position: 'absolute', top: 0, left: 0, right: 0, bottom: 0  }}>
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={this.state.modalVisible}
+        onRequestClose={() => {
+          console.log('Modal has been closed');
+        }}
+      >
+      {console.log(this.state.modalVisible)}
+       <View >
+        <Text>Enter verification code below:</Text>
+         <Input
+           autoFocus
+          style={{ height: 40, marginTop: 15, marginBottom: 15 }}
+           onChangeText={value => this.setState({ codeInput: value })}
+           placeholder={'Code ... '}
+           value={codeInput}
+         />
+      
+         <Button title="Confirm Code" color="#841584" onPress={this.confirmCode} />
+       </View>
+     
+      </Modal>
+     
+    </View>
     }
 
   // onSignUpUser() {
@@ -176,7 +209,6 @@ class UserSignUp extends Component {
   onCancelClicked() {
     this.props.navigation.goBack();
   }
-
 
   renderLoading() {
     console.log('loading state :: ', this.props.loading);
@@ -208,14 +240,13 @@ class UserSignUp extends Component {
 
   render() {
     const { user, confirmResult } = this.state;
-    console.log( 'render'+confirmResult);
     return (
       <View style={{ flex: 1 }}>
           {this.renderLoading()}
           <CardSection>
           <View style={styles.logoStyle}>
             <Text style={styles.logoTextStyle}>
-              Action
+              action
             </Text>
           </View>
           </CardSection>
@@ -235,15 +266,12 @@ class UserSignUp extends Component {
               value={this.props.mobile}
               onChangeText={value => this.props.userProfile({ prop: 'mobile', value })}
             />
-                         {/* <Button title="Sign In" color="green" onPress={this.signIn} /> */}
           </CardSection>
-          {/* <CardSection style={styles.buttonStyle}> */}
-               {this.renderMessage()}
-          {/* </CardSection> */}
-         <CardSection>
+         
+         {/* <CardSection>
          {confirmResult && this.renderVerificationCodeInput()}
         
-         </CardSection>
+         </CardSection> */}
           <CardSection>
             <Input
               isPassword
@@ -262,10 +290,11 @@ class UserSignUp extends Component {
               onChangeText={value => this.props.userProfile({ prop: 'confirmPassword', value })}
             />
           </CardSection>
-        
+          {this.renderMessage()}
           <CardSection style={styles.buttonStyle}>
             {this.renderButton()}
             {this.renderCancelButton()}
+           
           </CardSection>
          
       </View>

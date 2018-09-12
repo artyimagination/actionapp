@@ -24,7 +24,7 @@ class HomeScreen extends Component {
 
   renderProjectButton() {
     const { category } = this.props.userprofile;
-    if (category === 'Directors' || category === 'Producers') {
+    if (category === 'Director' || category === 'Producer') {
       return (
         <CardSection>
             <Button

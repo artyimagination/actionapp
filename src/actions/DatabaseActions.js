@@ -34,7 +34,8 @@ export const fetchCategories = () => {
 export const fetchUserDetails = () => {
   return (dispatch) => {
     const { currentUser } = firebase.auth();
-    firebase.database().ref(`/users/${currentUser.uid}`)
+   console.log(currentUser);
+    firebase.database().ref(`/users/${currentUser}`)
       .on('value', snapshot => {
         dispatch({ type: FETCH_USER, payload: snapshot.val() });
     });

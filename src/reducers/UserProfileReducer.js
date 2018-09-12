@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   name: '',
   email: '',
   password: '',
-  category: 'Directors',
+  category: 'Director',
   date: '1992-11-30',
   gender: 'male',
   language: 'hindi',

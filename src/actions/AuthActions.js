@@ -67,46 +67,29 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ contact, password }) => {
 
-  //console.log('action login'+contact);
   const mobileNo = '+91'+contact;
   console.log('action login1'+mobileNo);
-  return (dispatch) => {
-    dispatch({ type: LOGIN_USER });
+ 
+  
+    // firebase.auth().signInWithPhoneNumber(mobileNo)
+    //     .then(user => loginUserSuccess(dispatch, user), console.log(mobileNo))
+    //       .catch((error) => {
+    //         console.log('some error occurs:'+error);
+    //         Alert('Error', 'Email or Password incorrect');
+    //         loginUserFail(dispatch);
+    //     });
 
-    const { currentUser } = firebase.auth().currentUser.uid;
-    console.log(currentUser);
-     firebase.auth().signInWithPhoneNumber(mobileNo)
-     .then( confirmResult =>  console.log(confirmResult),
-     currentUser1 = firebase.auth().currentUser.uid,
-     console.log(currentUser1),
-     console.log(firebase.auth()),
-      NavigationService.navigate('Home') )
-   
-     .catch((error) => {
-       const { code, message } = error;
-      console.log('Error: '+error);
-     
-     });
-    
-    firebase.auth().signInWithPhoneNumber(mobileNo)
-        .then(user => loginUserSuccess(dispatch, user), console.log(mobileNo))
-          .catch((error) => {
-            console.log('some error occurs:'+error);
-            Alert('Error', 'Email or Password incorrect');
-            loginUserFail(dispatch);
-        });
-
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(user => loginUserSuccess(dispatch, user))
-        .catch(() => {
-          console.log('some error occurs');
-          //Alert('Error', 'Email or Password incorrect');
-          loginUserFail(dispatch);
-          firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(user => loginUserSuccess(dispatch, user))
-          .catch(() => loginUserFail(dispatch));
-        });
-  };
+        // firebase.auth().signInWithEmailAndPassword(email, password)
+        // .then(user => loginUserSuccess(dispatch, user))
+        // .catch(() => {
+        //   console.log('some error occurs');
+        //   //Alert('Error', 'Email or Password incorrect');
+        //   loginUserFail(dispatch);
+        //   firebase.auth().createUserWithEmailAndPassword(email, password)
+        //   .then(user => loginUserSuccess(dispatch, user))
+        //   .catch(() => loginUserFail(dispatch));
+        // });
+  
 };
 
 
@@ -149,8 +132,9 @@ const loginUserSuccess = (dispatch, user) => {
   console.log('user' + JSON.parse(user));
   console.log('dispatch' + JSON.parse(dispatch));
 
-  // const { currentUser } = firebase.auth();
-  // console.log(currentUser);
+  const { currentUser } = firebase.auth();
+  console.log(currentUser);
+  alert(currentUser);
   //firebase.database().ref(`/users/${currentUser.uid}`)
   firebase.database().ref(`/users/`)
   .update({ uid: currentUser.uid })
