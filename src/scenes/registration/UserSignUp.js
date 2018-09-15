@@ -6,8 +6,8 @@ import firebase from 'react-native-firebase';
 import { userProfile, signUpUser } from '../../actions';
 import { TextButton, CardSection, Input, Button, Spinner, LogoText } from '../../components/common';
 import { Validator, PasswordValidator } from '../../utils/Validator';
-import NavigationService from '../../components/NavigationService';
-import PhoneVerificationPopup  from './PhoneVerificationPopup';
+//import NavigationService from '../../components/NavigationService';
+//import PhoneVerificationPopup  from './PhoneVerificationPopup';
 //import styles from '../../style/commonStyle';
 
 
@@ -25,7 +25,6 @@ class UserSignUp extends Component {
       modalVisible: false
      
     };
-
   }
   
 
@@ -55,72 +54,91 @@ class UserSignUp extends Component {
        if (this.unsubscribe) this.unsubscribe();
     }
   
-    signIn = () => {
+    // signIn = () => {
 
-      const { name,  password, confirmPassword, mobile } = this.props;
+    //   const { name,  password, confirmPassword, mobile } = this.props;
 
+    //   const object = { confirmPassword, password };
+    //   const error = Validator('name', name)
+    //     || Validator('password', password)
+    //     || PasswordValidator(object)
+    //     || Validator('mobile', mobile);
+        
+    //  const mobileNo = '+91'+mobile;
+  
+    //   if (error != null) {
+      
+    //     Alert.alert('Error', error);
+    //   } else {
+    //     console.log('else');
+    //     const mobile = this.props.mobile;
+      
+    //     const userRef = firebase.database().ref(`/users/`);
+      
+    //     userRef.once('value', function(snapshot) {
+         
+    //       //If user is existed redirect to login page
+    //       if(snapshot.val().mobile == mobile){
+    //         Alert.alert('Error', 'Phone number is already registered! Please login with your credentials');
+    //           NavigationService.navigate('Login');
+    //       }
+     
+    //     });
+       
+    //   }     
+    //     // If user is not exist signup
+    //     firebase.auth().signInWithPhoneNumber(mobileNo)
+    //       .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' },
+    //       this.renderVerificationCodeInput()
+    //     ))
+    //       .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
+    // };
+  
+    // confirmCode = () => {
+    //   const { codeInput, confirmResult, message } = this.state;
+    //   if (confirmResult && codeInput.length) {
+    //     confirmResult.confirm(codeInput)
+       
+    //       .then((user) => {
+    //         console.log(confirmResult);
+    //         this.setState({ message: 'Code Confirmed!' });
+         
+    //         NavigationService.navigate('UserProfile');
+    //       })
+    //       .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
+    //   }
+    // };
+    onBackClicked() {
+      //const { modalVisible } = this.state;
+     // console.log('on back button clicked');
+      this.setState({ modalVisible: false });
+    }
+    onCancelClicked() {
+      this.props.navigation.goBack();
+    }
+  
+    onSignUpUser() {
+      const { email, name, password, confirmPassword, mobile } = this.props;
+  
       const object = { confirmPassword, password };
       const error = Validator('name', name)
         || Validator('password', password)
         || PasswordValidator(object)
         || Validator('mobile', mobile);
         
-     const mobileNo = '+91'+mobile;
-  
+      // const mobileNo = '+91'+mobile;
+      // console.log(mobileNo);
+      // console.log(name);
       if (error != null) {
-      
+        console.log('Error in Email id : ', error);
         Alert.alert('Error', error);
       } else {
-        console.log('else');
-        const mobile = this.props.mobile;
-      
-        const userRef = firebase.database().ref(`/users/`);
-      
-        userRef.once('value', function(snapshot) {
-         
-          //If user is existed redirect to login page
-          if(snapshot.val().mobile == mobile){
-            Alert.alert('Error', 'Phone number is already registered! Please login with your credentials');
-              NavigationService.navigate('Login');
-          }
-     
-        });
-       
-      }     
-        // If user is not exist signup
-        firebase.auth().signInWithPhoneNumber(mobileNo)
-          .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' },
-          this.renderVerificationCodeInput()
-        ))
-          .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
-    };
-  
-    confirmCode = () => {
-      const { codeInput, confirmResult, message } = this.state;
-      if (confirmResult && codeInput.length) {
-        confirmResult.confirm(codeInput)
-       
-          .then((user) => {
-            console.log(confirmResult);
-            this.setState({ message: 'Code Confirmed!' });
-         
-            NavigationService.navigate('UserProfile');
-          })
-          .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
+        this.props.signUpUser({ email, name, password, mobile });
       }
-    };
+    }
   
-    signOut = () => {
-      firebase.auth().signOut();
-    }
-
     setModalVisible(visible) {
-      this.setState({modalVisible: visible});
-    }
-    onBackClicked() {
-      //const { modalVisible } = this.state;
-     // console.log('on back button clicked');
-      this.setState({ modalVisible: false });
+      this.setState({ modalVisible: visible });
     }
 
     renderMessage() {
@@ -185,31 +203,6 @@ class UserSignUp extends Component {
     </View>
     }
 
-  // onSignUpUser() {
-  //   const { name,  password, confirmPassword, mobile } = this.props;
-
-  //   const object = { confirmPassword, password };
-  //   const error = Validator('name', name)
-  //     || Validator('password', password)
-  //     || PasswordValidator(object)
-  //     || Validator('mobile', mobile);
-      
-  //   const mobileNo = '+91'+mobile;
-  //   console.log(mobileNo);
-  //   console.log(name);
-  //   if (error != null) {
-  //     console.log('Error in Email id : ', error);
-  //     Alert.alert('Error', error);
-  //   } else {
-  //     this.props.signUpUser({ name, password, mobileNo });
-  //   }
-  // }
-
- 
-  onCancelClicked() {
-    this.props.navigation.goBack();
-  }
-
   renderLoading() {
     console.log('loading state :: ', this.props.loading);
     return (
@@ -219,7 +212,7 @@ class UserSignUp extends Component {
 
   renderButton() {
     return (
-      <Button onPress={this.signIn.bind(this)}>
+      <Button onPress={this.onSignUpUser}>
         Sign Up
       </Button>
     );

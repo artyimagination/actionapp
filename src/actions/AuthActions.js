@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
 import { Alert } from 'react-native';
 import {
-  //EMAIL_CHANGED,
+  EMAIL_CHANGED,
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
@@ -11,16 +11,16 @@ import {
   NEW_PASSWORD,
   CONFIRM_PASSWORD,
   PASSWORD_RESET,
-  CONTACT_CHANGED} from './types';
+  CONTACT_CHANGED } from './types';
 
-import   NavigationService  from '../components/NavigationService';
+import NavigationService from '../components/NavigationService';
 
-// export const emailChanged = (text) => {
-//   return {
-//     type: EMAIL_CHANGED,
-//     payload: text
-//   };
-// };
+export const emailChanged = (text) => {
+  return {
+    type: EMAIL_CHANGED,
+    payload: text
+  };
+};
 export const cntChanged = (text) => {
  
   return {
@@ -65,12 +65,10 @@ export const passwordChanged = (text) => {
 };
 
 
-export const loginUser = ({ contact, password }) => {
+export const loginUser = ({ email, contact, password }) => {
 
-  const mobileNo = '+91'+contact;
-  console.log('action login1'+mobileNo);
- 
-  
+    // const mobileNo = '+91'+contact;
+    // console.log('action login1'+mobileNo);
     // firebase.auth().signInWithPhoneNumber(mobileNo)
     //     .then(user => loginUserSuccess(dispatch, user), console.log(mobileNo))
     //       .catch((error) => {
@@ -78,21 +76,19 @@ export const loginUser = ({ contact, password }) => {
     //         Alert('Error', 'Email or Password incorrect');
     //         loginUserFail(dispatch);
     //     });
-
-        // firebase.auth().signInWithEmailAndPassword(email, password)
-        // .then(user => loginUserSuccess(dispatch, user))
-        // .catch(() => {
-        //   console.log('some error occurs');
-        //   //Alert('Error', 'Email or Password incorrect');
-        //   loginUserFail(dispatch);
-        //   firebase.auth().createUserWithEmailAndPassword(email, password)
-        //   .then(user => loginUserSuccess(dispatch, user))
-        //   .catch(() => loginUserFail(dispatch));
-        // });
-  
-};
-
-
+    return (dispatch) => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(user => loginUserSuccess(dispatch, user))
+        .catch(() => {
+          console.log('some error occurs');
+          //Alert('Error', 'Email or Password incorrect');
+          loginUserFail(dispatch);
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then(user => loginUserSuccess(dispatch, user))
+          .catch(() => loginUserFail(dispatch));
+        });
+     };
+  };
 
 export const confirmForgotPassword = (email) => {
   return (dispatch) => {
@@ -134,9 +130,9 @@ const loginUserSuccess = (dispatch, user) => {
 
   const { currentUser } = firebase.auth();
   console.log(currentUser);
-  alert(currentUser);
-  //firebase.database().ref(`/users/${currentUser.uid}`)
-  firebase.database().ref(`/users/`)
+  //alert(currentUser);
+  firebase.database().ref(`/users/${currentUser.uid}`)
+  //firebase.database().ref(`/users/`)
   .update({ uid: currentUser.uid })
   .catch(() => {
     console.log('some error occuring');

@@ -7,6 +7,7 @@ import {
   passwordChanged,
   loginUser,
   cntChanged,
+  emailChanged
 } from '../actions';
 import { Button, CardSection, Input, TextButton, Spinner } from './common';
 import NavigationService from '../components/NavigationService';
@@ -26,16 +27,7 @@ class Login extends Component {
     };
   
   }
-  // onEmailChange(text) {
-  //   this.props.emailChanged(text);
-  // }
-  onContactChange(text) {
-    this.props.cntChanged(text);
-  }
 
-  onPasswordChange(text) {
-    this.props.passwordChanged(text);
-  }
 
   componentDidMount() {
     //  user1 = firebase.auth().getInstance().getUid();
@@ -58,30 +50,44 @@ class Login extends Component {
 
   componentWillUnmount() {
      if (this.unsubscribe) this.unsubscribe();
+  }  
+
+  onEmailChange(text) {
+    this.props.emailChanged(text);
   }
 
+  onContactChange(text) {
+    this.props.cntChanged(text);
+  }
+
+  onPasswordChange(text) {
+    this.props.passwordChanged(text);
+  }
       onLoginBtnClicked() {
 
-        const { contact, password } = this.props;
-        const error =  Validator('password', password) ||  Validator('contact', contact);
-      
+        const { email, contact, password } = this.props;
+       // const error = Validator('password', password) || Validator('contact', contact);
+         const error = Validator('email', email) || Validator('password', password);
+
+      console.log(email);
+      console.log(password);
         if (error !== null) {
           Alert.alert(error);
         } else {
               console.log('else');
-            // this.props.loginUser({ contact, password});
+             this.props.loginUser({ email, password });
 
-            const mobileNo = '+91'+contact;
-            firebase.auth().signInWithPhoneNumber(mobileNo)
-            .then(confirmResult =>
-                console.log(confirmResult),
-                curr = firebase.auth(),
-                console.log("curr"+JSON.stringify(curr)),
-                this.setState({ data: curr}),
-                console.log(this.state.data),
-                NavigationService.navigate('Home')
-            )
-            .catch(error => console(error.message) );
+            // const mobileNo = '+91'+contact;
+            // firebase.auth().signInWithPhoneNumber(mobileNo)
+            // .then(confirmResult =>
+            //     console.log(confirmResult),
+            //     curr = firebase.auth(),
+            //     console.log("curr"+JSON.stringify(curr)),
+            //     this.setState({ data: curr}),
+            //     console.log(this.state.data),
+            //     NavigationService.navigate('Home')
+            // )
+            // .catch(error => console(error.message) );
         }
         
        // firebase.auth().onAuthStateChanged((user) => {
@@ -166,20 +172,22 @@ class Login extends Component {
       return (
         
             <View style={this.props.style} > 
-              <CardSection style={{ paddingRight: 20}} >
-                <Input
-                  label="Phone Number"
-                  keyboardType="phone-pad"
-                  placeHolder="Enter Contact Number"
-                  onChangeText={this.onContactChange.bind(this)}
-                  value={this.props.mobile}
-                  onSubmitEditing={() => { 
-                    this.refs.pwd.focus(); 
-                  }}
+           
+              <CardSection style={{ paddingRight: 20 }} >
+              <Input
+                label="Username"
+                // keyboardType="phone-pad"
+                placeHolder="Enter Usernmae"
+                onChangeText={this.onContactChange.bind(this)}
+                value={this.props.email}
+                ref='email'
+                onSubmitEditing={() => { 
+                  this.refs.email.focus(); 
+                }}
 
-                />
-              </CardSection>
-              <CardSection style={{ paddingRight: 20}}>
+              />
+            </CardSection>
+              <CardSection style={{ paddingRight: 20 }}>
                 <Input
                   isPassword
                   ref='pwd'
@@ -235,5 +243,5 @@ const mapStateToProps = ({ auth }) => {
   return { password, error, loading, contact };
 };
 
-export default connect(mapStateToProps, {
-  cntChanged, passwordChanged, loginUser })(Login);
+export default connect(mapStateToProps, { 
+  emailChanged, cntChanged, passwordChanged, loginUser })(Login);
