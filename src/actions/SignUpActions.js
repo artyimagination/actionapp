@@ -99,23 +99,23 @@ export const signUpUser = ({ email, name, password, mobileNo }) => {
     //   }
     // });
   
-        dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
-    CurrentUser.isFirstTimeUser = true;
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => saveIntoDatabase(dispatch, user, name, mobileNo))
-      .catch(() => ErrorWhileSignIn(dispatch));
+    //     dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
+    // CurrentUser.isFirstTimeUser = true;
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    //   .then(user => saveIntoDatabase(dispatch, user, name, mobileNo))
+    //   .catch(() => ErrorWhileSignIn(dispatch));
   
 
-      //      // If user is not exist signup
-      // firebase.auth().signInWithPhoneNumber(mobileNo)
-      //   .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
-      //   .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
+           // If user is not exist signup
+      firebase.auth().signInWithPhoneNumber(mobileNo)
+        .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
+        .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
       
-      // //saveToDatabase
-      //   const { currentUser } = firebase.auth();
-      //   console.log(currentUser.uid);
-      //   const ref = firebase.database().ref(`/users/${currentUser.uid}`)
-      //  .set({ 'name': name, 'mobile' : mobileNo });
+      //saveToDatabase
+        const { currentUser } = firebase.auth();
+        console.log(currentUser.uid);
+        const ref = firebase.database().ref(`/users/${currentUser.uid}`)
+       .set({ 'name': name, 'mobile' : mobileNo });
   };
 };
 

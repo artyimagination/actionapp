@@ -67,27 +67,30 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ email, contact, password }) => {
 
-    // const mobileNo = '+91'+contact;
-    // console.log('action login1'+mobileNo);
-    // firebase.auth().signInWithPhoneNumber(mobileNo)
-    //     .then(user => loginUserSuccess(dispatch, user), console.log(mobileNo))
-    //       .catch((error) => {
-    //         console.log('some error occurs:'+error);
-    //         Alert('Error', 'Email or Password incorrect');
-    //         loginUserFail(dispatch);
-    //     });
-    return (dispatch) => {
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(user => loginUserSuccess(dispatch, user))
-        .catch(() => {
-          console.log('some error occurs');
-          //Alert('Error', 'Email or Password incorrect');
-          loginUserFail(dispatch);
-          firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(user => loginUserSuccess(dispatch, user))
-          .catch(() => loginUserFail(dispatch));
+
+  console.log('some email'+email);
+  console.log('some password'+password);
+    const mobileNo = '+91'+contact;
+    console.log('action login1'+mobileNo);
+    firebase.auth().signInWithPhoneNumber(mobileNo)
+        .then(user => loginUserSuccess(dispatch, user), console.log(mobileNo))
+          .catch((error) => {
+            console.log('some error occurs:'+error);
+            Alert('Error', 'Email or Password incorrect');
+            loginUserFail(dispatch);
         });
-     };
+    // return (dispatch) => {
+    //     firebase.auth().signInWithEmailAndPassword(email, password)
+    //     .then(user => loginUserSuccess(dispatch, user))
+    //     .catch((error) => {
+    //       console.log('some error occurs'+error);
+    //       //Alert('Error', 'Email or Password incorrect');
+    //       loginUserFail(dispatch);
+    //       firebase.auth().createUserWithEmailAndPassword(email, password)
+    //       .then(user => loginUserSuccess(dispatch, user))
+    //       .catch(() => loginUserFail(dispatch));
+    //     });
+    //  };
   };
 
 export const confirmForgotPassword = (email) => {

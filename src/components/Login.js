@@ -66,8 +66,8 @@ class Login extends Component {
       onLoginBtnClicked() {
 
         const { email, contact, password } = this.props;
-       // const error = Validator('password', password) || Validator('contact', contact);
-         const error = Validator('email', email) || Validator('password', password);
+        const error = Validator('password', password) || Validator('contact', contact);
+         //const error = Validator('email', email) || Validator('password', password);
 
       console.log(email);
       console.log(password);
@@ -75,19 +75,19 @@ class Login extends Component {
           Alert.alert(error);
         } else {
               console.log('else');
-             this.props.loginUser({ email, password });
+             //this.props.loginUser({ email, password });
 
-            // const mobileNo = '+91'+contact;
-            // firebase.auth().signInWithPhoneNumber(mobileNo)
-            // .then(confirmResult =>
-            //     console.log(confirmResult),
-            //     curr = firebase.auth(),
-            //     console.log("curr"+JSON.stringify(curr)),
-            //     this.setState({ data: curr}),
-            //     console.log(this.state.data),
-            //     NavigationService.navigate('Home')
-            // )
-            // .catch(error => console(error.message) );
+            const mobileNo = '+91'+contact;
+            firebase.auth().signInWithPhoneNumber(mobileNo)
+            .then(confirmResult =>
+                console.log(confirmResult),
+                curr = firebase.auth(),
+                console.log("curr"+JSON.stringify(curr)),
+                this.setState({ data: curr}),
+                console.log(this.state.data),
+                NavigationService.navigate('Home')
+            )
+            .catch(error => console(error.message) );
         }
         
        // firebase.auth().onAuthStateChanged((user) => {
@@ -171,18 +171,18 @@ class Login extends Component {
   render() {
       return (
         
-            <View style={this.props.style} > 
+            <View style={this.props.style}> 
            
               <CardSection style={{ paddingRight: 20 }} >
               <Input
-                label="Username"
-                // keyboardType="phone-pad"
-                placeHolder="Enter Usernmae"
+                label="Phone number"
+                 keyboardType="phone-pad"
+                placeHolder="Enter Contact number"
                 onChangeText={this.onContactChange.bind(this)}
-                value={this.props.email}
-                ref='email'
+                value={this.props.mobile}
+                ref='mobile'
                 onSubmitEditing={() => { 
-                  this.refs.email.focus(); 
+                  this.refs.mobile.focus(); 
                 }}
 
               />
@@ -239,8 +239,8 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  const { password, error, loading, contact } = auth;
-  return { password, error, loading, contact };
+  const { email, password, error, loading, contact } = auth;
+  return { email, password, error, loading, contact };
 };
 
 export default connect(mapStateToProps, { 

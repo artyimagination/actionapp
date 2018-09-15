@@ -54,60 +54,60 @@ class UserSignUp extends Component {
        if (this.unsubscribe) this.unsubscribe();
     }
   
-    // signIn = () => {
+    signIn = () => {
 
-    //   const { name,  password, confirmPassword, mobile } = this.props;
+      const { name,  password, confirmPassword, mobile } = this.props;
 
-    //   const object = { confirmPassword, password };
-    //   const error = Validator('name', name)
-    //     || Validator('password', password)
-    //     || PasswordValidator(object)
-    //     || Validator('mobile', mobile);
+      const object = { confirmPassword, password };
+      const error = Validator('name', name)
+        || Validator('password', password)
+        || PasswordValidator(object)
+        || Validator('mobile', mobile);
         
-    //  const mobileNo = '+91'+mobile;
+     const mobileNo = '+91'+mobile;
   
-    //   if (error != null) {
+      if (error != null) {
       
-    //     Alert.alert('Error', error);
-    //   } else {
-    //     console.log('else');
-    //     const mobile = this.props.mobile;
+        Alert.alert('Error', error);
+      } else {
+        console.log('else');
+        const mobile = this.props.mobile;
       
-    //     const userRef = firebase.database().ref(`/users/`);
+        const userRef = firebase.database().ref(`/users/`);
       
-    //     userRef.once('value', function(snapshot) {
+        userRef.once('value', function(snapshot) {
          
-    //       //If user is existed redirect to login page
-    //       if(snapshot.val().mobile == mobile){
-    //         Alert.alert('Error', 'Phone number is already registered! Please login with your credentials');
-    //           NavigationService.navigate('Login');
-    //       }
+          //If user is existed redirect to login page
+          if(snapshot.val().mobile == mobile){
+            Alert.alert('Error', 'Phone number is already registered! Please login with your credentials');
+              NavigationService.navigate('Login');
+          }
      
-    //     });
+        });
        
-    //   }     
-    //     // If user is not exist signup
-    //     firebase.auth().signInWithPhoneNumber(mobileNo)
-    //       .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' },
-    //       this.renderVerificationCodeInput()
-    //     ))
-    //       .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
-    // };
+      }     
+        // If user is not exist signup
+        firebase.auth().signInWithPhoneNumber(mobileNo)
+          .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' },
+          this.renderVerificationCodeInput()
+        ))
+          .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
+    };
   
-    // confirmCode = () => {
-    //   const { codeInput, confirmResult, message } = this.state;
-    //   if (confirmResult && codeInput.length) {
-    //     confirmResult.confirm(codeInput)
+    confirmCode = () => {
+      const { codeInput, confirmResult, message } = this.state;
+      if (confirmResult && codeInput.length) {
+        confirmResult.confirm(codeInput)
        
-    //       .then((user) => {
-    //         console.log(confirmResult);
-    //         this.setState({ message: 'Code Confirmed!' });
+          .then((user) => {
+            console.log(confirmResult);
+            this.setState({ message: 'Code Confirmed!' });
          
-    //         NavigationService.navigate('UserProfile');
-    //       })
-    //       .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
-    //   }
-    // };
+            NavigationService.navigate('UserProfile');
+          })
+          .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
+      }
+    };
     onBackClicked() {
       //const { modalVisible } = this.state;
      // console.log('on back button clicked');
@@ -120,15 +120,18 @@ class UserSignUp extends Component {
     onSignUpUser() {
       const { email, name, password, confirmPassword, mobile } = this.props;
   
+      console.log(name);
+      console.log(email);
       const object = { confirmPassword, password };
       const error = Validator('name', name)
+        || Validator('email', email)
         || Validator('password', password)
         || PasswordValidator(object)
         || Validator('mobile', mobile);
         
       // const mobileNo = '+91'+mobile;
       // console.log(mobileNo);
-      // console.log(name);
+     
       if (error != null) {
         console.log('Error in Email id : ', error);
         Alert.alert('Error', error);
@@ -149,7 +152,6 @@ class UserSignUp extends Component {
         <Text style={{ padding: 5, backgroundColor: '#000', color: '#fff' }}>{message}</Text>
       );
     }
-    
     renderVerificationCodeInput() {
   
            console.log('code');
@@ -212,7 +214,7 @@ class UserSignUp extends Component {
 
   renderButton() {
     return (
-      <Button onPress={this.onSignUpUser}>
+      <Button onPress={this.signIn()}>
         Sign Up
       </Button>
     );
@@ -249,6 +251,14 @@ class UserSignUp extends Component {
               placeHolder="Enter Name"
               value={this.props.name}
               onChangeText={value => this.props.userProfile({ prop: 'name', value })}
+            />
+          </CardSection>
+          <CardSection>
+            <Input
+            label="Email"
+            placeHolder="Enter Email"
+            value={this.props.email}
+            onChangeText={value => this.props.userProfile({ prop: 'email', value })}
             />
           </CardSection>
           <CardSection>
@@ -300,7 +310,7 @@ const styles = {
   logoStyle: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 50
+    paddingTop: 40
   },
   logoTextStyle: {
     width: 170,
@@ -332,8 +342,8 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { name, password, confirmPassword, mobile, loading } = state.userprofile;
-  return { name, password, confirmPassword, mobile, loading };
+  const { email, name, password, confirmPassword, mobile, loading } = state.userprofile;
+  return { email, name, password, confirmPassword, mobile, loading };
 };
 
 const SignUpComponent = connect(mapStateToProps, {
