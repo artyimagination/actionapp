@@ -120,8 +120,7 @@ class UserSignUp extends Component {
     onSignUpUser() {
       const { email, name, password, confirmPassword, mobile } = this.props;
   
-      console.log(name);
-      console.log(email);
+  
       const object = { confirmPassword, password };
       const error = Validator('name', name)
         || Validator('email', email)
@@ -140,9 +139,9 @@ class UserSignUp extends Component {
       }
     }
   
-    setModalVisible(visible) {
-      this.setState({ modalVisible: visible });
-    }
+    // setModalVisible(visible) {
+    //   this.setState({ modalVisible: visible });
+    // }
 
     renderMessage() {
       const { message, confirmResult } = this.state;
@@ -156,53 +155,53 @@ class UserSignUp extends Component {
   
            console.log('code');
            const { codeInput } = this.state;
-           this.setModalVisible(!this.state.modalVisible);
-           console.log(this.state.modalVisible);
+          //  this.setModalVisible(!this.state.modalVisible);
+          //  console.log(this.state.modalVisible);
           // return (
           //       <PhoneVerificationPopup/>
           // )
    
-      // return (
-      //   <ScrollView style={{ marginTop: 25, padding: 25 }}>
-      //     <Text>Enter verification code below:</Text>
-      //     <Input
-      //       autoFocus
-      //       style={{ height: 40, marginTop: 15, marginBottom: 15 }}
-      //       onChangeText={value => this.setState({ codeInput: value })}
-      //       placeholder={'Code ... '}
-      //       value={codeInput}
-      //     />
-      //     {/* <Button onPress={() => this.openHeaderModal()} vertical/> */}
-      //     <Button title="Confirm Code" color="#841584" onPress={this.confirmCode} />
-      //   </ScrollView>
-      // );
+      return (
+        <ScrollView style={{ marginTop: 25, padding: 25 }}>
+          <Text>Enter verification code below:</Text>
+          <Input
+            autoFocus
+            style={{ height: 40, marginTop: 15, marginBottom: 15 }}
+            onChangeText={value => this.setState({ codeInput: value })}
+            placeholder={'Code ... '}
+            value={codeInput}
+          />
+          {/* <Button onPress={() => this.openHeaderModal()} vertical/> */}
+          <Button title="Confirm Code" color="#841584" onPress={this.confirmCode} />
+        </ScrollView>
+      );
 
-      <View style={{  position: 'absolute', top: 0, left: 0, right: 0, bottom: 0  }}>
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={this.state.modalVisible}
-        onRequestClose={() => {
-          console.log('Modal has been closed');
-        }}
-      >
-      {console.log(this.state.modalVisible)}
-       <View >
-        <Text>Enter verification code below:</Text>
-         <Input
-           autoFocus
-          style={{ height: 40, marginTop: 15, marginBottom: 15 }}
-           onChangeText={value => this.setState({ codeInput: value })}
-           placeholder={'Code ... '}
-           value={codeInput}
-         />
+    //   <View style={{  position: 'absolute', top: 0, left: 0, right: 0, bottom: 0  }}>
+    //   <Modal
+    //     animationType="slide"
+    //     transparent={false}
+    //     visible={this.state.modalVisible}
+    //     onRequestClose={() => {
+    //       console.log('Modal has been closed');
+    //     }}
+    //   >
+    //   {console.log(this.state.modalVisible)}
+    //    <View >
+    //     <Text>Enter verification code below:</Text>
+    //      <Input
+    //        autoFocus
+    //       style={{ height: 40, marginTop: 15, marginBottom: 15 }}
+    //        onChangeText={value => this.setState({ codeInput: value })}
+    //        placeholder={'Code ... '}
+    //        value={codeInput}
+    //      />
       
-         <Button title="Confirm Code" color="#841584" onPress={this.confirmCode} />
-       </View>
+    //      <Button title="Confirm Code" color="#841584" onPress={this.confirmCode} />
+    //    </View>
      
-      </Modal>
+    //   </Modal>
      
-    </View>
+    // </View>
     }
 
   renderLoading() {
@@ -214,7 +213,7 @@ class UserSignUp extends Component {
 
   renderButton() {
     return (
-      <Button onPress={this.signIn()}>
+      <Button onPress={this.onSignUpUser.bind(this)}>
         Sign Up
       </Button>
     );

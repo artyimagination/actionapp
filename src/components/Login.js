@@ -63,32 +63,32 @@ class Login extends Component {
   onPasswordChange(text) {
     this.props.passwordChanged(text);
   }
-      onLoginBtnClicked() {
+      // onLoginBtnClicked() {
 
-        const { email, contact, password } = this.props;
-        const error = Validator('password', password) || Validator('contact', contact);
-         //const error = Validator('email', email) || Validator('password', password);
+      //   const { email, contact, password } = this.props;
+      //   //const error = Validator('password', password) || Validator('contact', contact);
+      //    const error = Validator('email', email) || Validator('password', password);
 
-      console.log(email);
-      console.log(password);
-        if (error !== null) {
-          Alert.alert(error);
-        } else {
-              console.log('else');
-             //this.props.loginUser({ email, password });
+      // console.log(email);
+      // console.log(password);
+      //   if (error !== null) {
+      //     Alert.alert(error);
+      //   } else {
+      //         console.log('else');
+      //        this.props.loginUser({ email, password });
 
-            const mobileNo = '+91'+contact;
-            firebase.auth().signInWithPhoneNumber(mobileNo)
-            .then(confirmResult =>
-                console.log(confirmResult),
-                curr = firebase.auth(),
-                console.log("curr"+JSON.stringify(curr)),
-                this.setState({ data: curr}),
-                console.log(this.state.data),
-                NavigationService.navigate('Home')
-            )
-            .catch(error => console(error.message) );
-        }
+            // const mobileNo = '+91'+contact;
+            // firebase.auth().signInWithPhoneNumber(mobileNo)
+            // .then(confirmResult =>
+            //     console.log(confirmResult),
+            //     curr = firebase.auth(),
+            //     console.log("curr"+JSON.stringify(curr)),
+            //     this.setState({ data: curr}),
+            //     console.log(this.state.data),
+            //     NavigationService.navigate('Home')
+            // )
+            // .catch(error => console(error.message) );
+        //}
         
        // firebase.auth().onAuthStateChanged((user) => {
          // console.log('user'+user);
@@ -115,7 +115,7 @@ class Login extends Component {
            //     //NavigationService.navigate('Home');
            //  }
          // })
-    }
+   // }
 
   // renderError() {
   //   if (this.props.error) {
@@ -128,6 +128,11 @@ class Login extends Component {
   //     );
   //   }
   // }
+
+  onLoginBtnClicked() {
+    const { email, password } = this.props;
+    this.props.loginUser({ email, password });
+  }
 
   renderLoginButton() {
     if (this.props.loading) {
@@ -169,48 +174,35 @@ class Login extends Component {
 
   
   render() {
-      return (
-        
-            <View style={this.props.style}> 
-           
-              <CardSection style={{ paddingRight: 20 }} >
-              <Input
-                label="Phone number"
-                 keyboardType="phone-pad"
-                placeHolder="Enter Contact number"
-                onChangeText={this.onContactChange.bind(this)}
-                value={this.props.mobile}
-                ref='mobile'
-                onSubmitEditing={() => { 
-                  this.refs.mobile.focus(); 
-                }}
-
-              />
-            </CardSection>
-              <CardSection style={{ paddingRight: 20 }}>
-                <Input
-                  isPassword
-                  ref='pwd'
-                  label="Password"
-                  placeHolder="Enter Password"
-                  onChangeText={this.onPasswordChange.bind(this)}
-                  value={this.props.password}
-                //onSubmitEditing={() => this.b.current.focus()}
-                  
-                />
-              </CardSection>
-              <CardSection style={{ paddingTop: 10, paddingLeft: 15 }}>
-                {this.renderLoginButton()}
-              </CardSection>
-              <CardSection style={styles.buttonStyle}>
-                {this.renderForgotPasswordButton()}
-                {this.renderSignupButton()}
-              </CardSection>
-
-              </View> 
-        
-      );
-  }
+    return (
+      <View style={this.props.style}>
+        <CardSection>
+          <Input
+            label="User Name"
+            placeHolder="Enter User Name"
+            onChangeText={this.onEmailChange.bind(this)}
+            value={this.props.email}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            isPassword
+            label="Password"
+            placeHolder="Enter Password"
+            onChangeText={this.onPasswordChange.bind(this)}
+            value={this.props.password}
+          />
+        </CardSection>
+        <CardSection style={{ paddingTop: 10, paddingLeft: 10 }}>
+          {this.renderLoginButton()}
+        </CardSection>
+        <CardSection style={styles.buttonStyle}>
+          {this.renderForgotPasswordButton()}
+          {this.renderSignupButton()}
+        </CardSection>
+      </View>
+    );
+}
 }
 const styles = {
   

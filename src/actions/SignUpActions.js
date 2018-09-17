@@ -2,7 +2,6 @@ import { Alert } from 'react-native';
 import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import NavigationService from '../components/NavigationService';
-
 import {
   SIGNUP_DATA,
   USER_PROFILE_DATA,
@@ -13,7 +12,6 @@ import {
 } from './types';
 
 import CurrentUser from '../utils/CurrentUser';
-
 
 export const signUp = ({ prop, value }) => {
   return {
@@ -41,7 +39,6 @@ export const logoutUser = () => {
 
 export const saveUserProfile = ({ userprofile }) => {
   return (dispatch) => {
-    //console.log(userprofile);
     const {
       name, category, date, language, gender, address, selectedstate, city, mobile
     } = userprofile;
@@ -64,12 +61,15 @@ export const saveUserProfile = ({ userprofile }) => {
 };
 
 export const saveUserDetails = ({ userprofile }) => {
+
   return (dispatch) => {
     const {
       height, weight, waist, experience, ProfilePic, description, youtubelink, fblink, instalink, pic1, pic2, pic3
     } = userprofile;
     dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
     const { currentUser } = firebase.auth();
+
+    console.log("curr"+currentUser);
     firebase.database().ref(`/users/${currentUser.uid}`)
     .update(
       { height, weight, waist, experience, ProfilePic, description, youtubelink, fblink, instalink, pic1, pic2, pic3 })
@@ -81,43 +81,30 @@ export const saveUserDetails = ({ userprofile }) => {
   };
 };
 
-export const signUpUser = ({ email, name, password, mobileNo }) => {
-
-  console.log(name);
+export const signUpUser = ({ name, email, password, mobile }) => {
   return (dispatch) => {
-    // firebase.auth().verifyPhoneNumber(mobileNo)
-    // .on('state_changed', phoneAuthSnapshot => {
-    //   switch (phoneAuthSnapshot.state) {
-    //     case firebase.auth.PhoneAuthState.CODE_SENT:
-    //       console.log('Verification Code Sent');
-    //       break;
-    //     case firebase.auth.PhoneAuthState.ERROR:
-    //       console.log('Error : ', phoneAuthSnapshot.error);
-    //     break;
-    //     default:
-    //       console.log('Default Case');
-    //   }
-    // });
-  
-    //     dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
-    // CurrentUser.isFirstTimeUser = true;
-    // firebase.auth().createUserWithEmailAndPassword(email, password)
-    //   .then(user => saveIntoDatabase(dispatch, user, name, mobileNo))
-    //   .catch(() => ErrorWhileSignIn(dispatch));
-  
+    /*firebase.auth().verifyPhoneNumber(mobile)
+    .on('state_changed', phoneAuthSnapshot => {
+      switch (phoneAuthSnapshot.state) {
 
-           // If user is not exist signup
-      firebase.auth().signInWithPhoneNumber(mobileNo)
-        .then(confirmResult => this.setState({ confirmResult, message: 'Code has been sent!' }))
-        .catch(error => this.setState({ message: `Sign In With Phone Number Error: ${error.message}` }));
-      
-      //saveToDatabase
-        const { currentUser } = firebase.auth();
-        console.log(currentUser.uid);
-        const ref = firebase.database().ref(`/users/${currentUser.uid}`)
-       .set({ 'name': name, 'mobile' : mobileNo });
+        case firebase.auth.PhoneAuthState.CODE_SENT:
+          console.log('Verification Code Sent');
+          break;
+        case firebase.auth.PhoneAuthState.ERROR:
+          console.log('Error : ', phoneAuthSnapshot.error);
+        break;
+        default:
+          console.log('Default Case');
+      }
+    });*/
+    dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
+    CurrentUser.isFirstTimeUser = true;
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => saveIntoDatabase(dispatch, user, name, email, mobile))
+      .catch(() => ErrorWhileSignIn(dispatch));
   };
 };
+
 
 export const signInWithGoogle = () => {
   return (dispatch) => {
@@ -208,8 +195,10 @@ const updateUserProfileData = (dispatch, { displayName, email }) => {
     } });
 };
 
-const saveIntoDatabase = (dispatch, user, name, email) => {
-  const { currentUser } = firebase.auth();
+const saveIntoDatabase = (dispatch, user, name, email, mobile) => {
+  
+  const { currentUser } = firebase.auth(); 
+
   firebase.database().ref(`/users/${currentUser.uid}`)
   .update({ email, uid: currentUser.uid })
   .then(() => {

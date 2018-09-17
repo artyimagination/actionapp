@@ -65,33 +65,55 @@ export const passwordChanged = (text) => {
 };
 
 
-export const loginUser = ({ email, contact, password }) => {
+// export const loginUser = ({ email, contact, password }) => {
 
 
-  console.log('some email'+email);
-  console.log('some password'+password);
-    const mobileNo = '+91'+contact;
-    console.log('action login1'+mobileNo);
-    firebase.auth().signInWithPhoneNumber(mobileNo)
-        .then(user => loginUserSuccess(dispatch, user), console.log(mobileNo))
-          .catch((error) => {
-            console.log('some error occurs:'+error);
-            Alert('Error', 'Email or Password incorrect');
-            loginUserFail(dispatch);
-        });
-    // return (dispatch) => {
-    //     firebase.auth().signInWithEmailAndPassword(email, password)
-    //     .then(user => loginUserSuccess(dispatch, user))
-    //     .catch((error) => {
-    //       console.log('some error occurs'+error);
-    //       //Alert('Error', 'Email or Password incorrect');
-    //       loginUserFail(dispatch);
-    //       firebase.auth().createUserWithEmailAndPassword(email, password)
-    //       .then(user => loginUserSuccess(dispatch, user))
-    //       .catch(() => loginUserFail(dispatch));
-    //     });
-    //  };
+//   console.log('some email'+email);
+//   console.log('some password'+password);
+
+
+//   //SigninwithPhone number
+//     // const mobileNo = '+91'+contact;
+//     // console.log('action login1'+mobileNo);
+//     // firebase.auth().signInWithPhoneNumber(mobileNo)
+//     //     .then(user => loginUserSuccess(dispatch, user), console.log(mobileNo))
+//     //       .catch((error) => {
+//     //         console.log('some error occurs:'+error);
+//     //         Alert('Error', 'Email or Password incorrect');
+//     //         loginUserFail(dispatch);
+//     //     });
+
+//     //SigninWithEmailPassword
+
+//     return (dispatch) => {
+//         firebase.auth().signInWithEmailAndPassword(email, password)
+//         .then(user => loginUserSuccess(dispatch, user))
+//         .catch((error) => {
+//           console.log('some error occurs:'+error);
+//           //Alert('Error', 'Email or Password incorrect');
+//           loginUserFail(dispatch);
+//           // firebase.auth().createUserWithEmailAndPassword(email, password)
+//           // .then(user => loginUserSuccess(dispatch, user))
+//           // .catch(() => loginUserFail(dispatch));
+//         });
+//      };
+//   };
+
+export const loginUser = ({ email, password }) => {
+  return (dispatch) => {
+    dispatch({ type: LOGIN_USER });
+     firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(user => loginUserSuccess(dispatch, user))
+    .catch((error) => {
+      console.log('some error occurs:'+error);
+      loginUserFail(dispatch);
+      /*firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => loginUserSuccess(dispatch, user))
+      .catch(() => loginUserFail(dispatch));*/
+    });
   };
+};
+
 
 export const confirmForgotPassword = (email) => {
   return (dispatch) => {
@@ -126,24 +148,31 @@ const loginUserFail = (dispatch) => {
   });
 };
 
-const loginUserSuccess = (dispatch, user) => {
-  
-  console.log('user' + JSON.parse(user));
-  console.log('dispatch' + JSON.parse(dispatch));
 
-  const { currentUser } = firebase.auth();
-  console.log(currentUser);
-  //alert(currentUser);
-  firebase.database().ref(`/users/${currentUser.uid}`)
-  //firebase.database().ref(`/users/`)
-  .update({ uid: currentUser.uid })
-  .catch(() => {
-    console.log('some error occuring');
-  });
+const loginUserSuccess = (dispatch, user) => {
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
-
-  NavigationService.navigate('UserDetails');
+   NavigationService.navigate('Home');
+  //NavigationService.navigate('UserDetails');
 };
+// const loginUserSuccess = (dispatch, user) => {
+  
+//   console.log(user);
+//   const { currentUser } = firebase.auth();
+//   console.log(currentUser);
+//   //alert(currentUser);
+//   firebase.database().ref(`/users/${currentUser.uid}`)
+//   //firebase.database().ref(`/users/`)
+//   .update({ uid: currentUser.uid })
+//   .catch(() => {
+//     console.log('some error occuring');
+//   });
+//   dispatch({
+//     type: LOGIN_USER_SUCCESS,
+//     payload: user
+//   });
+
+//   NavigationService.navigate('UserDetails');
+// };
