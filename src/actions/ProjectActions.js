@@ -86,7 +86,24 @@ export const applyProject = (projectId) => {
   };
 };
 
+export const filteredProjectByTypes = (type) => {
 
+  console.log('type :'+type);
+  return (dispatch) => {
+    const ref = firebase.database().ref('projects');
+    console.log(ref);
+    const query = ref.orderByChild('type').equalTo(type);
+
+    query.on('value', (snapshot) => {
+      console.log('project detail ', snapshot.val());
+      snapshot.forEach((child) => {
+        console.log(child.key);
+        dispatch({ type: PROJECT_FETCHED, payload: snapshot.val() });
+        //NavigationService.navigate('Home',snapshot.val());
+      });
+    });
+  };
+};
 export const fetchProjectList = () => {
   return (dispatch) => {
     firebase.database().ref('/projects')

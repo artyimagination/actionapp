@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { FloatingAction } from 'react-native-floating-action';
-
 import { fetchUserDetails } from '../../actions';
 import { CardSection, Button } from '../../components/common';
 import NavigationService from '../../components/NavigationService';
 import { HomeProject } from './HomeProject';
-
 
 
 class HomeScreen extends Component {
@@ -17,11 +14,12 @@ class HomeScreen extends Component {
     this.props.fetchUserDetails();
   }
 
-  navigateToPath() {
-    console.log('navigtor');
-    NavigationService.navigate('Project');
-  }
-
+  // navigateToFilter(){
+  //   this.props.navigation.navigate('filterScreen', { filterCallback: filterValue => this.filterCallback(filterValue) });
+  // }
+  //   filterCallback(filterValue){
+  //     console.log('-> Callback value:', filterValue);
+  //   }
   renderProjectButton() {
     const { category } = this.props.userprofile;
     if (category === 'Director' || category === 'Producer') {
@@ -34,7 +32,6 @@ class HomeScreen extends Component {
             > <Icon name="plus" size={10} />
             Add Project
           </Button>
-         
         </CardSection>
        
       );
@@ -44,23 +41,16 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <CardSection style={styles.projectBtn}>
-          <Text style={styles.labelStyle}>
-            Hello... {this.props.userprofile.name}
-          </Text>
-          {this.renderProjectButton()}
-        </CardSection>
+      
         <HomeProject />
 
-        <FloatingAction
-          color='rgb(234, 94, 32)'
-          onPressItem={
-            (name) => {
-              console.log(`selected button: ${name}`);
-              this.navigateToPath();
-            }
-          }
-        />
+      <View>
+        <TouchableHighlight style={styles.addButton}
+            underlayColor='#ff7043' onPress={()=>{NavigationService.navigate('Filters')}}>
+            <Text style={{fontSize: 20, color: 'white'}}>+</Text>
+        </TouchableHighlight>
+      </View>
+       
       </View>
     );
   }
@@ -90,7 +80,28 @@ const styles = {
     fontSize: 14,
     fontWeight: '600',
     padding: 10
+  },
+  addButton: {
+    backgroundColor: '#ff5722',
+    borderColor: '#ff5722',
+    borderWidth: 1,
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 20,
+    right:20,
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   }
+
 };
 
 const mapStateToProps = state => {

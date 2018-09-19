@@ -16,6 +16,7 @@ export const USER_PROFILE_DATA_SAVE_PROCESS = 'user_profile_save_data_process';
 export const USER_PROFILE_PIC_UPLOADED = 'user_profile_pic_uploaded';
 
 export const CATEGORIES_FETCHED = 'categories_fetched';
+export const TYPES_FETCHED = 'types_fetched';
 export const FETCH_USER = 'fetch_user';
 export const FETCH_USER_NAME = 'fetch_user_name';
 

@@ -4,6 +4,7 @@ import RNFetchBlob from 'react-native-fetch-blob';
 
 import {
   CATEGORIES_FETCHED,
+  TYPES_FETCHED,
   FETCH_USER,
   USER_PROFILE_PIC_UPLOADED,
   FETCH_CHAT_USERS,
@@ -30,6 +31,15 @@ export const fetchCategories = () => {
   };
 };
 
+export const fetchTypes = () => {
+  return (dispatch) => {
+    firebase.database().ref('/Types')
+    .on('value', snapshot => {
+      dispatch({ type: TYPES_FETCHED, payload: snapshot.val() });
+    });
+  };
+};
+
 
 export const fetchUserDetails = () => {
   return (dispatch) => {
@@ -51,7 +61,6 @@ export const fetchProjectDetails = () => {
     });
   };
 };
-
 
 export const createChatUsers = (fuid) => {
   return () => {

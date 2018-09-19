@@ -157,6 +157,7 @@ const loginUserSuccess = (dispatch, user) => {
    NavigationService.navigate('Home');
   //NavigationService.navigate('UserDetails');
 };
+
 // const loginUserSuccess = (dispatch, user) => {
   
 //   console.log(user);

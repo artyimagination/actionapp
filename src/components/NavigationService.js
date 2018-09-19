@@ -1,4 +1,4 @@
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions,navigation } from 'react-navigation';
 
 let _navigator;
 
@@ -15,4 +15,13 @@ function navigate(routeName, params) {
   );
 }
 
-export default { setTopLevelNavigator, navigate };
+function getParams(param){
+  console.log("param: "+param);
+  _navigator.dispatch(
+    console.log("param: "+param),
+    navigation.getParam(param)
+  );
+}
+
+
+export default { setTopLevelNavigator, navigate, getParams };

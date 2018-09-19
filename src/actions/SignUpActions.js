@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 import firebase from 'react-native-firebase';
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
+//import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import NavigationService from '../components/NavigationService';
 import {
   SIGNUP_DATA,
@@ -141,41 +141,41 @@ export const signInWithGoogle = () => {
   };
 };
 
-export const signInWithFacebook = () => {
-  return (dispatch) => {
-    dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
-    LoginManager.logInWithReadPermissions(['public_profile', 'email'])
-      .then((result) => {
-        if (result.isCancelled) {
-          return Promise.reject(new Error(
-            'the User Cancelled the request'
-          ));
-        }
-        return AccessToken.getCurrentAccessToken();
-      })
-      .then((data) => {
-        const credential =
-          firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+// export const signInWithFacebook = () => {
+//   return (dispatch) => {
+//     dispatch({ type: USER_PROFILE_DATA_SAVE_PROCESS });
+//     LoginManager.logInWithReadPermissions(['public_profile', 'email'])
+//       .then((result) => {
+//         if (result.isCancelled) {
+//           return Promise.reject(new Error(
+//             'the User Cancelled the request'
+//           ));
+//         }
+//         return AccessToken.getCurrentAccessToken();
+//       })
+//       .then((data) => {
+//         const credential =
+//           firebase.auth.FacebookAuthProvider.credential(data.accessToken);
 
-        return firebase.auth().signInAndRetrieveDataWithCredential(credential);
-      })
-      .then((user) => {
-        //console.log('Facebook Login : ', user);
-        CurrentUser.isFirstTimeUser = true;
-        if (isUserNew(user.additionalUserInfo)) {
-          const { _user } = user.user;
-          updateUserProfileData(dispatch, _user);
-          saveIntoDatabase(dispatch, user, _user.displayName, _user.email, '');
-        } else {
-          CurrentUser.isFirstTimeUser = false;
-          NavigationService.navigate('Home');
-        }
-      })
-      .catch((error) => {
-        console.log('Error While facebook log - in', error);
-      });
-  };
-};
+//         return firebase.auth().signInAndRetrieveDataWithCredential(credential);
+//       })
+//       .then((user) => {
+//         //console.log('Facebook Login : ', user);
+//         CurrentUser.isFirstTimeUser = true;
+//         if (isUserNew(user.additionalUserInfo)) {
+//           const { _user } = user.user;
+//           updateUserProfileData(dispatch, _user);
+//           saveIntoDatabase(dispatch, user, _user.displayName, _user.email, '');
+//         } else {
+//           CurrentUser.isFirstTimeUser = false;
+//           NavigationService.navigate('Home');
+//         }
+//       })
+//       .catch((error) => {
+//         console.log('Error While facebook log - in', error);
+//       });
+//   };
+// };
 
 const isUserNew = ({ isNewUser }) => {
   return isNewUser;

@@ -12,6 +12,7 @@ import ProjectListReducer from './ProjectListReducer';
 import ResetPasswordReducer from './ResetPasswordReducer';
 import ProjectUserReducer from './ProjectUserReducer';
 import AppliedProjectListReducer from './AppliedProjectListReducer';
+import TypesReducer from './TypesReducer';
 
 export default combineReducers({
   auth: AuthReducer,
@@ -19,6 +20,7 @@ export default combineReducers({
   resetPassword: ResetPasswordReducer,
   userprofile: UserProfileReducer,
   categories: CatogoriesReducer,
+  types: TypesReducer,
   statesandcities: StatesAndCitiesReducer,
   chatdata: ChatReducer,
   projectdata: ProjectReducer,

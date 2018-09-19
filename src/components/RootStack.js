@@ -29,14 +29,15 @@ import {
   ViewProject,
   AppliedProjectUsers,
   ViewActorProfileScreen,
-  ViewProducerProfile
-  
+  ViewProducerProfile,
+  FilterScreen
+
 } from '../scenes/mainscreens';
 import {
   UploadProjectScreen1,
   CastScreen,
   OtherCategoryScreen,
- // FilterScreen
+ 
 } from '../scenes/mainscreens/projects';
 
 import Chat from './Chat';
@@ -49,9 +50,7 @@ const MainStack = createStackNavigator(
   Login: LoginScreen,
   SignUpScreen: UserSignUp,
   ForgotPassword: ForgotPasswordScreen,
-  UpdateProfile: UserProfileScreen,
-  ViewActorProfile: ViewActorProfileScreen,
-  ViewProducer : ViewProducerProfile,
+  
 },
 {
    initialRouteName: 'HomeScreen'
@@ -131,12 +130,12 @@ const RegistrationStack = createStackNavigator(
   UserActorDetails: UserActorDetailsScreen
 },
 {
-  navigationOptions: {
+  navigationOptions:() =>( {
     title: 'Update Profile',
     contentOptions: {
       activeTintColor: 'rgb(234, 94, 32)'
     }
-  }
+  })
 }
 );
 
@@ -152,7 +151,7 @@ const HomeStack = createStackNavigator(
         headerRight: (
           <SearchButton style={styles.Headercss} navigation={navigation} />
         ),
-        headerStyle: { paddingRight: 5, paddingLeft: 5 },
+        //headerStyle: { paddingRight: 5, paddingLeft: 5 },
         headerTitleStyle: { color: 'rgb(234, 94, 32)' }
         
       })
@@ -167,9 +166,34 @@ const HomeStack = createStackNavigator(
     Notification: {
       screen: NotificationScreen
     },
-    // Filters: {
-    //  screen: FilterScreen
-    // },
+    Filters: {
+     screen: FilterScreen,
+     navigationOptions: () => ({
+      title: 'Filter',
+      headerTintColor: 'rgb(234, 94, 32)', 
+    })
+    },
+    UpdateProfile: {
+      screen:UserProfileScreen,
+      navigationOptions: () => ({
+        title: 'Profile',
+        headerTintColor: 'rgb(234, 94, 32)', 
+      })
+    },
+    ViewActorProfile: {
+      screen: ViewActorProfileScreen,
+      navigationOptions: () => ({
+        title: 'View Profile',
+        headerTintColor: 'rgb(234, 94, 32)', 
+      })
+    },
+    ViewProducer :{
+      screen: ViewProducerProfile,
+      navigationOptions: () => ({
+        title: 'View Profile',
+        headerTintColor: 'rgb(234, 94, 32)', 
+      })
+    },
     ProjectView: {
       screen: ViewProject,
       navigationOptions: () => ({
@@ -190,7 +214,7 @@ const HomeStack = createStackNavigator(
         title: 'Chat'
       }
     },
-    ViewProfileScreen: {
+    ViewActorProfileScreen: {
       screen: ViewActorProfileScreen,
       navigationOptions: () => ({
         title: 'View Profile',
