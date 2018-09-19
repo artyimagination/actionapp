@@ -164,7 +164,11 @@ const HomeStack = createStackNavigator(
       })
     },
     Notification: {
-      screen: NotificationScreen
+      screen: NotificationScreen,
+      navigationOptions: () => ({
+        title: 'Notification',
+        headerTintColor: 'rgb(234, 94, 32)', 
+      })
     },
     Filters: {
      screen: FilterScreen,
@@ -174,7 +178,7 @@ const HomeStack = createStackNavigator(
     })
     },
     UpdateProfile: {
-      screen:UserProfileScreen,
+      screen: UserProfileScreen,
       navigationOptions: () => ({
         title: 'Profile',
         headerTintColor: 'rgb(234, 94, 32)', 
@@ -187,7 +191,7 @@ const HomeStack = createStackNavigator(
         headerTintColor: 'rgb(234, 94, 32)', 
       })
     },
-    ViewProducer :{
+    ViewProducer: {
       screen: ViewProducerProfile,
       navigationOptions: () => ({
         title: 'View Profile',

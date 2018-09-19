@@ -6,7 +6,7 @@ import firebase from 'react-native-firebase';
 import { userProfile, signUpUser } from '../../actions';
 import { TextButton, CardSection, Input, Button, Spinner, LogoText } from '../../components/common';
 import { Validator, PasswordValidator } from '../../utils/Validator';
-//import NavigationService from '../../components/NavigationService';
+import NavigationService from '../../components/NavigationService';
 //import PhoneVerificationPopup  from './PhoneVerificationPopup';
 //import styles from '../../style/commonStyle';
 

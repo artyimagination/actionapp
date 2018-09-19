@@ -5,6 +5,7 @@ import {
   SAVE_INTO_DRAFT,
   SAVE_PROJECT_ID,
   CLEAR_PROJECT_DATA,
+  PROJECT_FETCHED,
   PROJECT_LIST_FETCHED,
   DRAFT_PROJECT_FETCHED,
   APPILED_PROJECT,
@@ -87,7 +88,6 @@ export const applyProject = (projectId) => {
 };
 
 export const filteredProjectByTypes = (type) => {
-
   console.log('type :'+type);
   return (dispatch) => {
     const ref = firebase.database().ref('projects');
@@ -99,7 +99,7 @@ export const filteredProjectByTypes = (type) => {
       snapshot.forEach((child) => {
         console.log(child.key);
         dispatch({ type: PROJECT_FETCHED, payload: snapshot.val() });
-        //NavigationService.navigate('Home',snapshot.val());
+        NavigationService.navigate('HomeStackScreen1', { snapshot: snapshot.val() });
       });
     });
   };

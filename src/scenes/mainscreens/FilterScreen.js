@@ -13,34 +13,38 @@ import {
 import { Validator } from '../../utils/Validator';
 import NavigationService from '../../components/NavigationService';
 
+var people = [
+  { name: 'Quang Vĩ', age: 29 },
+  { name: 'Sơn Tùng', age: 24 },
+];
+
+
 class FilterScreen extends Component {
 
-  state = {
+  // state = {
     
-  }
+  // }
 
   componentWillMount() {
     this.props.fetchTypes();
-    this.props.fetchCategories();
-   
+    this.props.fetchCategories(); 
+    console.log(this.props.dummy);
   }
 
   onSaveClicked() {
-   
-
     console.log('Filter is in progress');
 
     //this.props.navigation.goBack()
-    // const { navigation } = this.props;
-    // navigation.navigate('HomeStackScreen1');
+    const { navigation } = this.props.navigation;
+     navigation.navigate('HomeStackScreen1', { people: people });
 
     const { userprofile } = this.props;
     console.log(userprofile);
-    const  { type } = userprofile;
-    console.log('type'+ type);
-   NavigationService.navigate('HomeStackScreen1', {type:type});
+    const { type } = userprofile;
+    console.log('type' + type);
+    //this.props.filteredProjectByTypes(type);
+  // NavigationService.navigate('HomeStackScreen1', { people: people });
     
-  
     //const error = Validator('type', type);
 
     // if (error !== null) {
@@ -49,8 +53,6 @@ class FilterScreen extends Component {
     //   console.log('Filter is in progress'+type);
     //   NavigationService.navigate('Home');
     // }
-
-    
   }
   onGoBack() {
     console.log('Filter is in going back');
@@ -87,7 +89,8 @@ class FilterScreen extends Component {
   }
 
   render() {
-   
+    const { navigate } = this.props.navigation
+
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
           {this.renderLoading()}

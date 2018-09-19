@@ -10,10 +10,16 @@ class ProjectList extends Component {
 
   state = {
     isChanged: false,
-    isVisible: false
+    isVisible: false,
+    dummyData: 'test'
   }
 
   componentWillMount() {
+    
+    console.log('dumme'+this.state.dummyData);
+    const {dummy} = this.props;
+    dummy = this.state.dummyData;
+
     this.props.fetchProjectUserDetails(this.props.data.userid);
   }
 

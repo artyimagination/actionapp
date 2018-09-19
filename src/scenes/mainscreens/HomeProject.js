@@ -9,9 +9,19 @@ import NavigationService from '../../components/NavigationService';
 
 
 class HomeProject extends Component {
+  constructor(props) {
+    super(props);
+    console.log(" Home props :" + JSON.stringify(this.props));
+    this.state = {
+      people: this.props.people,
+    };
+    const { navigation } = this.props;
+    //const type1 = navigation.getParam('snapshot');
+   //console.log(" Home type1 :" + type1);
+    console.log("Home people :" + this.state.people);
+  }
 
   componentWillMount() {
-
     this.props.fetchProjectList();
     this.createDataSource(this.props);
     //const { navigation } = this.props;
@@ -24,12 +34,12 @@ class HomeProject extends Component {
   componentWillReceiveProps(nextProps) {
     this.createDataSource(nextProps);
 
-       const { navigation } = this.props;
-  const type1 = navigation.getParam(type);
-  console.log(" Home type1 :"+type1 );
-   const type = NavigationService.getParams('type');
-    console.log(" Home type :"+type  );
-     
+  // const { navigation } = this.props;
+  // const type1 = navigation.getParam('snapshot');
+  // console.log(" Home type1 :" + type1);
+  // console.log(" Home people :" + this.state.people);
+  //  const type = NavigationService.getParams('type');
+  //   console.log(" Home type :" +type);
   }
 
   createDataSource({ projectlist }) {
@@ -47,11 +57,11 @@ class HomeProject extends Component {
   //  if (data.userid !== currentUser.uid && !data.isDraft) {
         return (<ProjectList data={data} />);
   //  }
-    return (
-      <View>
-        <Text />
-      </View>
-    );
+  //   return (
+  //     <View>
+  //       <Text />
+  //     </View>
+  //   );
   }
 
   render() {
