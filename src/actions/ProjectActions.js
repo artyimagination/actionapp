@@ -13,7 +13,6 @@ import {
   CLEAR_PROJECT_LIST
 } from './types';
 import NavigationService from '../components/NavigationService';
-
 export const updateProjectDetails = ({ prop, value }) => {
   return {
     type: UPDATE_PROJECT_DETAILS,
@@ -73,7 +72,6 @@ export const postProject = ({ id }) => {
   };
 };
 
-
 export const applyProject = (projectId) => {
   return (dispatch) => {
     const { currentUser } = firebase.auth();
@@ -88,19 +86,36 @@ export const applyProject = (projectId) => {
 };
 
 export const filteredProjectByTypes = (type) => {
-  console.log('type :'+type);
+  console.log('type :' + type);
   return (dispatch) => {
     const ref = firebase.database().ref('projects');
-    console.log(ref);
     const query = ref.orderByChild('type').equalTo(type);
-
     query.on('value', (snapshot) => {
       console.log('project detail ', snapshot.val());
-      snapshot.forEach((child) => {
-        console.log(child.key);
-        dispatch({ type: PROJECT_FETCHED, payload: snapshot.val() });
-        NavigationService.navigate('HomeStackScreen1', { snapshot: snapshot.val() });
+
+      const filterProjects = [];
+
+      snapshot.forEach((item) => {
+        filterProjects.push({ key: item.key, 
+          userid: item.val().userid,
+          title: item.val().title,
+          location: item.val().location,
+          type: item.val().type
+        });
       });
+      console.log("filterProjects: ", snapshot.val());
+  
+     dispatch({ type: PROJECT_FETCHED, payload: snapshot.val() });
+    //   this.params = this.props.navigation.state.params;
+    //   // const objectToPass = {
+    //   //   name: 'Vishwajeet',
+    //   //   age: 26,
+    //   //   isCool: true,
+    //   // };
+   
+    //  if (this.params && this.params.filterCallback) this.params.filterCallback(filterProjects);
+    //  // this.props.navigation.goBack();
+    //  NavigationService.sendBack();
     });
   };
 };

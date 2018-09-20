@@ -10,40 +10,31 @@ import NavigationService from '../../components/NavigationService';
 
 class HomeProject extends Component {
   constructor(props) {
-    super(props);
-    console.log(" Home props :" + JSON.stringify(this.props));
-    this.state = {
-      people: this.props.people,
-    };
-    const { navigation } = this.props;
-    //const type1 = navigation.getParam('snapshot');
-   //console.log(" Home type1 :" + type1);
-    console.log("Home people :" + this.state.people);
+    super(props)
   }
 
   componentWillMount() {
-    this.props.fetchProjectList();
+   this.props.fetchProjectList();
     this.createDataSource(this.props);
-    //const { navigation } = this.props;
-  //const type1 = navigation.getParam(type);
-  //console.log(" Home type :"+type1 );
-   //const type = NavigationService.getParams('type');
-    //console.log(" Home type :"+type  );
+    console.log(this.props.filterValue);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.createDataSource(nextProps);
-
-  // const { navigation } = this.props;
-  // const type1 = navigation.getParam('snapshot');
-  // console.log(" Home type1 :" + type1);
-  // console.log(" Home people :" + this.state.people);
-  //  const type = NavigationService.getParams('type');
-  //   console.log(" Home type :" +type);
+    console.log('nextProps' + JSON.stringify(nextProps));
+    console.log('receive' + JSON.stringify(nextProps.filterValue));
+    // this.createDataSource(nextProps);
+     if (nextProps.filterValue !== '') {
+       console.log('if');
+      this.createDataSource(nextProps.filterValue);
+     } else {
+      console.log('else');
+      this.createDataSource(nextProps);
+     }
   }
 
   createDataSource({ projectlist }) {
-    console.log('111'+JSON.stringify(projectlist));
+    console.log('111');
+    console.log('projetclist' + projectlist);
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });

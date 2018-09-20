@@ -10,22 +10,16 @@ import { HomeProject } from './HomeProject';
 
 class HomeScreen extends Component {
 
-constructor(prop) {
-    super(prop);
-    this.state = {
-      filterValue: {}
-    };
-  }
   componentWillMount() {
     this.props.fetchUserDetails();
   }
+
   // navigateToFilter(){
   //   this.props.navigation.navigate('filterScreen', { filterCallback: filterValue => this.filterCallback(filterValue) });
   // }
-  onFilterCallback(filterValue) {
-    console.log('-> Callback value:', filterValue);
-    this.setState({ filterValue: filterValue });
-  }
+  //   filterCallback(filterValue){
+  //     console.log('-> Callback value:', filterValue);
+  //   }
   renderProjectButton() {
     const { category } = this.props.userprofile;
     if (category === 'Director' || category === 'Producer') {
@@ -39,7 +33,7 @@ constructor(prop) {
             Add Project
           </Button>
         </CardSection>
-
+       
       );
     }
   }
@@ -47,14 +41,16 @@ constructor(prop) {
   render() {
     return (
       <View style={styles.container}>
-        <HomeProject filterValue={this.state.filterValue} />
-        <View>
-          <TouchableHighlight
-            style={styles.addButton}
-            underlayColor='#ff7043' onPress={() => NavigationService.navigate('Filters', { filterCallback: filterValue => this.onFilterCallback(filterValue) })}>
-            <Text style={{ fontSize: 20, color: 'white' }}>+</Text>
-          </TouchableHighlight>
-        </View>
+      
+        <HomeProject />
+
+      <View>
+        <TouchableHighlight style={styles.addButton}
+            underlayColor='#ff7043' onPress={()=>{NavigationService.navigate('Filters')}}>
+            <Text style={{fontSize: 20, color: 'white'}}>+</Text>
+        </TouchableHighlight>
+      </View>
+       
       </View>
     );
   }
@@ -96,8 +92,8 @@ const styles = {
     justifyContent: 'center',
     position: 'absolute',
     bottom: 20,
-    right: 20,
-    shadowColor: '#000000',
+    right:20,
+    shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowRadius: 2,
     shadowOffset: {

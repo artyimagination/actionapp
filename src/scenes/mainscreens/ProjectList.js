@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
 import { Text, Image, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-
 import { CardSection, IconButton } from '../../components/common';
 import { fetchProjectUserDetails, applyProject } from '../../actions';
 import NavigationService from '../../components/NavigationService';
 
 class ProjectList extends Component {
 
-  state = {
+  state ={
     isChanged: false,
     isVisible: false,
-    dummyData: 'test'
-  }
+  };
 
   componentWillMount() {
-    
-    console.log('dumme'+this.state.dummyData);
-    const {dummy} = this.props;
-    dummy = this.state.dummyData;
-
     this.props.fetchProjectUserDetails(this.props.data.userid);
   }
 
   onStarButtonClicked() {
-
   }
 
   onChatClicked() {
-
   }
 
   onViewProjectClicked() {
@@ -77,59 +68,58 @@ class ProjectList extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-      <CardSection style={styles.mainContainer}>
-      <TouchableOpacity onPress={this.onViewProjectClicked.bind(this)} >
-        <CardSection style={styles.container}>
-          <CardSection>
-            {this.renderProfileImage()}
+        <View style={{ flex: 1 }}>
+          <CardSection style={styles.mainContainer}>
+            <TouchableOpacity onPress={this.onViewProjectClicked.bind(this)} >
+              <CardSection style={styles.container}>
+                <CardSection>
+                  {this.renderProfileImage()}
+                </CardSection>
+                <CardSection style={styles.descriptionStyle}>
+                  <Text style={styles.labelStyle}> {this.props.name} - {this.props.category}</Text>
+                  <Text style={styles.titleStyle}>{this.props.data.title}</Text>
+                  <Text style={styles.labelStyle}>Type - {this.props.data.type}</Text>
+                  <Text style={styles.labelStyle}>Language : {this.props.data.language}</Text>
+                  <Text style={styles.labelStyle}>Description</Text>
+                  <Text style={styles.labelStyle}>{this.props.data.description}</Text>
+                </CardSection>
+              </CardSection>
+              <CardSection style={styles.container}>
+                    <Image source={require('../../images/logo/images.jpg')}  />
+                </CardSection> 
+              <CardSection style={styles.iconContainer}>
+                <CardSection>
+                    <IconButton
+                        style={styles.iconStyle}
+                        onPress={() => this.onStarButtonClicked()}
+                        iconname="star"
+                        lable="Shortlist"
+                    />
+                    <IconButton
+                      style={styles.iconStyle}
+                      onPress={this.onHideClicked.bind(this)}
+                      iconname="eye-slash"
+                      lable="Hide"
+                    />
+                    <IconButton
+                      style={styles.iconStyle}
+                      onPress={() => this.onChatClicked()}
+                      iconname="comment"
+                      lable="chat"
+                    />
+                  </CardSection>
+                  <CardSection style={styles.iconStyle}>
+                    <IconButton
+                      style={styles.iconStyle}
+                      onPress={this.onViewProjectClicked.bind(this)}
+                      iconname="eye"
+                      lable="View"
+                    />
+                  </CardSection>
+              </CardSection>
+            </TouchableOpacity>
           </CardSection>
-          <CardSection style={styles.descriptionStyle}>
-            <Text style={styles.labelStyle}> {this.props.name} - {this.props.category}</Text>
-            <Text style={styles.titleStyle}>{this.props.data.title}</Text>
-            <Text style={styles.labelStyle}>Type - {this.props.data.type}</Text>
-            <Text style={styles.labelStyle}>Language : {this.props.data.language}</Text>
-            <Text style={styles.labelStyle}>Description</Text>
-            <Text style={styles.labelStyle}>{this.props.data.description}</Text>
-          </CardSection>
-        </CardSection>
-        <CardSection style={styles.container}>
-              <Image source={require('../../images/logo/images.jpg')}  />
-          </CardSection> 
-        <CardSection style={styles.iconContainer}>
-          <CardSection>
-            <IconButton
-                style={styles.iconStyle}
-                onPress={() => this.onStarButtonClicked()}
-                iconname="star"
-                lable="Shortlist"
-            />
-              <IconButton
-                style={styles.iconStyle}
-                onPress={this.onHideClicked.bind(this)}
-                iconname="eye-slash"
-                lable="Hide"
-              />
-              <IconButton
-                style={styles.iconStyle}
-                onPress={() => this.onChatClicked()}
-                iconname="comment"
-                lable="chat"
-              />
-            </CardSection>
-            <CardSection style={styles.iconStyle}>
-          
-              <IconButton
-                style={styles.iconStyle}
-                onPress={this.onViewProjectClicked.bind(this)}
-                iconname="eye"
-                lable="View"
-              />
-            </CardSection>
-        </CardSection>
-        </TouchableOpacity>
-        </CardSection>
-      </View>
+        </View>
     );
   }
 }
