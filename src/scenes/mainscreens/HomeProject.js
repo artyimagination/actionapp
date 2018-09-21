@@ -16,20 +16,20 @@ class HomeProject extends Component {
   componentWillMount() {
    this.props.fetchProjectList();
     this.createDataSource(this.props);
-    console.log(this.props.filterValue);
+    //console.log(this.props.filterValue);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps' + JSON.stringify(nextProps));
-    console.log('receive' + JSON.stringify(nextProps.filterValue));
+    //console.log('nextProps' + JSON.stringify(nextProps));
+   // console.log('receive' + JSON.stringify(nextProps.filterValue));
     // this.createDataSource(nextProps);
-     if (nextProps.filterValue !== '') {
-       console.log('if');
-      this.createDataSource(nextProps.filterValue);
-     } else {
-      console.log('else');
+    // if (nextProps.filterValue !== '') {
+     //  console.log('if');
+     // this.createDataSource(nextProps.filterValue);
+     //} else {
+      //console.log('else');
       this.createDataSource(nextProps);
-     }
+     //}
   }
 
   createDataSource({ projectlist }) {

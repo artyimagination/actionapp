@@ -1,101 +1,81 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Alert, TouchableHighlight, Picker } from 'react-native';
 import { connect } from 'react-redux';
-import firebase from 'react-native-firebase';
 import { userProfile, saveUserDetails, fetchTypes, fetchCategories, filteredProjectByTypes } from '../../actions';
 import {
-
+ 
   CardSection,
   Button, Input,
   Spinner,
   DropDown,
-
+ 
 } from '../../components/common';
 import { Validator } from '../../utils/Validator';
 import NavigationService from '../../components/NavigationService';
 
+var people = [
+  { name: 'Quang Vĩ', age: 29 },
+  { name: 'Sơn Tùng', age: 24 },
+];
+
+
 class FilterScreen extends Component {
 
- 
+  // state = {
+    
+  // }
+
   componentWillMount() {
     this.props.fetchTypes();
-    this.props.fetchCategories();
+    this.props.fetchCategories(); 
+    console.log(this.props.dummy);
   }
 
-  // onFilterClicked() {
-  //   console.log('Filter is in progress');
+  onSaveClicked() {
+    console.log('Filter is in progress');
 
-  //   const { userprofile } = this.props;
-  //   //console.log(userprofile);
-  //   const { type } = userprofile;
-  //   console.log('type' + type);
-  //   //this.props.navigation.goBack()
-  //   // const { navigation } = this.props.navigation;
-  //   //  navigation.navigate('HomeStackScreen1', { people: people });
-  //    NavigationService.navigate('HomeStackScreen1', { type: type });
-  // }
+    //this.props.navigation.goBack()
+    const { navigation } = this.props.navigation;
+     navigation.navigate('HomeStackScreen1', { people: people });
+
+    const { userprofile } = this.props;
+    console.log(userprofile);
+    const { type } = userprofile;
+    console.log('type' + type);
+    //this.props.filteredProjectByTypes(type);
+  // NavigationService.navigate('HomeStackScreen1', { people: people });
+    
+    //const error = Validator('type', type);
+
+    // if (error !== null) {
+    //   Alert.alert('Error', error);
+    // } else {
+    //   console.log('Filter is in progress'+type);
+    //   NavigationService.navigate('Home');
+    // }
+  }
   onGoBack() {
     console.log('Filter is in going back');
     const { userprofile } = this.props;
-    const { type } = userprofile;
-  // const objectToPass = this.props.filteredProjectByTypes(type);
-
-
-    // console.log('props' + JSON.stringify(this.props));
-    // console.log(objectToPass);
+    console.log(userprofile);
+    const  { type } = userprofile;
+    console.log('type'+ type);
 
     this.params = this.props.navigation.state.params;
-    // const objectToPass = {
-    //   name: 'Vishwajeet',
-    //   age: 26,
-    //   isCool: true,
-    // };
-
-    // export const filteredProjectByTypes = (type) => {
-      console.log('type :' + type);
-     // return (dispatch) => {
-        const ref = firebase.database().ref('projects');
-        const query = ref.orderByChild('type').equalTo(type);
-        query.on('value', (snapshot) => {
-          console.log('project detail ', snapshot.val());
-    
-          const filterProjects = [];
-    
-          snapshot.forEach((item) => {
-            filterProjects.push({ key: item.key, 
-              userid: item.val().userid,
-              title: item.val().title,
-              location: item.val().location
-            });
-          });
-          console.log("filterProjects: ", filterProjects);
-      
-              
-        if (this.params && this.params.filterCallback) this.params.filterCallback(filterProjects);
-        console.log('goback');
-        this.props.navigation.goBack();
-       //  dispatch({ type: PROJECT_FETCHED, payload: snapshot.val() });
-        //   this.params = this.props.navigation.state.params;
-        //   // const objectToPass = {
-        //   //   name: 'Vishwajeet',
-        //   //   age: 26,
-        //   //   isCool: true,
-        //   // };
-       
-        //  if (this.params && this.params.filterCallback) this.params.filterCallback(filterProjects);
-        //  // this.props.navigation.goBack();
-        //  NavigationService.sendBack();
-        });
-     // };
-   // };
-  
+    const objectToPass = {
+      name: 'Vishwajeet',
+      age: 26,
+      isCool: true,
+    };
+    this.params.callback(objectToPass);
+    this.props.navigation.goBack();
   }
 
   renderButton() {
     return (
       <Button
         style={{ alignItems: 'center' }}
-        onPress={this.onGoBack.bind(this)}
+        onPress={this.onSaveClicked.bind(this)}
       >
         Filter
       </Button>
@@ -114,11 +94,11 @@ class FilterScreen extends Component {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }}>
           {this.renderLoading()}
-
+         
             <DropDown
                 label="Project Type"
                 containerStyle={{
-                  width: 100,
+                  width: 100, 
                   //zIndex: 60,
                   top: 20,
 
@@ -135,11 +115,11 @@ class FilterScreen extends Component {
                     />);
                 })}
             </DropDown>
-
+            
             <DropDown
               label="Language"
               containerStyle={{
-                width: 140,
+                width: 140, 
                 //zIndex: 60,
                 top: 20,
 
@@ -156,11 +136,11 @@ class FilterScreen extends Component {
                   />);
               })}
             </DropDown>
-
+               
             <DropDown
               label="Keywords"
               containerStyle={{
-                width: 140,
+                width: 140, 
                 //zIndex: 60,
                 top: 20,
 
@@ -206,7 +186,7 @@ const styles = {
     fontWeight: '600',
     flexDirection: 'row',
     flexWrap: 'wrap',
-
+   
   },
   iconStyle: {
     flex: 1,
