@@ -32,6 +32,7 @@ class FilterScreen extends Component {
   }
 
   onSaveClicked() {
+    //test
     console.log('Filter is in progress');
 
     //this.props.navigation.goBack()
