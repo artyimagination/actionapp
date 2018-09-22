@@ -11,3 +11,4 @@ export * from './ProfilePicture';
 export * from './UploadPicture';
 export * from './CheckboxGroup';
 export * from './IconButton';
+export * from './ProfileSearch';

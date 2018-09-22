@@ -5,7 +5,7 @@ import { userProfile, saveUserDetails, fetchTypes, fetchCategories, filteredProj
 import {
  
   CardSection,
-  Button, Input,
+  Button, 
   Spinner,
   DropDown,
  
@@ -24,13 +24,13 @@ class FilterScreen extends Component {
     
     console.log('Filter is in progress');
 
-    const { userprofile } = this.props;
-    console.log(userprofile);
-    const { type } = userprofile;
-    this.props.filteredProjectByTypes(type);
-    this.params = this.props.navigation.state.params;
+    // const { userprofile } = this.props;
+    // console.log(userprofile);
+    // const { type } = userprofile;
+    // this.props.filteredProjectByTypes(type);
+    // this.params = this.props.navigation.state.params;
    
-    NavigationService.navigate('HomeStackScreen1');
+    // NavigationService.navigate('HomeStackScreen1');
     
   }
 

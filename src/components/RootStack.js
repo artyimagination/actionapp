@@ -30,7 +30,8 @@ import {
   AppliedProjectUsers,
   ViewActorProfileScreen,
   ViewProducerProfile,
-  FilterScreen
+  FilterScreen,
+  FilterProfileScreen
 
 } from '../scenes/mainscreens';
 import {
@@ -177,6 +178,13 @@ const HomeStack = createStackNavigator(
       headerTintColor: 'rgb(234, 94, 32)', 
     })
     },
+    FiltersProfile: {
+      screen: FilterProfileScreen,
+      navigationOptions: () => ({
+        title: 'Filter Profile',
+       headerTintColor: 'rgb(234, 94, 32)', 
+     })
+     },
     UpdateProfile: {
       screen: UserProfileScreen,
       navigationOptions: () => ({
