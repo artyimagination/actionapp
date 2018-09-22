@@ -32,6 +32,7 @@ export const CLEAR_CAST = 'clear_cast';
 export const FETCH_CAST_LIST = 'fetch_cast_list';
 
 export const PROJECT_FETCHED = 'project_fetched';
+export const FILTER_PROJECT_FETCHED = 'filter_project_fetched';
 export const SAVE_PROJECT_ID = 'save_project_id';
 export const PROJECT_LIST_FETCHED = 'project_list_fetched';
 export const DRAFT_PROJECT_FETCHED = 'draft_project_fetched';

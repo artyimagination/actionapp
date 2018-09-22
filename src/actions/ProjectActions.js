@@ -10,7 +10,8 @@ import {
   DRAFT_PROJECT_FETCHED,
   APPILED_PROJECT,
   APPLIED_USERS_FETCHED,
-  CLEAR_PROJECT_LIST
+  CLEAR_PROJECT_LIST,
+  FILTER_PROJECT_FETCHED
 } from './types';
 import NavigationService from '../components/NavigationService';
 export const updateProjectDetails = ({ prop, value }) => {
@@ -104,18 +105,13 @@ export const filteredProjectByTypes = (type) => {
         });
       });
       console.log("filterProjects: ", snapshot.val());
-  
-     dispatch({ type: PROJECT_FETCHED, payload: snapshot.val() });
-    //   this.params = this.props.navigation.state.params;
-    //   // const objectToPass = {
-    //   //   name: 'Vishwajeet',
-    //   //   age: 26,
-    //   //   isCool: true,
-    //   // };
-   
-    //  if (this.params && this.params.filterCallback) this.params.filterCallback(filterProjects);
-    //  // this.props.navigation.goBack();
-    //  NavigationService.sendBack();
+ 
+     dispatch({ type: FILTER_PROJECT_FETCHED, payload: filterProjects });
+      // this.params = this.props.navigation.state.params;
+      
+     //if (this.params && this.params.filterCallback) this.params.filterCallback(filterProjects);
+
+      
     });
   };
 };
@@ -125,6 +121,7 @@ export const fetchProjectList = () => {
     .on('value', snapshot => {
       dispatch({ type: PROJECT_LIST_FETCHED, payload: snapshot.val() });
     });
+
   };
 };
 

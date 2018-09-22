@@ -16,25 +16,16 @@ class HomeProject extends Component {
   componentWillMount() {
    this.props.fetchProjectList();
     this.createDataSource(this.props);
-    //console.log(this.props.filterValue);
   }
 
   componentWillReceiveProps(nextProps) {
-    //console.log('nextProps' + JSON.stringify(nextProps));
-   // console.log('receive' + JSON.stringify(nextProps.filterValue));
-    // this.createDataSource(nextProps);
-    // if (nextProps.filterValue !== '') {
-     //  console.log('if');
-     // this.createDataSource(nextProps.filterValue);
-     //} else {
-      //console.log('else');
       this.createDataSource(nextProps);
-     //}
+   
   }
 
   createDataSource({ projectlist }) {
     console.log('111');
-    console.log('projetclist' + projectlist);
+   // console.log('projetclist' + projectlist);
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });

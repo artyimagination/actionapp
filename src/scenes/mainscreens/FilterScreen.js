@@ -13,63 +13,25 @@ import {
 import { Validator } from '../../utils/Validator';
 import NavigationService from '../../components/NavigationService';
 
-var people = [
-  { name: 'Quang Vĩ', age: 29 },
-  { name: 'Sơn Tùng', age: 24 },
-];
-
 
 class FilterScreen extends Component {
-
-  // state = {
-    
-  // }
-
   componentWillMount() {
     this.props.fetchTypes();
     this.props.fetchCategories(); 
-    console.log(this.props.dummy);
   }
 
   onSaveClicked() {
-    //test
+    
     console.log('Filter is in progress');
-
-    //this.props.navigation.goBack()
-    const { navigation } = this.props.navigation;
-     navigation.navigate('HomeStackScreen1', { people: people });
 
     const { userprofile } = this.props;
     console.log(userprofile);
     const { type } = userprofile;
-    console.log('type' + type);
-    //this.props.filteredProjectByTypes(type);
-  // NavigationService.navigate('HomeStackScreen1', { people: people });
-    
-    //const error = Validator('type', type);
-
-    // if (error !== null) {
-    //   Alert.alert('Error', error);
-    // } else {
-    //   console.log('Filter is in progress'+type);
-    //   NavigationService.navigate('Home');
-    // }
-  }
-  onGoBack() {
-    console.log('Filter is in going back');
-    const { userprofile } = this.props;
-    console.log(userprofile);
-    const  { type } = userprofile;
-    console.log('type'+ type);
-
+    this.props.filteredProjectByTypes(type);
     this.params = this.props.navigation.state.params;
-    const objectToPass = {
-      name: 'Vishwajeet',
-      age: 26,
-      isCool: true,
-    };
-    this.params.callback(objectToPass);
-    this.props.navigation.goBack();
+   
+    NavigationService.navigate('HomeStackScreen1');
+    
   }
 
   renderButton() {

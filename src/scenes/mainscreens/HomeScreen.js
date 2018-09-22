@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { fetchUserDetails } from '../../actions';
@@ -19,9 +19,7 @@ constructor(prop) {
   componentWillMount() {
     this.props.fetchUserDetails();
   }
-  // navigateToFilter(){
-  //   this.props.navigation.navigate('filterScreen', { filterCallback: filterValue => this.filterCallback(filterValue) });
-  // }
+  
   onFilterCallback(filterValue) {
     console.log('-> Callback value:', filterValue);
     this.setState({ filterValue: filterValue });
@@ -29,6 +27,7 @@ constructor(prop) {
   renderProjectButton() {
     const { category } = this.props.userprofile;
     if (category === 'Director' || category === 'Producer') {
+  
       return (
         <CardSection>
             <Button
@@ -47,13 +46,19 @@ constructor(prop) {
   render() {
     return (
       <View style={styles.container}>
-        <HomeProject filterValue={this.state.filterValue} />
+        <CardSection style={styles.projectBtn}>
+          <Text style={styles.labelStyle}>
+            Hello... {this.props.userprofile.name}
+          </Text>
+          {this.renderProjectButton()}
+        </CardSection>
+        <HomeProject />
         <View>
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.addButton}
             underlayColor='#ff7043' onPress={() => NavigationService.navigate('Filters', { filterCallback: filterValue => this.onFilterCallback(filterValue) })}>
             <Text style={{ fontSize: 20, color: 'white' }}>+</Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </View>
     );
